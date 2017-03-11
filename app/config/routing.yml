@@ -1,3 +1,13 @@
 sb_core:
     resource: "@SBCoreBundle/Resources/config/routing.yml"
     prefix:   /
+
+login:
+    pattern:   /connexion
+    defaults:  { _controller: SBUserBundle:Security:login }
+
+login_check:
+    pattern:   /login_check
+
+logout:
+    pattern:   /deconnexion

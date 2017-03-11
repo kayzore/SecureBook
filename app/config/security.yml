@@ -11,8 +11,8 @@ security:
         in_memory:
             memory:
                 users:
-                    user:  { password: userpass, roles: [ 'ROLE_USER' ] }
-                    admin: { password: adminpass, roles: [ 'ROLE_ADMIN' ] }
+                    user:  { password: user, roles: [ 'ROLE_USER' ] }
+                    admin: { password: admin, roles: [ 'ROLE_ADMIN' ] }
 
     firewalls:
         dev:
@@ -21,6 +21,13 @@ security:
         main:
             pattern:   ^/
             anonymous: true
+            provider:  in_memory
+            form_login:
+                login_path: login
+                check_path: login_check
+            logout:
+                path:   logout
+                target: /platform
 
     access_control:
         #- { path: ^/login, roles: IS_AUTHENTICATED_ANONYMOUSLY, requires_channel: https }
