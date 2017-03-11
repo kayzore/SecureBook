@@ -14,6 +14,12 @@ html, body {background: #efefef;}
     clear:both;
     padding:14px;
 }
+#login-dp .top{
+    background-color:rgba(255,255,255,.8);
+    border-bottom:1px solid #ddd;
+    clear:both;
+    padding:14px;
+}
 #login-dp .social-buttons{
     margin:12px 0
 }
