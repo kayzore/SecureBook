@@ -28,7 +28,8 @@ class RegistrationController extends Controller
             // 3) Encode the password (you could also do this via Doctrine listener)
             $password = $this->get('security.password_encoder')->encodePassword($user, $user->getPlainPassword());
             $user->setPassword($password);
-            $user->setSalt(md5(new Date()));
+            $user->setSalt('');
+            $user->setRoles(array('ROLE_USER'));
 
             // 4) save the User!
             $em = $this->getDoctrine()->getManager();
