@@ -2,8 +2,16 @@
 <html>
     <head>
         <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
         <title>{% block title %}Welcome!{% endblock %}</title>
         <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />
+        <link rel="stylesheet" href="{{ asset('assets/external/libs/font-awesome/css/font-awesome.css') }}">
+        <link rel="stylesheet" href="{{ asset('assets/external/libs/bootstrap/dist/css/bootstrap.min.css') }}">
+        <link rel="stylesheet" href="{{ asset('assets/external/libs/bootstrap/dist/css/bootstrap-theme.min.css') }}">
+        <link rel="stylesheet" href="{{ asset('assets/app/css/app.css') }}">
+
+        <script src="{{ asset('assets/external/libs/jquery/dist/jquery.min.js') }}"></script>
+        <script src="{{ asset('assets/external/libs/bootstrap/dist/js/bootstrap.min.js') }}"></script>
         {% block stylesheets %}{% endblock %}
         {% block javascripts %}{% endblock %}
     </head>
