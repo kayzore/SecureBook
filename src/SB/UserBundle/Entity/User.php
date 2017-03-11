@@ -3,6 +3,8 @@
 namespace SB\UserBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Security\Core\User\UserInterface;
 
 /**
@@ -10,23 +12,39 @@ use Symfony\Component\Security\Core\User\UserInterface;
  *
  * @ORM\Table()
  * @ORM\Entity(repositoryClass="SB\UserBundle\Entity\UserRepository")
+ * @UniqueEntity(fields="email", message="Email déjà enregistrée")
+ * @UniqueEntity(fields="username", message="Username déjà enregistré")
  */
 class User implements UserInterface
 {
     /**
-     * @ORM\Column(name="id", type="integer")
      * @ORM\Id
+     * @ORM\Column(name="id", type="integer")
      * @ORM\GeneratedValue(strategy="AUTO")
      */
     private $id;
 
     /**
+     * @ORM\Column(type="string", length=255, unique=true)
+     * @Assert\NotBlank()
+     * @Assert\Email()
+     */
+    private $email;
+
+    /**
      * @ORM\Column(name="username", type="string", length=255, unique=true)
+     * @Assert\NotBlank()
      */
     private $username;
 
     /**
-     * @ORM\Column(name="password", type="string", length=255)
+     * @Assert\NotBlank()
+     * @Assert\Length(max=4096)
+     */
+    private $plainPassword;
+
+    /**
+     * @ORM\Column(name="password", type="string", length=64)
      */
     private $password;
 
@@ -40,22 +58,23 @@ class User implements UserInterface
      */
     private $roles = array();
 
-    /**
-     * Get id
-     *
-     * @return integer 
-     */
-    public function getId()
+    public function getEmail()
     {
-        return $this->id;
+        return $this->email;
     }
 
-    /**
-     * Set username
-     *
-     * @param string $username
-     * @return User
-     */
+    public function setEmail($email)
+    {
+        $this->email = $email;
+
+        return $this;
+    }
+
+    public function getUsername()
+    {
+        return $this->username;
+    }
+
     public function setUsername($username)
     {
         $this->username = $username;
@@ -63,22 +82,23 @@ class User implements UserInterface
         return $this;
     }
 
-    /**
-     * Get username
-     *
-     * @return string 
-     */
-    public function getUsername()
+    public function getPlainPassword()
     {
-        return $this->username;
+        return $this->plainPassword;
     }
 
-    /**
-     * Set password
-     *
-     * @param string $password
-     * @return User
-     */
+    public function setPlainPassword($password)
+    {
+        $this->plainPassword = $password;
+
+        return $this;
+    }
+
+    public function getPassword()
+    {
+        return $this->password;
+    }
+
     public function setPassword($password)
     {
         $this->password = $password;
@@ -86,14 +106,11 @@ class User implements UserInterface
         return $this;
     }
 
-    /**
-     * Get password
-     *
-     * @return string 
-     */
-    public function getPassword()
+    public function getSalt()
     {
-        return $this->password;
+        // The bcrypt algorithm doesn't require a separate salt.
+        // You *may* need a real salt if you choose a different encoder.
+        return null;
     }
 
     /**
@@ -107,16 +124,6 @@ class User implements UserInterface
         $this->salt = $salt;
 
         return $this;
-    }
-
-    /**
-     * Get salt
-     *
-     * @return string 
-     */
-    public function getSalt()
-    {
-        return $this->salt;
     }
 
     /**
@@ -135,11 +142,21 @@ class User implements UserInterface
     /**
      * Get roles
      *
-     * @return array 
+     * @return array
      */
     public function getRoles()
     {
         return $this->roles;
+    }
+
+    /**
+     * Get id
+     *
+     * @return integer
+     */
+    public function getId()
+    {
+        return $this->id;
     }
 
     public function eraseCredentials()

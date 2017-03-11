@@ -2,7 +2,7 @@
 security:
     encoders:
         Symfony\Component\Security\Core\User\User: plaintext
-        SB\UserBundle\Entity\User: plaintext
+        SB\UserBundle\Entity\User: bcrypt
 
     role_hierarchy:
         ROLE_ADMIN:       ROLE_USER
