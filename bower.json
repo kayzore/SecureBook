@@ -1,0 +1,17 @@
+{
+  "name": "securebook",
+  "homepage": "https://github.com/kayzore/SecureBook",
+  "authors": [
+    "jerome-lelievre <jerome.lelievre9@gmail.com>"
+  ],
+  "description": "",
+  "main": "",
+  "license": "",
+  "private": true,
+  "dependencies": {
+    "jquery": "^3.1.1",
+    "bootstrap": "https://github.com/twbs/bootstrap.git#^3.3.7",
+    "font-awesome": "https://github.com/FortAwesome/Font-Awesome.git#^4.7.0",
+    "jquery-ui": "^1.12.1"
+  }
+}
