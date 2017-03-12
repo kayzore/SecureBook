@@ -40,8 +40,7 @@
                         <div class="row activity-top">
                             <div class="col-xs-12">
                                 <b>{{ activity.user.username }}</b>
-                                <span class="pull-right">
-                                <div class="btn-group">
+                                <div class="btn-group pull-right">
                                     <button type="button" class="btn btn-default btn-xs dropdown-toggle"
                                             data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                         <i class="fa fa-plus-circle" aria-hidden="true"></i>
@@ -52,7 +51,6 @@
                                         <li><a href="#">Separated link</a></li>
                                     </ul>
                                 </div>
-                            </span>
                             </div>
                             <div class="col-xs-12 activity-date">
                                 <em class="text-muted">{{ activity.dateActivity|date('d/m/Y') }}</em>
