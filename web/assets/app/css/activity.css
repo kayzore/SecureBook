@@ -28,6 +28,9 @@
     padding-bottom: 20px;
     background: white;
 }
+.activity-form-body  .row:first-child  div:first-child {
+    padding-left: 0;
+}
 .activity-form-body textarea:focus{box-shadow: none !important;}
 .activity-form-body .btnAddPicture {
     color: lightgrey;
