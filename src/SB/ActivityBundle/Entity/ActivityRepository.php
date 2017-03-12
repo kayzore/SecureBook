@@ -12,4 +12,15 @@ use Doctrine\ORM\EntityRepository;
  */
 class ActivityRepository extends EntityRepository
 {
+    public function fetchAll($id_user)
+    {
+        $qb = $this->createQueryBuilder('a');
+
+        $qb
+            ->where('a.id = :id')
+            ->setParameter('id', $id_user)
+        ;
+
+        return $qb->getQuery()->getResult();
+    }
 }

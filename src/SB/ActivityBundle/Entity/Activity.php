@@ -3,6 +3,7 @@
 namespace SB\ActivityBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use SB\UserBundle\Entity\User;
 
 /**
  * Activity
@@ -35,6 +36,16 @@ class Activity
      */
     private $dateActivity;
 
+    /**
+     * @ORM\ManyToOne(targetEntity="SB\UserBundle\Entity\User")
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $user;
+
+    public function __construct()
+    {
+        $this->dateActivity = new \Datetime();
+    }
 
     /**
      * Get id
@@ -90,5 +101,28 @@ class Activity
     public function getDateActivity()
     {
         return $this->dateActivity;
+    }
+
+    /**
+     * Set user
+     *
+     * @param User $user
+     * @return Activity
+     */
+    public function setUser(User $user)
+    {
+        $this->user = $user;
+
+        return $this;
+    }
+
+    /**
+     * Get user
+     *
+     * @return User
+     */
+    public function getUser()
+    {
+        return $this->user;
     }
 }
