@@ -6,13 +6,25 @@ namespace SB\UserBundle\DataFixtures\ORM;
 use Doctrine\Common\DataFixtures\FixtureInterface;
 use Doctrine\Common\Persistence\ObjectManager;
 use SB\UserBundle\Entity\User;
+use Symfony\Component\DependencyInjection\ContainerAwareInterface;
+use Symfony\Component\DependencyInjection\ContainerInterface;
 
-class LoadUser implements FixtureInterface
+class LoadUser implements FixtureInterface, ContainerAwareInterface
 {
+    /**
+     * @var ContainerInterface
+     */
+    private $container;
+
+    public function setContainer(ContainerInterface $container = null)
+    {
+        $this->container = $container;
+    }
+
     public function load(ObjectManager $manager)
     {
         // Les noms d'utilisateurs à créer
-        $listNames = array('Alexandre', 'Marine', 'Anna');
+        $listNames = array('Kayzore', 'Alexandre', 'Marine', 'Anna');
 
         foreach ($listNames as $name) {
             // On crée l'utilisateur
@@ -20,7 +32,10 @@ class LoadUser implements FixtureInterface
 
             // Le nom d'utilisateur et le mot de passe sont identiques
             $user->setUsername($name);
-            $user->setPassword($name);
+            $encoder = $this->container->get('security.password_encoder');
+            $password = $encoder->encodePassword($user, $name);
+            $user->setPassword($password);
+            $user->setEmail($name . '@fakemail.com');
 
             // On ne se sert pas du sel pour l'instant
             $user->setSalt('');
