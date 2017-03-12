@@ -17,7 +17,7 @@ class RegistrationController extends Controller
      */
     public function registerAction(Request $request)
     {
-        if ($this->get('security.context')->isGranted('IS_AUTHENTICATED_REMEMBERED')) {
+        if ($this->get('security.authorization_checker')->isGranted('IS_AUTHENTICATED_REMEMBERED')) {
             return $this->redirectToRoute('sb_core_homepage');
         }
 
