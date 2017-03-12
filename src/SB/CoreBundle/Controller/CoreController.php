@@ -11,17 +11,16 @@ class CoreController extends Controller
 {
     public function indexAction()
     {
-        if ($this->get('security.authorization_checker')->isGranted('IS_AUTHENTICATED_REMEMBERED')) {
-            $em = $this->get('doctrine')->getManager();
-            /*
+        /*
             $user = $em->getRepository('SBUserBundle:User')->find(5);
             $user->addFriend(3);
             $em->persist($user);
             $em->flush();
             */
+        if ($this->get('security.authorization_checker')->isGranted('IS_AUTHENTICATED_REMEMBERED')) {
             $user = $this->getUser();
+            $em = $this->getDoctrine()->getManager();
             $list_friends = $em->getRepository('SBUserBundle:User')->findBy(array('id' => $user->getFriends()));
-
             $activity = new Activity();
             $form_add_activity = $this->createForm(new ActivityType(), $activity, array(
                 'action' => $this->generateUrl('sb_activity_add')
