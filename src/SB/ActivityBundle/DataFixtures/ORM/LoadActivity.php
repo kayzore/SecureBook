@@ -33,10 +33,10 @@ class LoadActivity extends AbstractFixture implements FixtureInterface, Containe
     {
         // Les activités à créer
         $listActivity = array(
-            array('Super message de test 1', new DateTime('2000-01-01'), 1),
-            array('Super message de test 2', new DateTime('2000-01-02'), 2),
-            array('Super message de test 3', new DateTime('2000-01-03'), 3),
-            array('Super message de test 4', new DateTime('2000-01-04'), 4),
+            array('Super message de test 1', new DateTime('2017-01-01'), 1),
+            array('Super message de test 2', new DateTime('2017-03-02'), 2),
+            array('Super message de test 3', new DateTime('2017-03-03'), 3),
+            array('Super message de test 4', new DateTime('2017-03-04'), 4),
         );
 
         foreach ($listActivity as $key =>$activite) {
