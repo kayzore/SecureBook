@@ -1,14 +1,51 @@
 {% extends 'SBCoreBundle::layout.html.twig' %}
 
-{% block css %}
+{% block stylesheets %}
     <link rel="stylesheet" href="{{ asset('assets/app/css/activity.css') }}">
-{% endblock css %}
+{% endblock stylesheets %}
 
 {% block body %}
     <div class="container">
         <div class="row">
             {% for activity in list_activity %}
-                {{ dump(activity) }}
+                <div class="col-md-4 col-md-offset-4 activity">
+                    <div class="row activity-top">
+                        <div class="col-xs-12">
+                            <b>{{ activity.user.username }}</b>
+                            <span class="pull-right">
+                                <div class="btn-group">
+                                    <button type="button" class="btn btn-default btn-xs dropdown-toggle"
+                                            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                        <i class="fa fa-plus-circle" aria-hidden="true"></i>
+                                    </button>
+                                    <ul class="dropdown-menu dropdown-menu-right">
+                                        <li><a href="#">Action</a></li>
+                                        <li role="separator" class="divider"></li>
+                                        <li><a href="#">Separated link</a></li>
+                                    </ul>
+                                </div>
+                            </span>
+                        </div>
+                        <div class="col-xs-12 activity-date">
+                            <em class="text-muted">{{ activity.dateActivity|date('d/m/Y') }}</em>
+                        </div>
+                    </div>
+
+                    <div class="row activity-middle">
+                        <div class="col-xs-12">
+                            <p>{{ activity.message }}</p>
+                        </div>
+                    </div>
+
+                    <div class="row activity-bottom">
+                        <div class="col-xs-12">
+                            0 J'aime
+                            <span class="pull-right">
+                                0 Commentaire
+                            </span>
+                        </div>
+                    </div>
+                </div>
             {% endfor %}
         </div>
     </div>
