@@ -14,10 +14,11 @@
         <div class="col-md-4 activity-form">
             <div class="row">
                 <div class="col-md-12 activity activity-form-body">
-                    <form>
+                    <form method="post" action="{{ path('sb_activity_add') }}" enctype="multipart/form-data">
                         <div class="row">
                             <div class="col-md-12">
-                                <textarea class="form-control" placeholder="Publiez quelque chose !" id="textareaAddActu"></textarea>
+                                <textarea class="form-control" placeholder="Publiez quelque chose !"
+                                          id="textareaAddActu" name="activity_message"></textarea>
                                 <span class="btnAddPicture pull-right">
                                     <i id="btnAddPictures" class="fa fa-picture-o fa-lg" aria-hidden="true"></i>
                                     <input id="btnSubmitNewActu" type="submit" class="btn btn-info btn-sm" value="Publier">
@@ -26,7 +27,7 @@
                         </div>
                         <div class="row"><div class="col-md-12"><div id="listImageAddActu" class="is_hidden"></div></div></div>
                         <span class="is_hidden" id="blockFormNewActu">
-                            <input type="file" accept="image/*" id="inputImage" multiple>
+                            <input type="file" accept="image/*" id="inputImage" name="activity_images" multiple>
                         </span>
                     </form>
                 </div>
