@@ -3,13 +3,14 @@
 
 namespace SB\UserBundle\DataFixtures\ORM;
 
+use Doctrine\Common\DataFixtures\AbstractFixture;
 use Doctrine\Common\DataFixtures\FixtureInterface;
 use Doctrine\Common\Persistence\ObjectManager;
 use SB\UserBundle\Entity\User;
 use Symfony\Component\DependencyInjection\ContainerAwareInterface;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 
-class LoadUser implements FixtureInterface, ContainerAwareInterface
+class LoadUser extends AbstractFixture implements FixtureInterface, ContainerAwareInterface
 {
     /**
      * @var ContainerInterface
@@ -26,7 +27,7 @@ class LoadUser implements FixtureInterface, ContainerAwareInterface
         // Les noms d'utilisateurs à créer
         $listNames = array('Kayzore', 'Alexandre', 'Marine', 'Anna');
 
-        foreach ($listNames as $name) {
+        foreach ($listNames as $key => $name) {
             // On crée l'utilisateur
             $user = new User;
 
@@ -44,6 +45,7 @@ class LoadUser implements FixtureInterface, ContainerAwareInterface
 
             // On le persiste
             $manager->persist($user);
+            $this->setReference('user' . $key, $user);
         }
 
         // On déclenche l'enregistrement
