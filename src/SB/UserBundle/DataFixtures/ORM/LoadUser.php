@@ -27,10 +27,10 @@ class LoadUser extends AbstractFixture implements FixtureInterface, ContainerAwa
     {
         // Les noms d'utilisateurs à créer
         $listNames = array(
-            array('Kayzore', array(1, 2)),
-            array('Alexandre', array(0, 2, 3)),
-            array('Marine', array(0, 1, 3)),
-            array('Anna', array(0, 1, 2)),
+            array('Kayzore', array(2, 3, 4)),
+            array('Alexandre', array(1, 3, 4)),
+            array('Marine', array(1, 2, 4)),
+            array('Anna', array(1, 2, 3)),
         );
 
         foreach ($listNames as $key => $new_user) {
