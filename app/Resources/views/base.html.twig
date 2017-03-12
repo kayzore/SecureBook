@@ -9,6 +9,9 @@
         <link rel="stylesheet" href="{{ asset('assets/external/libs/bootstrap/dist/css/bootstrap.min.css') }}">
         <link rel="stylesheet" href="{{ asset('assets/external/libs/bootstrap/dist/css/bootstrap-theme.min.css') }}">
         <link rel="stylesheet" href="{{ asset('assets/app/css/app.css') }}">
+        {% if not is_granted('ROLE_USER') %}
+            <link rel="stylesheet" href="{{ asset('assets/app/css/login_register.css') }}">
+        {% endif %}
 
         <script src="{{ asset('assets/external/libs/jquery/dist/jquery.min.js') }}"></script>
         <script src="{{ asset('assets/external/libs/bootstrap/dist/js/bootstrap.min.js') }}"></script>
