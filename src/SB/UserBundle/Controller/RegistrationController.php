@@ -7,7 +7,6 @@ use SB\UserBundle\Form\Type\UserType;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\Validator\Constraints\Date;
 
 class RegistrationController extends Controller
 {
@@ -18,6 +17,10 @@ class RegistrationController extends Controller
      */
     public function registerAction(Request $request)
     {
+        if ($this->get('security.context')->isGranted('IS_AUTHENTICATED_REMEMBERED')) {
+            return $this->redirectToRoute('sb_core_homepage');
+        }
+
         // 1) build the form
         $user = new User();
         $form = $this->createForm(new UserType(), $user);
