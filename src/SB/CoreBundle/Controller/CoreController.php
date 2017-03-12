@@ -17,10 +17,11 @@ class CoreController extends Controller
             $em->persist($user);
             $em->flush();
             */
-            $user = $em->getRepository('SBUserBundle:User')->find(5);
+            $user = $this->getUser();
+            $list_friends = $em->getRepository('SBUserBundle:User')->findBy(array('id' => $user->getFriends()));
             return $this->render('SBCoreBundle:Home:index.html.twig', array(
-                'list_activity'     => $em->getRepository('SBActivityBundle:Activity')->fetchAll($this->getUser()->getId()),
-                //'user'              => $user
+                'list_activity'     => $em->getRepository('SBActivityBundle:Activity')->fetchAll($user->getId(), $list_friends),
+                'user'              => $user->getFriends()
             ));
         }
         return $this->render('SBCoreBundle:Home:index.html.twig');
