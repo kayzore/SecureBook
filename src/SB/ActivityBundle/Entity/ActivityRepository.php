@@ -17,8 +17,9 @@ class ActivityRepository extends EntityRepository
         $qb = $this->createQueryBuilder('a');
 
         $qb
-            ->where('a.id = :id')
-            ->setParameter('id', $id_user)
+            ->join('a.user', 'user')
+            ->where('a.user = :id_user')
+            ->setParameter('id_user', $id_user)
         ;
 
         return $qb->getQuery()->getResult();

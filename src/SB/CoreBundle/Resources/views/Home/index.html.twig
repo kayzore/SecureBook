@@ -3,6 +3,11 @@
 {% block body %}
     <div class="container">
         <div class="row">
+            {% if list_activity is defined %}
+                {% for activity in list_activity %}
+                    {{ dump(activity) }}
+                {% endfor %}
+            {% endif %}
         </div>
     </div>
 {% endblock body %}
