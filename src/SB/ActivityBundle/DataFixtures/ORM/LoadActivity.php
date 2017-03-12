@@ -6,13 +6,14 @@ namespace SB\ActivityBundle\DataFixtures\ORM;
 use DateTime;
 use Doctrine\Common\DataFixtures\AbstractFixture;
 use Doctrine\Common\DataFixtures\FixtureInterface;
+use Doctrine\Common\DataFixtures\OrderedFixtureInterface;
 use Doctrine\Common\Persistence\ObjectManager;
 use SB\ActivityBundle\Entity\Activity;
 use SB\UserBundle\Entity\User;
 use Symfony\Component\DependencyInjection\ContainerAwareInterface;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 
-class LoadActivity extends AbstractFixture implements FixtureInterface, ContainerAwareInterface
+class LoadActivity extends AbstractFixture implements FixtureInterface, ContainerAwareInterface, OrderedFixtureInterface
 {
     /**
      * @var ContainerInterface
@@ -49,5 +50,12 @@ class LoadActivity extends AbstractFixture implements FixtureInterface, Containe
         }
 
         $manager->flush();
+    }
+
+    public function getOrder()
+    {
+        // the order in which fixtures will be loaded
+        // the lower the number, the sooner that this fixture is loaded
+        return 2;
     }
 }
