@@ -12,7 +12,7 @@ use Doctrine\ORM\EntityRepository;
  */
 class ActivityRepository extends EntityRepository
 {
-    public function fetchAll($id_user)
+    public function fetchAll($id_user, array $list_friends)
     {
         $qb = $this->createQueryBuilder('a');
 
@@ -21,6 +21,12 @@ class ActivityRepository extends EntityRepository
             ->where('a.user = :id_user')
             ->setParameter('id_user', $id_user)
         ;
+        foreach ($list_friends as $key => $friend) {
+            $qb
+                ->orWhere('a.user = :friend' . $key)
+                ->setParameter('friend' . $key, $friend->getId())
+            ;
+        }
 
         return $qb->getQuery()->getResult();
     }
