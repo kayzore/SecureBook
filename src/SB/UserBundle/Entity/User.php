@@ -58,6 +58,11 @@ class User implements UserInterface
      */
     private $roles = array();
 
+    /**
+     * @ORM\Column(name="friends", type="array")
+     */
+    private $friends = array();
+
     public function getEmail()
     {
         return $this->email;
@@ -157,6 +162,38 @@ class User implements UserInterface
     public function getId()
     {
         return $this->id;
+    }
+
+    /**
+     * Set friends
+     *
+     * @param array $friends
+     * @return User
+     */
+    public function setFriends($friends)
+    {
+        $this->friends = $friends;
+
+        return $this;
+    }
+
+    /**
+     * Get friends
+     *
+     * @return array 
+     */
+    public function getFriends()
+    {
+        return $this->friends;
+    }
+
+    public function addFriend($id_new_friend)
+    {
+        array_push($this->friends, $id_new_friend);
+
+        $this->setFriends($this->friends);
+
+        return $this;
     }
 
     public function eraseCredentials()
