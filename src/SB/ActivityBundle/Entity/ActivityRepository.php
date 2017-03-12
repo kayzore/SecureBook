@@ -27,6 +27,7 @@ class ActivityRepository extends EntityRepository
                 ->setParameter('friend' . $key, $friend->getId())
             ;
         }
+        $qb->orderBy('a.dateActivity', 'DESC');
 
         return $qb->getQuery()->getResult();
     }
