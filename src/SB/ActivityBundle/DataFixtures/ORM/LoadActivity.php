@@ -8,6 +8,7 @@ use Doctrine\Common\DataFixtures\AbstractFixture;
 use Doctrine\Common\DataFixtures\FixtureInterface;
 use Doctrine\Common\Persistence\ObjectManager;
 use SB\ActivityBundle\Entity\Activity;
+use SB\UserBundle\Entity\User;
 use Symfony\Component\DependencyInjection\ContainerAwareInterface;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 
@@ -17,6 +18,11 @@ class LoadActivity extends AbstractFixture implements FixtureInterface, Containe
      * @var ContainerInterface
      */
     private $container;
+
+    /**
+     * @var User
+     */
+    private $user;
 
     public function setContainer(ContainerInterface $container = null)
     {
@@ -37,8 +43,8 @@ class LoadActivity extends AbstractFixture implements FixtureInterface, Containe
             $activity = new Activity();
             $activity->setMessage($activite[0]);
             $activity->setDateActivity($activite[1]);
-            $user = $this->getReference('user' . $key);
-            $activity->setUser($user);
+            $this->user = $this->getReference('user' . $key);
+            $activity->setUser($this->user);
             $manager->persist($activity);
         }
 
