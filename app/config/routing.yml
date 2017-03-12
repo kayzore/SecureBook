@@ -3,14 +3,14 @@ sb_core:
     prefix:   /
 
 login:
-    pattern:   /connexion
+    path:   /connexion
     defaults:  { _controller: SBUserBundle:Security:login }
 
 login_check:
-    pattern:   /login_check
+    path:   /login_check
 
 logout:
-    pattern:   /deconnexion
+    path:   /deconnexion
 
 user_registration:
     path:     /inscription
