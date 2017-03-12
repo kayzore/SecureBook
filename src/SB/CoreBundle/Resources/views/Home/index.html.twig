@@ -9,5 +9,10 @@
                 {% endfor %}
             {% endif %}
         </div>
+        <div class="row">
+            {% if user is defined %}
+                {{ dump(user) }}
+            {% endif %}
+        </div>
     </div>
 {% endblock body %}
