@@ -2,6 +2,7 @@
 
 namespace SB\ActivityBundle\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 use SB\UserBundle\Entity\User;
 
@@ -41,6 +42,13 @@ class Activity
      * @ORM\JoinColumn(nullable=false)
      */
     private $user;
+
+    /**
+     * @ORM\OneToMany(targetEntity="SB\ActivityBundle\Entity\Image", mappedBy="activity")
+     * @ORM\JoinColumn(nullable=true)
+     */
+    private $images = null;
+
 
     public function __construct()
     {
@@ -124,5 +132,40 @@ class Activity
     public function getUser()
     {
         return $this->user;
+    }
+
+    /**
+     * Add images
+     *
+     * @param Image $images
+     * @return Activity
+     */
+    public function addImage(Image $images)
+    {
+        $this->images[] = $images;
+        $images->setActivity($this);
+
+        return $this;
+    }
+
+    /**
+     * Remove images
+     *
+     * @param Image $images
+     */
+    public function removeImage(Image $images)
+    {
+        $this->images->removeElement($images);
+        $images->setActivity(null);
+    }
+
+    /**
+     * Get images
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getImages()
+    {
+        return $this->images;
     }
 }

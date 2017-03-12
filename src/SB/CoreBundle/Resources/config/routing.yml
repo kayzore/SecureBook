@@ -1,3 +1,9 @@
 sb_core_homepage:
     path:     /
+    methods: [GET]
     defaults: { _controller: SBCoreBundle:Core:index }
+
+sb_activity_add:
+    path:     /ajouter-une-activite/
+    methods: [POST]
+    defaults: { _controller: SBCoreBundle:Core:activityAdd }

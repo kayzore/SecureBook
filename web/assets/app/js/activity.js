@@ -1,3 +1,6 @@
 $(document).ready(function () {
-    $("#textareaAddActu").autoGrow();
+    $(".autogrow").autoGrow();
+    $('#btnAddPictures').click(function () {
+        $("#sb_activity_images_images").click();
+    });
 });

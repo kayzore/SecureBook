@@ -14,10 +14,12 @@
         <div class="col-md-4 activity-form">
             <div class="row">
                 <div class="col-md-12 activity activity-form-body">
-                    <form>
+                    {{ form_start(form_add_activity) }}
                         <div class="row">
                             <div class="col-md-12">
-                                <textarea class="form-control" placeholder="Publiez quelque chose !" id="textareaAddActu"></textarea>
+                                <!--<textarea class="form-control" placeholder="Publiez quelque chose !"
+                                          id="textareaAddActu" name="activity_message"></textarea>-->
+                                {{ form_widget(form_add_activity.message) }}
                                 <span class="btnAddPicture pull-right">
                                     <i id="btnAddPictures" class="fa fa-picture-o fa-lg" aria-hidden="true"></i>
                                     <input id="btnSubmitNewActu" type="submit" class="btn btn-info btn-sm" value="Publier">
@@ -26,9 +28,10 @@
                         </div>
                         <div class="row"><div class="col-md-12"><div id="listImageAddActu" class="is_hidden"></div></div></div>
                         <span class="is_hidden" id="blockFormNewActu">
-                            <input type="file" accept="image/*" id="inputImage" multiple>
+                            {{ form_widget(form_add_activity.images) }}
+                            <!--<input type="file" accept="image/*" id="inputImage" name="activity_images" multiple>-->
                         </span>
-                    </form>
+                    {{ form_end(form_add_activity) }}
                 </div>
             </div>
         </div>
@@ -39,8 +42,7 @@
                         <div class="row activity-top">
                             <div class="col-xs-12">
                                 <b>{{ activity.user.username }}</b>
-                                <span class="pull-right">
-                                <div class="btn-group">
+                                <div class="btn-group pull-right">
                                     <button type="button" class="btn btn-default btn-xs dropdown-toggle"
                                             data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                         <i class="fa fa-plus-circle" aria-hidden="true"></i>
@@ -51,7 +53,6 @@
                                         <li><a href="#">Separated link</a></li>
                                     </ul>
                                 </div>
-                            </span>
                             </div>
                             <div class="col-xs-12 activity-date">
                                 <em class="text-muted">{{ activity.dateActivity|date('d/m/Y') }}</em>

@@ -12,7 +12,7 @@ use Doctrine\ORM\EntityRepository;
  */
 class ActivityRepository extends EntityRepository
 {
-    public function fetchAll($id_user, array $list_friends)
+    public function fetchAll($id_user, array $list_friends, $limit)
     {
         $qb = $this->createQueryBuilder('a');
 
@@ -27,7 +27,10 @@ class ActivityRepository extends EntityRepository
                 ->setParameter('friend' . $key, $friend->getId())
             ;
         }
-        $qb->orderBy('a.dateActivity', 'DESC');
+        $qb
+            ->orderBy('a.dateActivity', 'DESC')
+            ->setMaxResults($limit)
+        ;
 
         return $qb->getQuery()->getResult();
     }
