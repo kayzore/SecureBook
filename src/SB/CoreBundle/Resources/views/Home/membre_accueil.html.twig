@@ -28,7 +28,8 @@
                         </div>
                         <div class="row"><div class="col-md-12"><div id="listImageAddActu" class="is_hidden"></div></div></div>
                         <span class="is_hidden" id="blockFormNewActu">
-                            <input type="file" accept="image/*" id="inputImage" name="activity_images" multiple>
+                            {{ form_widget(form_add_activity.images) }}
+                            <!--<input type="file" accept="image/*" id="inputImage" name="activity_images" multiple>-->
                         </span>
                     {{ form_end(form_add_activity) }}
                 </div>

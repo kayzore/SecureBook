@@ -47,13 +47,12 @@ class Activity
      * @ORM\OneToMany(targetEntity="SB\ActivityBundle\Entity\Image", mappedBy="activity")
      * @ORM\JoinColumn(nullable=true)
      */
-    private $images;
+    private $images = null;
 
 
     public function __construct()
     {
         $this->dateActivity = new \Datetime();
-        $this->images = new ArrayCollection();
     }
 
     /**
@@ -163,7 +162,7 @@ class Activity
     /**
      * Get images
      *
-     * @return ArrayCollection
+     * @return \Doctrine\Common\Collections\Collection 
      */
     public function getImages()
     {

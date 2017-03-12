@@ -24,6 +24,7 @@ class ActivityType extends AbstractType
                     'name'          => 'activity_message'
                 )
             ))
+            ->add('images', new ImageType())
         ;
     }
     

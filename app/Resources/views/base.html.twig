@@ -12,10 +12,9 @@
         {% if not is_granted('ROLE_USER') %}
             <link rel="stylesheet" href="{{ asset('assets/app/css/login_register.css') }}">
         {% endif %}
-
+        {% block stylesheets %}{% endblock %}
         <script src="{{ asset('assets/external/libs/jquery/dist/jquery.min.js') }}"></script>
         <script src="{{ asset('assets/external/libs/bootstrap/dist/js/bootstrap.min.js') }}"></script>
-        {% block stylesheets %}{% endblock %}
         {% block javascripts %}{% endblock %}
     </head>
     <body>
