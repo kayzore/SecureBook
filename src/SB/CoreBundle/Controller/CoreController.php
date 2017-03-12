@@ -19,7 +19,7 @@ class CoreController extends Controller
             */
             $user = $this->getUser();
             $list_friends = $em->getRepository('SBUserBundle:User')->findBy(array('id' => $user->getFriends()));
-            return $this->render('SBCoreBundle:Home:index.html.twig', array(
+            return $this->render('SBCoreBundle:Home:membre_accueil.html.twig', array(
                 'list_activity'     => $em->getRepository('SBActivityBundle:Activity')->fetchAll($user->getId(), $list_friends),
                 'user'              => $user->getFriends()
             ));
