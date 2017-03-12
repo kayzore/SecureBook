@@ -4,15 +4,42 @@
     <link rel="stylesheet" href="{{ asset('assets/app/css/activity.css') }}">
 {% endblock stylesheets %}
 
+{% block javascripts %}
+    <script src="{{ asset('assets/external/libs/autogrow-textarea/jquery.autogrowtextarea.min.js') }}"></script>
+    <script src="{{ asset('assets/app/js/activity.js') }}"></script>
+{% endblock javascripts %}
+
 {% block body %}
     <div class="container">
-        <div class="row">
+        <div class="col-md-4 activity-form">
+            <div class="row">
+                <div class="col-md-12 activity activity-form-body">
+                    <form>
+                        <div class="row">
+                            <div class="col-md-12">
+                                <textarea class="form-control" placeholder="Publiez quelque chose !" id="textareaAddActu"></textarea>
+                                <span class="btnAddPicture pull-right">
+                                    <i id="btnAddPictures" class="fa fa-picture-o fa-lg" aria-hidden="true"></i>
+                                    <input id="btnSubmitNewActu" type="submit" class="btn btn-info btn-sm" value="Publier">
+                                </span>
+                            </div>
+                        </div>
+                        <div class="row"><div class="col-md-12"><div id="listImageAddActu" class="is_hidden"></div></div></div>
+                        <span class="is_hidden" id="blockFormNewActu">
+                            <input type="file" accept="image/*" id="inputImage" multiple>
+                        </span>
+                    </form>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-8">
             {% for activity in list_activity %}
-                <div class="col-md-4 col-md-offset-4 activity">
-                    <div class="row activity-top">
-                        <div class="col-xs-12">
-                            <b>{{ activity.user.username }}</b>
-                            <span class="pull-right">
+                <div class="row">
+                    <div class="col-md-6 activity">
+                        <div class="row activity-top">
+                            <div class="col-xs-12">
+                                <b>{{ activity.user.username }}</b>
+                                <span class="pull-right">
                                 <div class="btn-group">
                                     <button type="button" class="btn btn-default btn-xs dropdown-toggle"
                                             data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -25,24 +52,25 @@
                                     </ul>
                                 </div>
                             </span>
+                            </div>
+                            <div class="col-xs-12 activity-date">
+                                <em class="text-muted">{{ activity.dateActivity|date('d/m/Y') }}</em>
+                            </div>
                         </div>
-                        <div class="col-xs-12 activity-date">
-                            <em class="text-muted">{{ activity.dateActivity|date('d/m/Y') }}</em>
-                        </div>
-                    </div>
 
-                    <div class="row activity-middle">
-                        <div class="col-xs-12">
-                            <p>{{ activity.message }}</p>
+                        <div class="row activity-middle">
+                            <div class="col-xs-12">
+                                <p>{{ activity.message }}</p>
+                            </div>
                         </div>
-                    </div>
 
-                    <div class="row activity-bottom">
-                        <div class="col-xs-12">
-                            0 J'aime
-                            <span class="pull-right">
+                        <div class="row activity-bottom">
+                            <div class="col-xs-12">
+                                0 J'aime
+                                <span class="pull-right">
                                 0 Commentaire
                             </span>
+                            </div>
                         </div>
                     </div>
                 </div>
