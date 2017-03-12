@@ -24,6 +24,6 @@ class CoreController extends Controller
                 'user'              => $user->getFriends()
             ));
         }
-        return $this->render('SBCoreBundle:Home:index.html.twig');
+        return $this->render('SBCoreBundle:Home:public_accueil.html.twig');
     }
 }
