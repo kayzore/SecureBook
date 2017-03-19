@@ -3,7 +3,6 @@
 namespace SB\CoreBundle\Controller;
 
 use SB\ActivityBundle\Entity\Activity;
-use SB\ActivityBundle\Entity\Image;
 use SB\ActivityBundle\Form\Type\ActivityType;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
@@ -13,11 +12,11 @@ class CoreController extends Controller
     public function indexAction()
     {
         /*
-            $user = $em->getRepository('SBUserBundle:User')->find(5);
-            $user->addFriend(3);
-            $em->persist($user);
-            $em->flush();
-            */
+        $user = $em->getRepository('SBUserBundle:User')->find(5);
+        $user->addFriend(3);
+        $em->persist($user);
+        $em->flush();
+        */
         if ($this->get('security.authorization_checker')->isGranted('IS_AUTHENTICATED_REMEMBERED')) {
             $user = $this->getUser();
             $em = $this->getDoctrine()->getManager();

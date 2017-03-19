@@ -17,20 +17,20 @@ class ActivityRepository extends EntityRepository
         $qb = $this->createQueryBuilder('a');
 
         $qb
-            ->join('a.user', 'user')
             ->where('a.user = :id_user')
             ->setParameter('id_user', $id_user)
         ;
-        foreach ($list_friends as $key => $friend) {
-            $qb
-                ->orWhere('a.user = :friend' . $key)
-                ->setParameter('friend' . $key, $friend->getId())
-            ;
+        if (!empty($list_friends)) {
+            foreach ($list_friends as $key => $friend) {
+                $qb
+                    ->orWhere('a.user = :friend' . $key)
+                    ->setParameter('friend' . $key, $friend->getId())
+                ;
+            }
         }
         $qb
             ->leftJoin('a.image', 'i')
             ->addSelect('i')
-            ->orWhere('a.image = i.id')
             ->orderBy('a.dateActivity', 'DESC')
             ->setMaxResults($limit)
         ;
