@@ -15,3 +15,6 @@ logout:
 user_registration:
     path:     /inscription
     defaults: { _controller: SBUserBundle:Registration:register }
+
+fos_js_routing:
+    resource: "@FOSJsRoutingBundle/Resources/config/routing/routing.xml"

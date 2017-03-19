@@ -5,6 +5,8 @@
 {% endblock stylesheets %}
 
 {% block javascripts %}
+    <script src="{{ asset('bundles/fosjsrouting/js/router.js') }}"></script>
+    <script src="{{ path('fos_js_routing_js', { callback: 'fos.Router.setData' }) }}"></script>
     <script src="{{ asset('assets/external/libs/autogrow-textarea/jquery.autogrowtextarea.min.js') }}"></script>
     <script src="{{ asset('assets/app/js/activity.js') }}"></script>
 {% endblock javascripts %}
@@ -70,10 +72,26 @@
 
                         <div class="row activity-bottom">
                             <div class="col-xs-12">
-                                0 J'aime
+                                {% if activity.nbLikes == 0 %}
+                                    {% set like_class = 'btn btn-primary btn-xs btn-like' %}
+                                    {% set like_text = " J'aime" %}
+                                {% else %}
+                                    {% set like_class = 'btn btn-success btn-xs btn-dislike' %}
+                                    {% set like_text = " J'aimes" %}
+                                {% endif %}
+
+                                {% if activity.likes|length > 0 %}
+                                    {% set like_class = 'btn btn-success btn-xs btn-dislike' %}
+                                {% else %}
+                                    {% set like_class = 'btn btn-primary btn-xs btn-like' %}
+                                {% endif %}
+
+                                <button type="button" class="{{ like_class }}" data-activity="{{ activity.id }}">
+                                    {{ activity.nbLikes ~ like_text }}
+                                </button>
                                 <span class="pull-right">
-                                0 Commentaire
-                            </span>
+                                    <button type="submit" class="btn btn-primary btn-xs">0 Commentaire</button>
+                                </span>
                             </div>
                         </div>
                     </div>

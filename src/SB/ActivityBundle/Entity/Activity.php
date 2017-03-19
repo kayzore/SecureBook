@@ -2,6 +2,7 @@
 
 namespace SB\ActivityBundle\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 use SB\UserBundle\Entity\User;
 
@@ -25,7 +26,7 @@ class Activity
     /**
      * @var string
      *
-     * @ORM\Column(name="message", type="text")
+     * @ORM\Column(name="message", type="text", nullable=true)
      */
     private $message;
 
@@ -48,10 +49,23 @@ class Activity
      */
     private $image;
 
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="nb_likes", type="integer")
+     */
+    private $nb_likes;
+
+    /**
+     * @ORM\OneToMany(targetEntity="SB\ActivityBundle\Entity\Likes", mappedBy="activity")
+     */
+    private $likes;
+
 
     public function __construct()
     {
         $this->dateActivity = new \Datetime();
+        $this->likes = new ArrayCollection();
     }
 
     /**
@@ -70,7 +84,7 @@ class Activity
      * @param string $message
      * @return Activity
      */
-    public function setMessage($message)
+    public function setMessage($message = null)
     {
         $this->message = $message;
 
@@ -149,10 +163,85 @@ class Activity
     /**
      * Get image
      *
-     * @return \SB\ActivityBundle\Entity\Image 
+     * @return \SB\ActivityBundle\Entity\Image
      */
     public function getImage()
     {
         return $this->image;
+    }
+
+    /**
+     * Add one like
+     *
+     * @return Activity
+     */
+    public function addOneLike()
+    {
+        $this->nb_likes++;
+
+        return $this;
+    }
+
+    /**
+     * Remove one like
+     *
+     * @return Activity
+     */
+    public function removeOneLike()
+    {
+        $this->nb_likes--;
+
+        return $this;
+    }
+
+    /**
+     * Set like
+     *
+     * @param integer $nb_like
+     * @return Activity
+     */
+    public function setNbLike($nb_like)
+    {
+        $this->nb_likes = $nb_like;
+
+        return $this;
+    }
+
+    /**
+     * Get Likes
+     *
+     * @return integer
+     */
+    public function getNbLikes()
+    {
+        return $this->nb_likes;
+    }
+
+    /**
+     * @param Likes $like
+     * @return $this
+     */
+    public function addLike(Likes $like)
+    {
+        $this->likes[] = $like;
+        $like->setActivity($this);
+
+        return $this;
+    }
+
+    /**
+     * @param Likes $like
+     */
+    public function removeLike(Likes $like)
+    {
+        $this->likes->removeElement($like);
+    }
+
+    /**
+     * @return ArrayCollection
+     */
+    public function getLikes()
+    {
+        return $this->likes;
     }
 }

@@ -17,6 +17,7 @@ class ActivityType extends AbstractType
         $builder
             ->add('message', 'textarea', array(
                 'label'         => false,
+                'required'      => false,
                 'attr' => array(
                     'class'         => 'form-control autogrow',
                     'placeholder'   => 'Publiez quelque chose !',

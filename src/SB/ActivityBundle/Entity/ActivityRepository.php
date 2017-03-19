@@ -18,19 +18,21 @@ class ActivityRepository extends EntityRepository
 
         $qb
             ->where('a.user = :id_user')
-            ->setParameter('id_user', $id_user)
         ;
         if (!empty($list_friends)) {
             foreach ($list_friends as $key => $friend) {
                 $qb
                     ->orWhere('a.user = :friend' . $key)
-                    ->setParameter('friend' . $key, $friend->getId())
+                        ->setParameter('friend' . $key, $friend->getId())
                 ;
             }
         }
         $qb
             ->leftJoin('a.image', 'i')
-            ->addSelect('i')
+                ->addSelect('i')
+            ->leftJoin('a.likes', 'l', 'WITH', 'l.user = :id_user')
+                ->addSelect('l')
+            ->setParameter('id_user', $id_user)
             ->orderBy('a.dateActivity', 'DESC')
             ->setMaxResults($limit)
         ;
