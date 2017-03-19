@@ -1,3 +1,8 @@
 .is_hidden {display: none;}
 .no-margin {margin: 0;}
+.no-ml {margin-left: 0;}
+.no-mr {margin-right: 0;}
+.no-padding {padding: 0;}
+.no-pl {padding-left: 0;}
+.no-pr {padding-right: 0;}
 html, body {background: #efefef;}

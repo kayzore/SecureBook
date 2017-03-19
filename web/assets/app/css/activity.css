@@ -6,7 +6,8 @@
     border: 1px solid lightgrey;
 }
 .activity-date {font-size: 0.8em;}
-.activity-top {padding: 10px;}
+.activity-top {padding: 10px 0;}
+.activity-top {padding: 10px 0;}
 .activity-top > div:first-child {
     padding-right: 0;
 }
