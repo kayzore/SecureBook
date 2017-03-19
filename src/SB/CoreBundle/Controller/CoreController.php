@@ -41,7 +41,12 @@ class CoreController extends Controller
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
             $activity->setUser($this->getUser());
-            $activity->getImage()->upload();
+
+            if (!is_null($activity->getImage()->getFile())) {
+                $activity->getImage()->upload();
+            } else {
+                $activity->setImage(null);
+            }
 
             $em = $this->getDoctrine()->getManager();
             $em->persist($activity);

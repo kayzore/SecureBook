@@ -28,8 +28,9 @@ class ActivityRepository extends EntityRepository
             ;
         }
         $qb
-            ->join('image', 'i')
-            ->on('i.a')
+            ->leftJoin('a.image', 'i')
+            ->addSelect('i')
+            ->orWhere('a.image = i.id')
             ->orderBy('a.dateActivity', 'DESC')
             ->setMaxResults($limit)
         ;

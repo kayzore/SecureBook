@@ -13,7 +13,6 @@
     "bootstrap": "https://github.com/twbs/bootstrap.git#^3.3.7",
     "font-awesome": "https://github.com/FortAwesome/Font-Awesome.git#^4.7.0",
     "jquery-ui": "^1.12.1",
-    "autogrow-textarea": "https://github.com/jevin/Autogrow-Textarea.git",
-    "unitegallery": "https://github.com/vvvmax/unitegallery.git#^1.7.40"
+    "autogrow-textarea": "https://github.com/jevin/Autogrow-Textarea.git"
   }
 }
