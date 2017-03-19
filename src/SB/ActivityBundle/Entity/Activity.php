@@ -58,14 +58,31 @@ class Activity
 
     /**
      * @ORM\OneToMany(targetEntity="SB\ActivityBundle\Entity\Likes", mappedBy="activity")
+     * @ORM\JoinColumn(nullable=true)
      */
     private $likes;
+
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="nb_comments", type="integer")
+     */
+    private $nb_comments;
+
+    /**
+     * @ORM\OneToMany(targetEntity="SB\ActivityBundle\Entity\Comment", mappedBy="activity")
+     * @ORM\JoinColumn(nullable=true)
+     */
+    private $comments;
 
 
     public function __construct()
     {
         $this->dateActivity = new \Datetime();
         $this->likes = new ArrayCollection();
+        $this->comments = new ArrayCollection();
+        $this->nb_likes = 0;
+        $this->nb_comments = 0;
     }
 
     /**
@@ -195,20 +212,20 @@ class Activity
     }
 
     /**
-     * Set like
+     * Set nb like
      *
-     * @param integer $nb_like
+     * @param integer $nb_likes
      * @return Activity
      */
-    public function setNbLike($nb_like)
+    public function setNbLike($nb_likes = 0)
     {
-        $this->nb_likes = $nb_like;
+        $this->nb_likes = $nb_likes;
 
         return $this;
     }
 
     /**
-     * Get Likes
+     * Get nb Likes
      *
      * @return integer
      */
@@ -243,5 +260,52 @@ class Activity
     public function getLikes()
     {
         return $this->likes;
+    }
+
+    /**
+     * Add one comment
+     *
+     * @return Activity
+     */
+    public function addOneComment()
+    {
+        $this->nb_comments++;
+
+        return $this;
+    }
+
+    /**
+     * Remove one comment
+     *
+     * @return Activity
+     */
+    public function removeOneComment()
+    {
+        $this->nb_comments--;
+
+        return $this;
+    }
+
+    /**
+     * Set nb comment
+     *
+     * @param integer $nb_comments
+     * @return Activity
+     */
+    public function setNbComment($nb_comments = 0)
+    {
+        $this->nb_comments = $nb_comments;
+
+        return $this;
+    }
+
+    /**
+     * Get nb comment
+     *
+     * @return integer
+     */
+    public function getNbComments()
+    {
+        return $this->nb_comments;
     }
 }

@@ -17,6 +17,33 @@
 }
 .activity-middle p {margin: 0;}
 .activity-bottom {padding: 10px;}
+.alert.alert-comment {
+    padding: 5px 10px;
+    opacity: 0.8;
+}
+.activity-comments {
+    border-top:1px solid #ddd;
+    padding: 10px;
+}
+.activity-comments .media {
+    border-bottom:1px solid #ddd;
+}
+.activity-comments .media:last-child {
+    border-bottom: none;
+}
+.activity-add-comment {
+    border-top:1px solid #ddd;
+    padding: 10px;
+}
+.activity-add-comment textarea {
+    max-width: 100%;
+    resize: none;
+}
+.activity-add-comment button {
+    position: absolute;
+    right: 10px;
+    bottom: 10px;
+}
 .activity-image {width: 100%}
 
 .activity-form {

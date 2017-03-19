@@ -1,0 +1,18 @@
+{% for comment in comments %}
+    <div class="media">
+        <div class="media-left">
+            <a href="#">
+                <img class="media-object img-circle"
+                     src="https://dummyimage.com/64x64/c9c9c9/000000" alt="..." style="max-width: 40px">
+            </a>
+        </div>
+        <div class="media-body">
+            <b class="media-heading">{{ comment.user.username }}</b>
+            <p>{{ comment.text }}</p>
+        </div>
+    </div>
+{% else %}
+    <div class="alert alert-info alert-comment no-margin">
+        <p>Aucun commentaire</p>
+    </div>
+{% endfor %}
