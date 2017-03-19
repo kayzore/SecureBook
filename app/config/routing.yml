@@ -2,6 +2,10 @@ sb_core:
     resource: "@SBCoreBundle/Resources/config/routing.yml"
     prefix:   /
 
+sb_activity:
+    resource: "@SBActivityBundle/Resources/config/routing.yml"
+    prefix:   /
+
 login:
     path:   /connexion
     defaults:  { _controller: SBUserBundle:Security:login }

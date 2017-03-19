@@ -2,36 +2,3 @@ sb_core_homepage:
     path:     /
     methods: [GET]
     defaults: { _controller: SBCoreBundle:Core:index }
-
-sb_activity_add:
-    path:     /ajouter-une-activite/
-    methods: [POST]
-    defaults: { _controller: SBCoreBundle:Core:activityAdd }
-
-sb_activity_like:
-    path:     /ajouter-un-like/
-    methods: [POST]
-    options:
-        expose: true
-    defaults: { _controller: SBCoreBundle:Core:activityLike }
-
-sb_activity_dislike:
-    path:     /supprimer-un-like/
-    methods: [POST]
-    options:
-        expose: true
-    defaults: { _controller: SBCoreBundle:Core:activityDislike }
-
-sb_activity_get_comments:
-    path:     /obtenir-les-commentaires/
-    methods: [POST]
-    options:
-        expose: true
-    defaults: { _controller: SBCoreBundle:Core:activityGetComment }
-
-sb_activity_add_comment:
-    path:     /ajouter-un-commentaire/
-    methods: [POST]
-    options:
-        expose: true
-    defaults: { _controller: SBCoreBundle:Core:activityComment }
