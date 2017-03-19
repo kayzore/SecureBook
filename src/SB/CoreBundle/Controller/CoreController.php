@@ -3,6 +3,7 @@
 namespace SB\CoreBundle\Controller;
 
 use SB\ActivityBundle\Entity\Activity;
+use SB\ActivityBundle\Entity\Image;
 use SB\ActivityBundle\Form\Type\ActivityType;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
@@ -39,9 +40,9 @@ class CoreController extends Controller
         $form = $this->createForm(new ActivityType(), $activity);
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
-            $data = $form->getData();
-            $activity->setMessage($data->getMessage());
             $activity->setUser($this->getUser());
+            $activity->getImage()->upload();
+
             $em = $this->getDoctrine()->getManager();
             $em->persist($activity);
             $em->flush();

@@ -3,6 +3,7 @@
 namespace SB\ActivityBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\HttpFoundation\File\UploadedFile;
 
 /**
  * Image
@@ -29,10 +30,9 @@ class Image
     private $name;
 
     /**
-     * @ORM\ManyToOne(targetEntity="SB\ActivityBundle\Entity\Activity", inversedBy="images")
-     * @ORM\JoinColumn(nullable=false)
+     * @var UploadedFile
      */
-    private $activity;
+    private $file;
 
 
     /**
@@ -68,26 +68,42 @@ class Image
         return $this->name;
     }
 
-    /**
-     * Set activity
-     *
-     * @param Activity $activity
-     * @return Image
-     */
-    public function setActivity(Activity $activity)
+    public function getFile()
     {
-        $this->activity = $activity;
-
-        return $this;
+        return $this->file;
     }
 
-    /**
-     * Get activity
-     *
-     * @return Activity
-     */
-    public function getActivity()
+    public function setFile(UploadedFile $file = null)
     {
-        return $this->activity;
+        $this->file = $file;
+    }
+
+    public function upload()
+    {
+        // Si jamais il n'y a pas de fichier (champ facultatif), on ne fait rien
+        if (null === $this->file) {
+            return;
+        }
+
+        // On récupère le nom original du fichier de l'internaute
+        $name = md5($this->file->getClientOriginalName()) . '.' . $this->file->getClientOriginalExtension();
+
+        // On déplace le fichier envoyé dans le répertoire de notre choix
+        $this->file->move($this->getUploadRootDir(), $name);
+
+        // On sauvegarde le nom de fichier dans notre attribut $url
+        $this->name = $name;
+    }
+
+    public function getUploadDir()
+    {
+        // On retourne le chemin relatif vers l'image pour un navigateur (relatif au répertoire /web donc)
+        return 'uploads/img';
+    }
+
+    protected function getUploadRootDir()
+    {
+        // On retourne le chemin relatif vers l'image pour notre code PHP
+        return __DIR__.'/../../../../web/'.$this->getUploadDir();
     }
 }

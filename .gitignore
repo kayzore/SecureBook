@@ -19,3 +19,4 @@ web/assets/external/
 app/SymfonyRequirements.php
 app/check.php
 web/config.php
+web/uploads/

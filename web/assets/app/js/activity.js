@@ -1,6 +1,6 @@
 $(document).ready(function () {
     $(".autogrow").autoGrow();
     $('#btnAddPictures').click(function () {
-        $("#sb_activity_images_images").click();
+        $("#sb_activity_image_file").click();
     });
 });
