@@ -1,3 +1,7 @@
+sb_notification:
+    resource: "@SBNotificationBundle/Resources/config/routing.yml"
+    prefix:   /
+
 sb_core:
     resource: "@SBCoreBundle/Resources/config/routing.yml"
     prefix:   /

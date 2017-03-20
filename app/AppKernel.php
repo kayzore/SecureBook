@@ -21,6 +21,7 @@ class AppKernel extends Kernel
             new SB\CoreBundle\SBCoreBundle(),
             new SB\UserBundle\SBUserBundle(),
             new SB\ActivityBundle\SBActivityBundle(),
+            new SB\NotificationBundle\SBNotificationBundle(),
         );
 
         if (in_array($this->getEnvironment(), array('dev', 'test'))) {
