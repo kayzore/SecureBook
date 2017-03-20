@@ -2,8 +2,10 @@
 
 namespace SB\UserBundle\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
 use Gedmo\Mapping\Annotation as Gedmo;
 use Doctrine\ORM\Mapping as ORM;
+use SB\NotificationBundle\Entity\Notification;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Validator\Constraints as Assert;
 use Symfony\Component\Security\Core\User\UserInterface;
@@ -69,6 +71,20 @@ class User implements UserInterface
      * @ORM\Column(name="friends", type="array")
      */
     private $friends = array();
+
+    /**
+     * @ORM\OneToMany(targetEntity="SB\NotificationBundle\Entity\Notification", mappedBy="userTo")
+     * @ORM\JoinColumn(nullable=true)
+     */
+    private $notifications;
+
+    /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->notifications = new ArrayCollection();
+    }
 
     public function getEmail()
     {
@@ -210,5 +226,38 @@ class User implements UserInterface
 
     public function eraseCredentials()
     {
+    }
+
+    /**
+     * Add notifications
+     *
+     * @param \SB\NotificationBundle\Entity\Notification $notifications
+     * @return User
+     */
+    public function addNotification(Notification $notifications)
+    {
+        $this->notifications[] = $notifications;
+
+        return $this;
+    }
+
+    /**
+     * Remove notifications
+     *
+     * @param \SB\NotificationBundle\Entity\Notification $notifications
+     */
+    public function removeNotification(Notification $notifications)
+    {
+        $this->notifications->removeElement($notifications);
+    }
+
+    /**
+     * Get notifications
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getNotifications()
+    {
+        return $this->notifications;
     }
 }

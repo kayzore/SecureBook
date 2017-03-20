@@ -3,6 +3,7 @@
 namespace SB\NotificationBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use SB\ActivityBundle\Entity\Activity;
 use SB\UserBundle\Entity\User;
 
 /**
@@ -33,6 +34,12 @@ class Notification
      * @ORM\JoinColumn(nullable=false)
      */
     private $userTo;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="SB\ActivityBundle\Entity\Activity")
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $activity;
 
     /**
      * @var string
@@ -149,5 +156,28 @@ class Notification
     public function getUserTo()
     {
         return $this->userTo;
+    }
+
+    /**
+     * Set activity
+     *
+     * @param \SB\ActivityBundle\Entity\Activity $activity
+     * @return Notification
+     */
+    public function setActivity(Activity $activity)
+    {
+        $this->activity = $activity;
+
+        return $this;
+    }
+
+    /**
+     * Get activity
+     *
+     * @return \SB\ActivityBundle\Entity\Activity 
+     */
+    public function getActivity()
+    {
+        return $this->activity;
     }
 }

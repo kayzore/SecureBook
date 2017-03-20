@@ -59,11 +59,12 @@ class ActivityController extends Controller
                 if ($user->getUsername() != $activity->getUser()->getUsername()) {
                     $faye = $this->container->get('acme_demo.faye.client');
                     $channel = '/' . $activity->getUser()->getUsername();
-                    $data    = array('text' => $user->getUsername() . ' aime une de vos actualité');
+                    $data    = array('type' => 'like', 'text' => $user->getUsername() . ' aime une de vos actualité');
                     $faye->send($channel, $data);
                     $notification = new Notification();
                     $notification->setUserFrom($user);
                     $notification->setUserTo($activity->getUser());
+                    $notification->setActivity($activity);
                     $notification->setType('like');
                     $em->persist($notification);
                 }
@@ -121,6 +122,17 @@ class ActivityController extends Controller
             $comment->setUser($user);
             $comment->setText($comment_text);
 
+            $faye = $this->container->get('acme_demo.faye.client');
+            $channel = '/' . $activity->getUser()->getUsername();
+            $data    = array('type' => 'comment', 'text' => $user->getUsername() . ' à commenté une de vos actualité');
+            $faye->send($channel, $data);
+            $notification = new Notification();
+            $notification->setUserFrom($user);
+            $notification->setUserTo($activity->getUser());
+            $notification->setActivity($activity);
+            $notification->setType('comment');
+
+            $em->persist($notification);
             $em->persist($activity);
             $em->persist($comment);
             $em->flush();

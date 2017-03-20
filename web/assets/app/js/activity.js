@@ -7,8 +7,13 @@ $(document).ready(function () {
     // Inscription du client au channel "notifications" & lorsqu'on recoit un message affichage dans la console
     client.subscribe('/' + $('#username').text(), function (message) {
         console.log(message.text);
+        if (message.type = 'like') {
+            type = '<i class="fa fa-thumbs-up" aria-hidden="true"></i> ';
+        } else if (message.type = 'comment') {
+            type = '<i class="fa fa-commenting-o" aria-hidden="true"></i> ';
+        }
         $.notify({
-            message: '<i class="fa fa-thumbs-up" aria-hidden="true"></i> ' + message.text
+            message: type + message.text
         }, {
             type: "info",
             allow_dismiss: true,

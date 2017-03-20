@@ -26,7 +26,8 @@ class CoreController extends Controller
             ));
             return $this->render('SBCoreBundle:Home:membre_accueil.html.twig', array(
                 'list_activity'         => $em->getRepository('SBActivityBundle:Activity')->fetchAll($user->getId(), $list_friends, 5),
-                'form_add_activity'     => $form_add_activity->createView()
+                'form_add_activity'     => $form_add_activity->createView(),
+                'notifications'         => $user->getNotifications()
             ));
         }
         return $this->render('SBCoreBundle:Home:public_accueil.html.twig');
