@@ -30,7 +30,7 @@ class Notification
     private $userFrom;
 
     /**
-     * @ORM\ManyToOne(targetEntity="SB\UserBundle\Entity\User")
+     * @ORM\ManyToOne(targetEntity="SB\UserBundle\Entity\User", inversedBy="notifications")
      * @ORM\JoinColumn(nullable=false)
      */
     private $userTo;
