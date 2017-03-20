@@ -46,7 +46,7 @@ class Notification
      *
      * @ORM\Column(name="view", type="boolean")
      */
-    private $view;
+    private $view = false;
 
 
     /**
@@ -88,7 +88,7 @@ class Notification
      * @param boolean $view
      * @return Notification
      */
-    public function setView($view)
+    public function setView($view = false)
     {
         $this->view = $view;
 

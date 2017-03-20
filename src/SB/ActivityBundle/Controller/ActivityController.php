@@ -6,6 +6,7 @@ use SB\ActivityBundle\Entity\Activity;
 use SB\ActivityBundle\Entity\Comment;
 use SB\ActivityBundle\Entity\Likes;
 use SB\ActivityBundle\Form\Type\ActivityType;
+use SB\NotificationBundle\Entity\Notification;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
@@ -56,13 +57,15 @@ class ActivityController extends Controller
                 $likes->setUser($user);
 
                 if ($user->getUsername() != $activity->getUser()->getUsername()) {
-                    // récupération du client
                     $faye = $this->container->get('acme_demo.faye.client');
-                    // construction d'un message
                     $channel = '/' . $activity->getUser()->getUsername();
                     $data    = array('text' => $user->getUsername() . ' aime une de vos actualité');
-                    // envoi du message
                     $faye->send($channel, $data);
+                    $notification = new Notification();
+                    $notification->setUserFrom($user);
+                    $notification->setUserTo($activity->getUser());
+                    $notification->setType('like');
+                    $em->persist($notification);
                 }
                 $em->persist($likes);
                 $em->persist($activity);
