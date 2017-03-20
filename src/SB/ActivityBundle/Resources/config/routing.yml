@@ -30,3 +30,10 @@ sb_activity_add_comment:
     options:
         expose: true
     defaults: { _controller: SBActivityBundle:Activity:activityComment }
+
+sb_activity_get_activity:
+    path:     /obtenir-des-activites/
+    methods: [POST]
+    options:
+        expose: true
+    defaults: { _controller: SBActivityBundle:Activity:activityGet }

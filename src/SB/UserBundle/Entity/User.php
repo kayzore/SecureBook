@@ -2,9 +2,10 @@
 
 namespace SB\UserBundle\Entity;
 
+use Gedmo\Mapping\Annotation as Gedmo;
 use Doctrine\ORM\Mapping as ORM;
-use Symfony\Component\Validator\Constraints as Assert;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
+use Symfony\Component\Validator\Constraints as Assert;
 use Symfony\Component\Security\Core\User\UserInterface;
 
 /**
@@ -36,6 +37,12 @@ class User implements UserInterface
      * @Assert\NotBlank()
      */
     private $username;
+
+    /**
+     * @Gedmo\Slug(fields={"username"})
+     * @ORM\Column(length=255, unique=true)
+     */
+    private $slug;
 
     /**
      * @Assert\NotBlank()
@@ -85,6 +92,11 @@ class User implements UserInterface
         $this->username = $username;
 
         return $this;
+    }
+
+    public function getSlug()
+    {
+        return $this->slug;
     }
 
     public function getPlainPassword()

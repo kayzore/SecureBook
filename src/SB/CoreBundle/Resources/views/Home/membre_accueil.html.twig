@@ -1,14 +1,22 @@
 {% extends 'SBCoreBundle::layout.html.twig' %}
 
+{% block title %}
+    Membre -
+{% endblock title %}
+
 {% block stylesheets %}
     <link rel="stylesheet" href="{{ asset('assets/app/css/activity.css') }}">
+    <link rel="stylesheet" href="{{ asset('assets/external/libs/animate.css/animate.min.css') }}">
 {% endblock stylesheets %}
 
 {% block javascripts %}
     <script src="{{ asset('bundles/fosjsrouting/js/router.js') }}"></script>
     <script src="{{ path('fos_js_routing_js', { callback: 'fos.Router.setData' }) }}"></script>
+    <script src="http://localhost:3000/faye/client.js"></script>
     <script src="{{ asset('assets/external/libs/autogrow-textarea/jquery.autogrowtextarea.min.js') }}"></script>
+    <script src="{{ asset('assets/external/libs/remarkable-bootstrap-notify/bootstrap-notify.min.js') }}"></script>
     <script src="{{ asset('assets/app/js/activity.js') }}"></script>
+    <script src="{{ asset('assets/app/js/channel.js') }}"></script>
 {% endblock javascripts %}
 
 {% block body %}
@@ -37,7 +45,7 @@
                 </div>
             </div>
         </div>
-        <div class="col-md-8">
+        <div class="col-md-8" id="container-activity" data-total-ativity="6">
             {% include('SBActivityBundle:activity:activity.html.twig') %}
         </div>
     </div>

@@ -55,6 +55,15 @@ class ActivityController extends Controller
                 $likes->setActivity($activity);
                 $likes->setUser($user);
 
+                if ($user->getUsername() != $activity->getUser()->getUsername()) {
+                    // récupération du client
+                    $faye = $this->container->get('acme_demo.faye.client');
+                    // construction d'un message
+                    $channel = '/' . $activity->getUser()->getUsername();
+                    $data    = array('text' => $user->getUsername() . ' aime une de vos actualité');
+                    // envoi du message
+                    $faye->send($channel, $data);
+                }
                 $em->persist($likes);
                 $em->persist($activity);
                 $em->flush();
@@ -129,6 +138,23 @@ class ActivityController extends Controller
 
             return $this->render('SBActivityBundle:comments:comment.html.twig', array(
                 'comments' => $comments
+            ));
+        }
+        return $this->createAccessDeniedException('Acces Denied');
+    }
+
+    public function activityGetAction(Request $request)
+    {
+        if ($request->isXmlHttpRequest()) {
+            $activity_last_id = $request->request->get('id_last_activity');
+
+            $em = $this->getDoctrine()->getManager();
+            $user = $this->getUser();
+            $list_friends = $em->getRepository('SBUserBundle:User')->findBy(array('id' => $user->getFriends()));
+            $activity = $em->getRepository('SBActivityBundle:Activity')->fetchAll($user->getId(), $list_friends, 3, $activity_last_id);
+
+            return $this->render('SBActivityBundle:activity:activity.html.twig', array(
+                'list_activity' => $activity
             ));
         }
         return $this->createAccessDeniedException('Acces Denied');

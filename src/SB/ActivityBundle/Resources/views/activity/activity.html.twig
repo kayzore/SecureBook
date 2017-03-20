@@ -53,16 +53,16 @@
                         {{ activity.nbLikes ~ like_text }}
                     </button>
                     <span class="pull-right">
-                                    {% if activity.nbComments < 2 %}
-                                        {% set comment_text = " Commentaire" %}
-                                    {% else %}
-                                        {% set comment_text = " Commentaires" %}
-                                    {% endif %}
+                        {% if activity.nbComments < 2 %}
+                            {% set comment_text = " Commentaire" %}
+                        {% else %}
+                            {% set comment_text = " Commentaires" %}
+                        {% endif %}
                         <button type="button" class="btn btn-primary btn-xs btn-show-comments"
                                 data-activity="{{ activity.id }}">
-                                        {{ activity.nbComments ~ comment_text }}
-                                    </button>
-                                </span>
+                            {{ activity.nbComments ~ comment_text }}
+                        </button>
+                    </span>
                 </div>
             </div>
             <div class="row activity-comments is_hidden"></div>

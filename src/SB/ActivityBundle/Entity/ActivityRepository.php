@@ -3,6 +3,7 @@
 namespace SB\ActivityBundle\Entity;
 
 use Doctrine\ORM\EntityRepository;
+use Doctrine\ORM\QueryBuilder;
 
 /**
  * ActivityRepository
@@ -12,7 +13,7 @@ use Doctrine\ORM\EntityRepository;
  */
 class ActivityRepository extends EntityRepository
 {
-    public function fetchAll($id_user, array $list_friends, $limit)
+    public function fetchAll($id_user, array $list_friends, $limit, $activity_last_id = null)
     {
         $qb = $this->createQueryBuilder('a');
 
@@ -27,6 +28,9 @@ class ActivityRepository extends EntityRepository
                 ;
             }
         }
+        if (!is_null($activity_last_id)) {
+            $this->getOlderActivity($qb, $activity_last_id);
+        }
         $qb
             ->leftJoin('a.image', 'i')
                 ->addSelect('i')
@@ -38,5 +42,13 @@ class ActivityRepository extends EntityRepository
         ;
 
         return $qb->getQuery()->getResult();
+    }
+
+    private function getOlderActivity(QueryBuilder $qb, $activity_last_id)
+    {
+        $qb
+            ->andWhere('a.id < :activity_last_id')
+                ->setParameter('activity_last_id', $activity_last_id)
+        ;
     }
 }

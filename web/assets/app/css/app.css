@@ -5,4 +5,45 @@
 .no-padding {padding: 0;}
 .no-pl {padding-left: 0;}
 .no-pr {padding-right: 0;}
-html, body {background: #efefef;}
+html, body {
+    background: #efefef;
+    padding-bottom: 10px;
+}
+#notifications{
+    min-width: 250px;
+    padding: 0;
+    overflow:hidden;
+    background-color:rgba(255,255,255,.8);
+}
+#notifications-top {
+    border-bottom: 1px solid #ddd;
+    padding: 4px 15px;
+}
+#notifications .notification {
+    border-top: 1px solid #ddd;
+    border-bottom: 1px solid #ddd;
+    padding: 5px 15px;
+}
+#notifications .notification.not-view {
+    background-color: lightgrey;
+}
+#notifications .notification:hover {
+    background-color: lightblue;
+    cursor: pointer;
+}
+#notifications .notification p {
+    font-size: 0.9em;
+}
+#notifications-container {
+    max-height: 185px;
+    overflow-y: scroll;
+    overflow-x: hidden;
+    width: 100%;
+
+}
+@media(max-width:768px){
+    #notifications{
+        background-color: inherit;
+        color: #fff;
+    }
+}
