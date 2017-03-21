@@ -6,19 +6,15 @@ sb_core:
     resource: "@SBCoreBundle/Resources/config/routing.yml"
     prefix:   /
 
-login:
-    path:   /connexion
-    defaults:  { _controller: SBUserBundle:Security:login }
+sb_user:
+    resource: "@SBUserBundle/Resources/config/routing.yml"
+    prefix:   /
 
 login_check:
     path:   /login_check
 
 logout:
     path:   /deconnexion
-
-user_registration:
-    path:     /inscription
-    defaults: { _controller: SBUserBundle:Registration:register }
 
 fos_js_routing:
     resource: "@FOSJsRoutingBundle/Resources/config/routing/routing.xml"
