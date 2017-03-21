@@ -52,7 +52,7 @@ class ActivityRepository extends EntityRepository
         ;
     }
 
-    public function count($id_user, array $list_friends)
+    public function countAll($id_user, array $list_friends)
     {
         $qb = $this->createQueryBuilder('a');
 
