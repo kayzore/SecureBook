@@ -24,8 +24,10 @@ class CoreController extends Controller
             $form_add_activity = $this->createForm(ActivityType::class, $activity, array(
                 'action' => $this->generateUrl('sb_activity_add')
             ));
+            $activityRepository = $em->getRepository('SBActivityBundle:Activity');
             return $this->render('SBCoreBundle:Home:membre_accueil.html.twig', array(
-                'list_activity'         => $em->getRepository('SBActivityBundle:Activity')->fetchAll($user->getId(), $list_friends, 5),
+                'list_activity'         => $activityRepository->fetchAll($user->getId(), $list_friends, 5),
+                'number_of_activity'    => $activityRepository->count($user->getId(), $list_friends),
                 'form_add_activity'     => $form_add_activity->createView(),
                 'notifications'         => $user->getNotifications()
             ));

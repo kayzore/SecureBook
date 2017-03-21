@@ -51,4 +51,26 @@ class ActivityRepository extends EntityRepository
                 ->setParameter('activity_last_id', $activity_last_id)
         ;
     }
+
+    public function count($id_user, array $list_friends)
+    {
+        $qb = $this->createQueryBuilder('a');
+
+        $qb
+            ->select('COUNT(a)')
+            ->where('a.user = :id_user')
+                ->setParameter('id_user', $id_user)
+        ;
+
+        if (!empty($list_friends)) {
+            foreach ($list_friends as $key => $friend) {
+                $qb
+                    ->orWhere('a.user = :friend' . $key)
+                    ->setParameter('friend' . $key, $friend->getId())
+                ;
+            }
+        }
+
+        return $qb->getQuery()->getSingleScalarResult();
+    }
 }
