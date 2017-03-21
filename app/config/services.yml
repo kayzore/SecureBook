@@ -1,13 +1,13 @@
 parameters:
-    acme_demo.faye.endpoint:      'http://localhost:3000/'
-    acme_demo.faye.adapter.class: 'Nc\FayeClient\Adapter\CurlAdapter'
-    acme_demo.faye.client.class:  'Nc\FayeClient\Client'
+    sb_realtime.faye.endpoint:      'http://localhost:3000/'
+    sb_realtime.faye.adapter.class: 'Nc\FayeClient\Adapter\CurlAdapter'
+    sb_realtime.faye.client.class:  'Nc\FayeClient\Client'
 
 services:
-    acme_demo.faye.adapter:
-        class:     %acme_demo.faye.adapter.class%
-    acme_demo.faye.client:
-        class:     %acme_demo.faye.client.class%
+    sb_realtime.faye.adapter:
+        class:     '%sb_realtime.faye.adapter.class%'
+    sb_realtime.faye.client:
+        class:     '%sb_realtime.faye.client.class%'
         arguments:
-            - @acme_demo.faye.adapter
-            - %acme_demo.faye.endpoint%
+            - '@sb_realtime.faye.adapter'
+            - '%sb_realtime.faye.endpoint%'

@@ -1,13 +1,9 @@
-sb_notification:
-    resource: "@SBNotificationBundle/Resources/config/routing.yml"
+sb_activity:
+    resource: "@SBActivityBundle/Resources/config/routing.yml"
     prefix:   /
 
 sb_core:
     resource: "@SBCoreBundle/Resources/config/routing.yml"
-    prefix:   /
-
-sb_activity:
-    resource: "@SBActivityBundle/Resources/config/routing.yml"
     prefix:   /
 
 login:

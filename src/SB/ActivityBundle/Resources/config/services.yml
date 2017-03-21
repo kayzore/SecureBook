@@ -1,4 +1,0 @@
-services:
-#    sb_activity.example:
-#        class: SB\ActivityBundle\Example
-#        arguments: [@service_id, "plain_value", %parameter%]

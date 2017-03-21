@@ -13,18 +13,17 @@ class AppKernel extends Kernel
             new Symfony\Bundle\TwigBundle\TwigBundle(),
             new Symfony\Bundle\MonologBundle\MonologBundle(),
             new Symfony\Bundle\SwiftmailerBundle\SwiftmailerBundle(),
-            new Symfony\Bundle\AsseticBundle\AsseticBundle(),
             new Doctrine\Bundle\DoctrineBundle\DoctrineBundle(),
             new Sensio\Bundle\FrameworkExtraBundle\SensioFrameworkExtraBundle(),
             new FOS\JsRoutingBundle\FOSJsRoutingBundle(),
             new Stof\DoctrineExtensionsBundle\StofDoctrineExtensionsBundle(),
-            new SB\CoreBundle\SBCoreBundle(),
-            new SB\UserBundle\SBUserBundle(),
-            new SB\ActivityBundle\SBActivityBundle(),
-            new SB\NotificationBundle\SBNotificationBundle(),
+            new SB\Bundle\CoreBundle\SBCoreBundle(),
+            new SB\Bundle\UserBundle\SBUserBundle(),
+            new SB\Bundle\ActivityBundle\SBActivityBundle(),
+            new SB\Bundle\NotificationBundle\SBNotificationBundle(),
         );
 
-        if (in_array($this->getEnvironment(), array('dev', 'test'))) {
+        if (in_array($this->getEnvironment(), array('dev', 'test'), true)) {
             $bundles[] = new Symfony\Bundle\DebugBundle\DebugBundle();
             $bundles[] = new Symfony\Bundle\WebProfilerBundle\WebProfilerBundle();
             $bundles[] = new Sensio\Bundle\DistributionBundle\SensioDistributionBundle();
