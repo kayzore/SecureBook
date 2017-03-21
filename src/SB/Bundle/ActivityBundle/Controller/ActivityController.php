@@ -22,7 +22,7 @@ class ActivityController extends Controller
             $activity->setUser($this->getUser());
 
             if (!is_null($activity->getImage()->getFile())) {
-                $activity->getImage()->upload();
+                $activity->getImage()->upload($this->getUser()->getUsername());
             } else {
                 $activity->setImage(null);
             }

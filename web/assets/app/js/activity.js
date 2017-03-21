@@ -33,6 +33,23 @@ $(document).ready(function () {
     $('#btnAddPictures').click(function () {
         $("#sb_activity_image_file").click();
     });
+    function readURL(input) {
+        if (input.files && input.files[0]) {
+            var reader = new FileReader();
+
+            reader.onload = function (e) {
+                $('#image-preview-input')
+                    .attr('src', e.target.result)
+                    .removeClass('hidden')
+                ;
+            };
+
+            reader.readAsDataURL(input.files[0]);
+        }
+    }
+    $("#sb_activity_image_file").change(function(){
+        readURL(this);
+    });
 
     $(document).on('click', '.btn-like', function(){
         var btn = this,

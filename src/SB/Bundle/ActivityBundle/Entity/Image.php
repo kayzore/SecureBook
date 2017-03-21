@@ -78,7 +78,7 @@ class Image
         $this->file = $file;
     }
 
-    public function upload()
+    public function upload($username)
     {
         // Si jamais il n'y a pas de fichier (champ facultatif), on ne fait rien
         if (null === $this->file) {
@@ -86,7 +86,7 @@ class Image
         }
 
         // On récupère le nom original du fichier de l'internaute
-        $name = md5($this->file->getClientOriginalName()) . '.' . $this->file->getClientOriginalExtension();
+        $name = md5(uniqid() . $username . $this->file->getClientOriginalName()) . '.' . $this->file->getClientOriginalExtension();
 
         // On déplace le fichier envoyé dans le répertoire de notre choix
         $this->file->move($this->getUploadRootDir(), $name);
@@ -104,6 +104,6 @@ class Image
     protected function getUploadRootDir()
     {
         // On retourne le chemin relatif vers l'image pour notre code PHP
-        return __DIR__.'/../../../../web/'.$this->getUploadDir();
+        return __DIR__.'/../../../../../web/'.$this->getUploadDir();
     }
 }
