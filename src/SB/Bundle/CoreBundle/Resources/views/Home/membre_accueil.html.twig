@@ -4,49 +4,33 @@
     Membre -
 {% endblock title %}
 
-{% block stylesheets %}
-    <link rel="stylesheet" href="{{ asset('assets/app/css/activity.css') }}">
-    <link rel="stylesheet" href="{{ asset('assets/external/libs/animate.css/animate.min.css') }}">
-{% endblock stylesheets %}
-
-{% block javascripts %}
-    <script src="{{ asset('bundles/fosjsrouting/js/router.js') }}"></script>
-    <script src="{{ path('fos_js_routing_js', { callback: 'fos.Router.setData' }) }}"></script>
-    <script src="http://localhost:3000/faye/client.js"></script>
-    <script src="{{ asset('assets/external/libs/autogrow-textarea/jquery.autogrowtextarea.min.js') }}"></script>
-    <script src="{{ asset('assets/external/libs/remarkable-bootstrap-notify/bootstrap-notify.min.js') }}"></script>
-    <script src="{{ asset('assets/app/js/activity.js') }}"></script>
-{% endblock javascripts %}
-
 {% block body %}
-    <div class="container">
-        <div class="col-md-4 activity-form">
-            <div class="row">
-                <div class="col-md-12 activity activity-form-body">
-                    {{ form_start(form_add_activity) }}
-                        <div class="row">
-                            <div class="col-md-12">
-                                <!--<textarea class="form-control" placeholder="Publiez quelque chose !"
-                                          id="textareaAddActu" name="activity_message"></textarea>-->
-                                {{ form_widget(form_add_activity.message) }}
-                                <span class="btnAddPicture pull-right">
-                                    <i id="btnAddPictures" class="fa fa-picture-o fa-lg" aria-hidden="true"></i>
-                                    <input id="btnSubmitNewActu" type="submit" class="btn btn-info btn-sm" value="Publier">
-                                </span>
-                            </div>
+    <div class="col-md-4 activity-form">
+        <div class="row">
+            <div class="col-md-12 activity activity-form-body">
+                {{ form_start(form_add_activity) }}
+                    <div class="row">
+                        <div class="col-md-12">
+                            <!--<textarea class="form-control" placeholder="Publiez quelque chose !"
+                                      id="textareaAddActu" name="activity_message"></textarea>-->
+                            {{ form_widget(form_add_activity.message) }}
+                            <span class="btnAddPicture pull-right">
+                                <i id="btnAddPictures" class="fa fa-picture-o fa-lg" aria-hidden="true"></i>
+                                <input id="btnSubmitNewActu" type="submit" class="btn btn-info btn-sm" value="Publier">
+                            </span>
                         </div>
-                        <div class="row"><div class="col-md-12"><div id="listImageAddActu" class="is_hidden"></div></div></div>
-                        <span class="is_hidden" id="blockFormNewActu">
-                            {{ form_widget(form_add_activity.image) }}
-                            <!--<input type="file" accept="image/*" id="inputImages" name="activity_images[]" multiple>-->
-                        </span>
-                    {{ form_end(form_add_activity) }}
-                    <img id="image-preview-input" class="img-responsive hidden" src="" alt="Image preview">
-                </div>
+                    </div>
+                    <div class="row"><div class="col-md-12"><div id="listImageAddActu" class="is_hidden"></div></div></div>
+                    <span class="is_hidden" id="blockFormNewActu">
+                        {{ form_widget(form_add_activity.image) }}
+                        <!--<input type="file" accept="image/*" id="inputImages" name="activity_images[]" multiple>-->
+                    </span>
+                {{ form_end(form_add_activity) }}
+                <img id="image-preview-input" class="img-responsive hidden" src="" alt="Image preview">
             </div>
         </div>
-        <div class="col-md-8" id="container-activity" data-total-ativity="{{ number_of_activity }}">
-            {% include('SBActivityBundle:activity:activity.html.twig') %}
-        </div>
+    </div>
+    <div class="col-md-8" id="container-activity" data-total-ativity="{{ number_of_activity }}">
+        {% include('SBActivityBundle:activity:activity.html.twig') %}
     </div>
 {% endblock body %}
