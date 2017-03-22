@@ -7,70 +7,27 @@
 {% block stylesheets %}
     {{ parent() }}
     <link rel="stylesheet" href="{{ asset('assets/app/css/profil.css') }}">
-    <link rel="stylesheet" href="{{ asset('assets/external/libs/angular-xeditable/dist/css/xeditable.min.css') }}">
 {% endblock stylesheets %}
 
 
 {% block js %}
     <script src="{{ asset('assets/external/libs/jquery-ui/jquery-ui.min.js') }}"></script>
-    <script src="{{ asset('assets/external/libs/angular/angular.min.js') }}"></script>
-    <script src="{{ asset('assets/external/libs/angular-xeditable/dist/js/xeditable.min.js') }}"></script>
     <!--<script src="{{ asset('assets/external/libs/JQ-Image-Drag/script/jquery.imagedrag.min.js') }}"></script>-->
-    <script src="{{ asset('assets/external/libs/ng-flow/dist/ng-flow-standalone.min.js') }}"></script>
     <script src="{{ asset('assets/app/js/profil.js') }}"></script>
-    <script>
-        var app = angular.module("app", ["xeditable", "flow"]);
-        app.config(function($interpolateProvider) {
-            $interpolateProvider.startSymbol('{/');
-            $interpolateProvider.endSymbol('/}');
-        });
-        app.config(['flowFactoryProvider', function (flowFactoryProvider) {
-            flowFactoryProvider.defaults = {
-                target: 'upload.php',
-                permanentErrors: [404, 500, 501],
-                maxChunkRetries: 1,
-                chunkRetryInterval: 5000,
-                simultaneousUploads: 1,
-                singleFile: true
-            };
-        }]);
-        app.run(function(editableOptions) {
-            editableOptions.theme = 'bs3';
-        });
-        app.controller('userInformations', function($scope) {
-            $scope.user = {
-                prenom: '{{ app.user.firstname }}',
-                nom: '{{ app.user.lastname }}',
-                pays: '{{ app.user.pays }}',
-                region: '{{ app.user.region }}',
-                ville: '{{ app.user.ville }}'
-            };
-            $scope.updateUser = function(data) {
-                $.ajax({
-                    url: Routing.generate('sb_user_profil_update_profil'),
-                    method: 'POST',
-                    data: $scope.user,
-                    dataType: 'json',
-                    success: function (result) {
-                        console.log(result);
-                    }
-                });
-                console.log(data);
-                console.log($scope.user);
-            };
-        });
-    </script>
 {% endblock js %}
 
 {% block body %}
-    <div class="col-md-12" ng-app="app">
+    <div class="col-md-12">
         <div class="row">
             <div class="col-md-12">
-                <article class="blocks no-padding">
+                <article class="no-padding">
                     <div id="blocks-couverture">
-                        <span class="is_hidden" id="coverPosition">-30px</span>
-                        <img src="http://www.photo-paysage.com/images_accueil/Plus-belles-photos-de-nature.jpg" class="img-responsive" id="currentCover" alt="Image couverture">
-                        <span><i class="fa fa-pencil-square fa-3x" aria-hidden="true" data-toggle="modal" data-target="#modalCover"></i></span>
+                        <img src="http://www.photo-paysage.com/images_accueil/Plus-belles-photos-de-nature.jpg"
+                             class="img-responsive" id="currentCover" alt="Image couverture">
+                        <span>
+                            <i class="fa fa-pencil-square fa-3x" aria-hidden="true" data-toggle="modal"
+                               data-target="#modalCover"></i>
+                        </span>
                     </div>
                     <div id="blocks-profil">
                         <img src="http://www.w3schools.com/bootstrap/img_avatar3.png" class="img-circle img-thumbnail currentAvatar" alt="Image couverture">
@@ -83,44 +40,17 @@
                         {% endif %}
                         <ul>
                             <li><h4>{{ user_profil_name }}</h4></li>
-                            <li><a href="#" class="btn btn-infos" id="btnSubmitNewActu"><i class="fa fa-cogs" aria-hidden="true"></i> Mes paramètres</a></li>
-                            <li><a href="#" class="btn btn-infos" id="btnSubmitNewActu"><i class="fa fa-picture-o" aria-hidden="true"></i> Mes images</a></li>
+                            <li>
+                                <a href="#" class="btn btn-infos" id="btnSubmitNewActu">
+                                    <i class="fa fa-cogs" aria-hidden="true"></i> Mes paramètres
+                                </a>
+                            </li>
+                            <li>
+                                <a href="#" class="btn btn-infos" id="btnSubmitNewActu">
+                                    <i class="fa fa-picture-o" aria-hidden="true"></i> Mes images
+                                </a>
+                            </li>
                         </ul>
-                    </div>
-                    <!-- Modal -->
-                    <div class="modal fade" id="modalCover" tabindex="-1" role="dialog" aria-labelledby="modalCoverLabel">
-                        <div class="modal-dialog" role="document">
-                            <div class="modal-content">
-                                <div class="modal-header">
-                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                                    <h4 class="modal-title" id="modalCoverLabel">Modifier ma couverture</h4>
-                                </div>
-                                <div class="modal-body" flow-init flow-files-submitted="$flow.upload()" flow-file-success="$file.msg = $message">
-                                    <div class="row">
-                                        <div class="col-mxs-12">
-                                            <h5 class="text-center">Image de couverture actuelle :</h5>
-                                            <img src="http://www.photo-paysage.com/images_accueil/Plus-belles-photos-de-nature.jpg" alt="Image de couverture actuelle"
-                                                 class="img-responsive center-block" style="max-height: 200px"/>
-                                        </div>
-                                        <hr>
-                                        <div class="col-mxs-12" id="test">
-                                            <div flow-drop>
-                                                <div class="dropNewCover" flow-drop="" ng-class="dropClass">
-                                                    <span class="btn btn-default" flow-btn="" flow-attrs="{accept:'image/*'}">Choisissez une image<input style="visibility: hidden; position: absolute;" multiple="multiple" type="file"></span>
-                                                    <b>OU</b>
-                                                    Glissez là dans cette zone
-                                                </div>
-                                            </div>
-                                            <img src="" flow-img="$flow.files[0]" class="img-responsive center-block" style="max-height: 200px"/>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="modal-footer">
-                                    <button type="button" class="btn btn-default" data-dismiss="modal">Annuler</button>
-                                    <button type="button" class="btn btn-primary" id="btnChangeCover">Sauvegarder</button>
-                                </div>
-                            </div>
-                        </div>
                     </div>
                 </article>
             </div>
@@ -130,22 +60,42 @@
                 <div class="row">
                     <div class="col-md-3 ml-20 mr-50 mt-20">
                         <div class="row">
-                            <div class="col-md-12 activity pb-20" id="blocks-user-information" ng-controller="userInformations">
+                            <div class="col-md-12 activity pb-20" id="blocks-user-information">
                                 <h4><i class="fa fa-info" aria-hidden="true"></i> Mes informations</h4>
                                 <p class="popover-wrapper">
-                                    <span id="publicPrenom" data-public="true"><i class="fa fa-eye" aria-hidden="true" data-toggle="tooltip" title="Public"></i></span> Prenom : <a href="#" editable-text="user.prenom" onaftersave="updateUser($data)">{/ user.prenom || "Vide" /} <i class="fa fa-pencil" aria-hidden="true"></i></a>
+                                    <span id="publicPrenom" data-public="true">
+                                        <i class="fa fa-eye" aria-hidden="true" data-toggle="tooltip" title="Public"></i>
+                                    </span>
+                                    Prenom :
+                                    <a href="#">{{ app.user.firstname }} <i class="fa fa-pencil" aria-hidden="true"></i></a>
                                 </p><br>
                                 <p class="popover-wrapper">
-                                    <span id="publicNom" data-public="true"><i class="fa fa-eye" aria-hidden="true" data-toggle="tooltip" title="Public"></i></span> Nom : <a href="#" editable-text="user.nom" onaftersave="updateUser($data)">{/ user.nom  || "Vide" /} <i class="fa fa-pencil" aria-hidden="true"></i></a>
+                                    <span id="publicNom" data-public="true">
+                                        <i class="fa fa-eye" aria-hidden="true" data-toggle="tooltip" title="Public"></i>
+                                    </span>
+                                    Nom :
+                                    <a href="#">{{ app.user.lastname }} <i class="fa fa-pencil" aria-hidden="true"></i></a>
                                 </p><br>
                                 <p class="popover-wrapper">
-                                    <span id="publicPays" data-public="false"><i class="fa fa-eye-slash" aria-hidden="true" data-toggle="tooltip" title="Non public"></i></span> Pays : <a href="#" editable-text="user.pays" onaftersave="updateUser($data)">{/ user.pays  || "Vide" /} <i class="fa fa-pencil" aria-hidden="true"></i></a>
+                                    <span id="publicPays" data-public="false">
+                                        <i class="fa fa-eye-slash" aria-hidden="true" data-toggle="tooltip" title="Non public"></i>
+                                    </span>
+                                    Pays :
+                                    <a href="#">{{ app.user.pays }} <i class="fa fa-pencil" aria-hidden="true"></i></a>
                                 </p><br>
                                 <p class="popover-wrapper">
-                                    <span id="publicRegion" data-public="false"><i class="fa fa-eye-slash" aria-hidden="true" data-toggle="tooltip" title="Non public"></i></span> Région : <a href="#" editable-text="user.region" onaftersave="updateUser($data)">{/ user.region || "Vide" /} <i class="fa fa-pencil" aria-hidden="true"></i></a>
+                                    <span id="publicRegion" data-public="false">
+                                        <i class="fa fa-eye-slash" aria-hidden="true" data-toggle="tooltip" title="Non public"></i>
+                                    </span>
+                                    Région :
+                                    <a href="#">{{ app.user.region }} <i class="fa fa-pencil" aria-hidden="true"></i></a>
                                 </p><br>
                                 <p class="popover-wrapper">
-                                    <span id="publicVille" data-public="true"><i class="fa fa-eye" aria-hidden="true" data-toggle="tooltip" title="Public"></i></span> Ville : <a href="#" editable-text="user.ville" onaftersave="updateUser($data)">{/ user.ville || "Vide" /} <i class="fa fa-pencil" aria-hidden="true"></i></a>
+                                    <span id="publicVille" data-public="true">
+                                        <i class="fa fa-eye" aria-hidden="true" data-toggle="tooltip" title="Public"></i>
+                                    </span>
+                                    Ville :
+                                    <a href="#">{{ app.user.ville }} <i class="fa fa-pencil" aria-hidden="true"></i></a>
                                 </p>
                             </div>
                         </div>
@@ -158,6 +108,34 @@
                             {% include('SBActivityBundle:activity:activity.html.twig') %}
                         </div>
                     </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Modal Cover -->
+    <div class="modal fade" id="modalCover" tabindex="-1" role="dialog" aria-labelledby="modalCoverLabel">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title" id="modalCoverLabel">Modifier ma couverture</h4>
+                </div>
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="col-mxs-12">
+                            <h5 class="text-center">Image de couverture actuelle :</h5>
+                            <img src="http://www.photo-paysage.com/images_accueil/Plus-belles-photos-de-nature.jpg"
+                                 alt="Image de couverture actuelle" class="img-responsive center-block"
+                                 style="max-height: 200px"/>
+                        </div>
+                        <hr>
+                        <div class="col-mxs-12" id="test">
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Annuler</button>
+                    <button type="button" class="btn btn-primary" id="btnChangeCover">Sauvegarder</button>
                 </div>
             </div>
         </div>

@@ -16,9 +16,6 @@
     "autogrow-textarea": "https://github.com/jevin/Autogrow-Textarea.git",
     "remarkable-bootstrap-notify": "https://github.com/mouse0270/bootstrap-notify.git#^3.1.3",
     "animate.css": "https://github.com/daneden/animate.css.git#^3.5.2",
-    "angular-xeditable": "https://github.com/vitalets/angular-xeditable.git#^0.6.0",
     "JQ-Image-Drag": "https://github.com/puneetkay/JQ-Image-Drag.git#^1.1.2",
-    "ng-flow": "https://github.com/flowjs/ng-flow.git#^2.7.4",
-    "angularjs": "https://github.com/angular/angular.js.git#^1.6.3"
   }
 }
