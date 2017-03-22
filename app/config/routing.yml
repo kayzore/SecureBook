@@ -10,11 +10,5 @@ sb_user:
     resource: "@SBUserBundle/Resources/config/routing.yml"
     prefix:   /
 
-login_check:
-    path:   /login_check
-
-logout:
-    path:   /deconnexion
-
 fos_js_routing:
     resource: "@FOSJsRoutingBundle/Resources/config/routing/routing.xml"

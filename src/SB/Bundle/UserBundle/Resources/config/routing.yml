@@ -1,8 +1,3 @@
-sb_user_profil:
-    path:     /{slugUsername}
-    methods: [GET]
-    defaults: { _controller: SBUserBundle:Profil:profil }
-
 user_registration:
     path:     /inscription
     defaults: { _controller: SBUserBundle:Registration:register }
@@ -10,3 +5,14 @@ user_registration:
 login:
     path:   /connexion
     defaults:  { _controller: SBUserBundle:Security:login }
+
+login_check:
+    path:   /login_check
+
+logout:
+    path:   /deconnexion
+
+sb_user_profil:
+    path:     /{slugUsername}
+    methods: [GET]
+    defaults: { _controller: SBUserBundle:Profil:profil }
