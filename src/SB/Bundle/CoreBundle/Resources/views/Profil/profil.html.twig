@@ -5,15 +5,17 @@
 {% endblock title %}
 
 {% block stylesheets %}
-    <script src="{{ asset('assets/app/css/profil.css') }}"></script>
+    {{ parent() }}
+    <link rel="stylesheet" href="{{ asset('assets/app/css/profil.css') }}">
     <link rel="stylesheet" href="{{ asset('assets/external/libs/angular-xeditable/dist/css/xeditable.min.css') }}">
 {% endblock stylesheets %}
 
 
-{% block javascript %}
+{% block js %}
+    <script src="{{ asset('assets/external/libs/jquery-ui/jquery-ui.min.js') }}"></script>
     <script src="{{ asset('assets/external/libs/angular/angular.min.js') }}"></script>
     <script src="{{ asset('assets/external/libs/angular-xeditable/dist/js/xeditable.min.js') }}"></script>
-    <script src="{{ asset('assets/external/libs/JQ-Image-Drag/script/jquery.imagedrag.min.js') }}"></script>
+    <!--<script src="{{ asset('assets/external/libs/JQ-Image-Drag/script/jquery.imagedrag.min.js') }}"></script>-->
     <script src="{{ asset('assets/external/libs/ng-flow/dist/ng-flow-standalone.min.js') }}"></script>
     <script src="{{ asset('assets/app/js/profil.js') }}"></script>
     <script>
@@ -49,10 +51,10 @@
             };
         });
     </script>
-{% endblock javascript %}
+{% endblock js %}
 
 {% block body %}
-    <div class="col-md-12">
+    <div class="col-md-12" ng-app="app">
         <div class="row">
             <div class="col-md-12">
                 <article class="blocks no-padding">
@@ -66,7 +68,7 @@
                     </div>
                     <div id="blocks-nav-profil">
                         <ul>
-                            <li><h4>Prenom Nom</h4></li>
+                            <li><h4>{{ app.user.username }}</h4></li>
                             <li><a href="#" class="btn btn-infos" id="btnSubmitNewActu"><i class="fa fa-cogs" aria-hidden="true"></i> Mes paramètres</a></li>
                             <li><a href="#" class="btn btn-infos" id="btnSubmitNewActu"><i class="fa fa-picture-o" aria-hidden="true"></i> Mes images</a></li>
                         </ul>
@@ -110,621 +112,36 @@
             </div>
         </div>
         <div class="row">
-            <div class="container">
-                <div class="col-md-12">
-                    <div class="row">
-                        <div class="col-md-3 ml-20 mr-50 mt-20">
-                            <div class="row">
-                                <div class="col-md-12 blocks blocks-complet pb-20" id="blocks-user-information" ng-controller="userInformations">
-                                    <h4><i class="fa fa-info" aria-hidden="true"></i> Mes informations</h4>
-                                    <p class="popover-wrapper">
-                                        <span id="publicPrenom" data-public="true"><i class="fa fa-eye" aria-hidden="true" data-toggle="tooltip" title="Public"></i></span> Prenom : <a href="#" editable-text="user.prenom" onaftersave="updateUser($data)">{/ user.prenom || "Vide" /} <i class="fa fa-pencil" aria-hidden="true"></i></a>
-                                    </p><br>
-                                    <p class="popover-wrapper">
-                                        <span id="publicNom" data-public="true"><i class="fa fa-eye" aria-hidden="true" data-toggle="tooltip" title="Public"></i></span> Nom : <a href="#" editable-text="user.nom" onaftersave="updateUser($data)">{/ user.nom  || "Vide" /} <i class="fa fa-pencil" aria-hidden="true"></i></a>
-                                    </p><br>
-                                    <p class="popover-wrapper">
-                                        <span id="publicPays" data-public="false"><i class="fa fa-eye-slash" aria-hidden="true" data-toggle="tooltip" title="Non public"></i></span> Pays : <a href="#" editable-text="user.pays" onaftersave="updateUser($data)">{/ user.pays  || "Vide" /} <i class="fa fa-pencil" aria-hidden="true"></i></a>
-                                    </p><br>
-                                    <p class="popover-wrapper">
-                                        <span id="publicRegion" data-public="false"><i class="fa fa-eye-slash" aria-hidden="true" data-toggle="tooltip" title="Non public"></i></span> Région : <a href="#" editable-text="user.region" onaftersave="updateUser($data)">{/ user.region || "Vide" /} <i class="fa fa-pencil" aria-hidden="true"></i></a>
-                                    </p><br>
-                                    <p class="popover-wrapper">
-                                        <span id="publicVille" data-public="true"><i class="fa fa-eye" aria-hidden="true" data-toggle="tooltip" title="Public"></i></span> Ville : <a href="#" editable-text="user.ville" onaftersave="updateUser($data)">{/ user.ville || "Vide" /} <i class="fa fa-pencil" aria-hidden="true"></i></a>
-                                    </p>
-                                </div>
+            <div class="col-md-12">
+                <div class="row">
+                    <div class="col-md-3 ml-20 mr-50 mt-20">
+                        <div class="row">
+                            <div class="col-md-12 activity pb-20" id="blocks-user-information" ng-controller="userInformations">
+                                <h4><i class="fa fa-info" aria-hidden="true"></i> Mes informations</h4>
+                                <p class="popover-wrapper">
+                                    <span id="publicPrenom" data-public="true"><i class="fa fa-eye" aria-hidden="true" data-toggle="tooltip" title="Public"></i></span> Prenom : <a href="#" editable-text="user.prenom" onaftersave="updateUser($data)">{/ user.prenom || "Vide" /} <i class="fa fa-pencil" aria-hidden="true"></i></a>
+                                </p><br>
+                                <p class="popover-wrapper">
+                                    <span id="publicNom" data-public="true"><i class="fa fa-eye" aria-hidden="true" data-toggle="tooltip" title="Public"></i></span> Nom : <a href="#" editable-text="user.nom" onaftersave="updateUser($data)">{/ user.nom  || "Vide" /} <i class="fa fa-pencil" aria-hidden="true"></i></a>
+                                </p><br>
+                                <p class="popover-wrapper">
+                                    <span id="publicPays" data-public="false"><i class="fa fa-eye-slash" aria-hidden="true" data-toggle="tooltip" title="Non public"></i></span> Pays : <a href="#" editable-text="user.pays" onaftersave="updateUser($data)">{/ user.pays  || "Vide" /} <i class="fa fa-pencil" aria-hidden="true"></i></a>
+                                </p><br>
+                                <p class="popover-wrapper">
+                                    <span id="publicRegion" data-public="false"><i class="fa fa-eye-slash" aria-hidden="true" data-toggle="tooltip" title="Non public"></i></span> Région : <a href="#" editable-text="user.region" onaftersave="updateUser($data)">{/ user.region || "Vide" /} <i class="fa fa-pencil" aria-hidden="true"></i></a>
+                                </p><br>
+                                <p class="popover-wrapper">
+                                    <span id="publicVille" data-public="true"><i class="fa fa-eye" aria-hidden="true" data-toggle="tooltip" title="Public"></i></span> Ville : <a href="#" editable-text="user.ville" onaftersave="updateUser($data)">{/ user.ville || "Vide" /} <i class="fa fa-pencil" aria-hidden="true"></i></a>
+                                </p>
                             </div>
                         </div>
-                        <div class="col-md-8 mt-20">
-                            <div class="row">
-                                <div class="blocks blocks-form-actu col-md-12">
-                                    <form>
-                                        <div class="row">
-                                            <div class="col-md-12">
-                                                <textarea class="form-control" placeholder="Publiez quelque chose !" id="textareaAddActu"></textarea>
-                                            </div>
-                                        </div>
-                                        <div class="row">
-                                            <div class="col-md-12">
-                                                <span class="btnAddPicture pull-right mr-20 mb-10">
-                                                    <i class="fa fa-picture-o fa-lg" aria-hidden="true"></i>
-                                                    <input id="btnSubmitNewActu" type="submit" class="btn btn-info btn-sm" value="Publier">
-                                                </span>
-                                            </div>
-                                        </div>
-                                        <div class="row">
-                                            <div class="col-md-12">
-                                                <div id="listImageAddActu" class="is_hidden">
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <span class="is_hidden" id="blockFormNewActu">
-                                            <input type="file" accept="image/*" id="inputImage" multiple>
-                                        </span>
-                                    </form>
-                                </div>
-                            </div>
-                            <div class="row" data-userId="1" data-actuId="1">
-                                <article class="blocks blocks-first">
-                                    <div class="blocks-header row">
-                                        <div class="col-md-12">
-                                            <div class="media">
-                                                <div class="media-left media-middle">
-                                                    <img src="http://www.w3schools.com/bootstrap/img_avatar3.png" alt="Avatar" class="media-object img-circle avatar-media-md">
-                                                </div>
-                                                <div class="media-body">
-                                                    <h4 class="media-heading">Prenom Nom</h4>
-                                                    <span class="text-muted">25/01/2017 12:09</span>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="blocks-body">
-                                        <p class="actualite">
-                                            Le Lorem Ipsum est simplement du faux texte employé dans la composition et la mise en page avant impression. Le Lorem Ipsum est le faux texte standard de l'imprimerie depuis les années 1500, quand un peintre anonyme assembla ensemble des morceaux de texte pour réaliser un livre spécimen de polices de texte. Il n'a pas fait que survivre cinq siècles, mais s'est aussi adapté à la bureautique informatique, sans que son contenu n'en soit modifié. Il a été popularisé dans les années 1960 grâce à la vente de feuilles Letraset contenant des passages du Lorem Ipsum, et, plus récemment, par son inclusion dans des applications de mise en page de texte, comme Aldus PageMaker.
-                                        </p>
-                                        <div class="galleryActu" id="galleryActu1">
-                                            <img src="http://www.photo-paysage.com/images_accueil/Plus-belles-photos-de-nature.jpg" alt="Image actualité">
-                                            <img src="{{ asset('images/548b52ec.jpg') }}" alt="Image actualité">
-                                            <img src="{{ asset('images/mer-plage-vagues-550x309.jpg') }}" alt="Image actualité">
-                                            <img src="{{ asset('images/c52fc99b6fecac8e6bc20a8ccc83a7e1.jpg') }}" alt="Image actualité">
-                                        </div>
-                                    </div>
-                                    <div class="blocks-footer">
-                                        <a href="#" class="btn btn-xs btn-primary">
-                                            <i class="fa fa-thumbs-o-up" aria-hidden="true"></i><span class="hidden-xs"> J'aime</span>
-                                        </a> |
-                                        <a href="#" data-toggle="tooltip" data-placement="top" title="Tooltip on top">
-                                            2 <i class="fa fa-heart" aria-hidden="true"></i>
-                                        </a>
-                                        <span class="pull-right">
-                                            <a href="#" class="btn btn-xs btn-primary btnShowComments">
-                                                5<span class="hidden-xs"> Commentaires</span> <i class="fa fa-comments-o" aria-hidden="true"></i>
-                                            </a>
-                                        </span>
-                                    </div>
-                                    <div class="blocks-commentaires">
-                                        <div class="commentaire commentaire-view-more text-center">
-                                            <a href="#"><i class="fa fa-search-plus" aria-hidden="true"></i> Afficher plus de commentaire</a>
-                                        </div>
-                                        <hr>
-                                        <div class="commentaire">
-                                            <div class="media">
-                                                <div class="media-left">
-                                                    <img src="http://www.w3schools.com/bootstrap/img_avatar6.png" class="media-object img-circle avatar-media-sm">
-                                                </div>
-                                                <div class="media-body">
-                                                    <h4 class="media-heading">Alicia Keyes</h4> <span class="text-muted">24/01/2017</span>
-                                                    <p>
-                                                        <span class="baseComment">
-                                                            Et quia Mesopotamiae tractus omnes crebro inquietari sueti praetenturis et stationibus servabantur agrariis, laevorsum flexo itinere...<br>
-                                                        </span>
-                                                        <span class="showMoreComment">
-                                                            <a href="#" class="showMoreCommentLink">Voir plus <i class="fa fa-caret-down" aria-hidden="true"></i></a>
-                                                        </span>
-                                                        <span class="moreComment is_hidden">
-                                                            Et quia Mesopotamiae tractus omnes crebro inquietari sueti praetenturis et stationibus servabantur agrariis, laevorsum flexo itinere,
-                                                            Et quia Mesopotamiae tractus omnes crebro inquietari sueti praetenturis et stationibus servabantur agrariis, laevorsum flexo itinere.
-                                                        </span>
-                                                        <span class="showMoinsComment is_hidden">
-                                                            <a href="#" class="showMoinsCommentLink">Voir moins <i class="fa fa-caret-up" aria-hidden="true"></i></a>
-                                                        </span>
-                                                    </p>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <hr>
-                                        <div class="commentaire">
-                                            <div class="media">
-                                                <div class="media-left">
-                                                    <img src="http://www.w3schools.com/bootstrap/img_avatar1.png" class="media-object img-circle avatar-media-sm">
-                                                </div>
-                                                <div class="media-body">
-                                                    <h4 class="media-heading">John Doe</h4> <span class="text-muted">25/01/2017</span>
-                                                    <p>
-                                                        Et quia Mesopotamiae tractus omnes crebro inquietari sueti praetenturis et stationibus servabantur agrariis, laevorsum flexo itinere.
-                                                    </p>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <hr>
-                                        <div class="commentaire">
-                                            <div class="media">
-                                                <div class="media-left">
-                                                    <img src="http://www.w3schools.com/bootstrap/img_avatar3.png" class="media-object img-circle avatar-media-sm">
-                                                </div>
-                                                <div class="media-body">
-                                                    <h4 class="media-heading">John Hit</h4> <span class="text-muted">26/01/2017</span>
-                                                    <p>
-                                                        Et quia Mesopotamiae tractus omnes crebro inquietari sueti praetenturis.
-                                                    </p>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <hr>
-                                        <div class="addCommentaire">
-                                            <div class="row">
-                                                <div class="col-md-10">
-                                                    <label class="is_hidden" for="commentActu1"></label>
-                                                    <textarea class="form-control textareaComments" id="commentActu1" placeholder="Saisissez un commentaire..."></textarea>
-                                                </div>
-                                                <div class="col-md-2">
-                                                    <a href="#" class="btn btn-primary"><i class="fa fa-paper-plane-o" aria-hidden="true"></i></a>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </article>
-                            </div>
-                            <div class="row" data-userId="1" data-actuId="2">
-                                <article class="blocks">
-                                    <div class="blocks-header row">
-                                        <div class="col-md-12">
-                                            <div class="media">
-                                                <div class="media-left media-middle">
-                                                    <img src="http://www.w3schools.com/bootstrap/img_avatar3.png" alt="Avatar" class="media-object img-circle avatar-media-md">
-                                                </div>
-                                                <div class="media-body">
-                                                    <h4 class="media-heading">Prenom Nom</h4>
-                                                    <span class="text-muted">25/01/2017 12:09</span>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="blocks-body">
-                                        <p class="actualite">
-                                            Le Lorem Ipsum est simplement du faux texte employé dans la composition et la mise en page avant impression. Le Lorem Ipsum est le faux texte standard de l'imprimerie depuis les années 1500, quand un peintre anonyme assembla ensemble des morceaux de texte pour réaliser un livre spécimen de polices de texte. Il n'a pas fait que survivre cinq siècles, mais s'est aussi adapté à la bureautique informatique, sans que son contenu n'en soit modifié. Il a été popularisé dans les années 1960 grâce à la vente de feuilles Letraset contenant des passages du Lorem Ipsum, et, plus récemment, par son inclusion dans des applications de mise en page de texte, comme Aldus PageMaker.
-                                        </p>
-                                    </div>
-                                    <div class="blocks-footer">
-                                        <a href="#" class="btn btn-xs btn-primary">
-                                            <i class="fa fa-thumbs-o-up" aria-hidden="true"></i><span class="hidden-xs"> J'aime</span>
-                                        </a> |
-                                        <a href="#" data-toggle="tooltip" data-placement="top" title="Tooltip on top">
-                                            2 <i class="fa fa-heart" aria-hidden="true"></i>
-                                        </a>
-                                        <span class="pull-right">
-                                            <a href="#" class="btn btn-xs btn-primary btnShowComments">
-                                                5<span class="hidden-xs"> Commentaires</span> <i class="fa fa-comments-o" aria-hidden="true"></i>
-                                            </a>
-                                        </span>
-                                    </div>
-                                    <div class="blocks-commentaires">
-                                        <div class="commentaire commentaire-view-more text-center">
-                                            <a href="#"><i class="fa fa-search-plus" aria-hidden="true"></i> Afficher plus de commentaire</a>
-                                        </div>
-                                        <hr>
-                                        <div class="commentaire">
-                                            <div class="media">
-                                                <div class="media-left">
-                                                    <img src="http://www.w3schools.com/bootstrap/img_avatar6.png" class="media-object img-circle avatar-media-sm">
-                                                </div>
-                                                <div class="media-body">
-                                                    <h4 class="media-heading">Alicia Keyes</h4> <span class="text-muted">24/01/2017</span>
-                                                    <p>
-                                                        <span class="baseComment">
-                                                            Et quia Mesopotamiae tractus omnes crebro inquietari sueti praetenturis et stationibus servabantur agrariis, laevorsum flexo itinere...<br>
-                                                        </span>
-                                                        <span class="showMoreComment">
-                                                            <a href="#" class="showMoreCommentLink">Voir plus <i class="fa fa-caret-down" aria-hidden="true"></i></a>
-                                                        </span>
-                                                        <span class="moreComment is_hidden">
-                                                            Et quia Mesopotamiae tractus omnes crebro inquietari sueti praetenturis et stationibus servabantur agrariis, laevorsum flexo itinere,
-                                                            Et quia Mesopotamiae tractus omnes crebro inquietari sueti praetenturis et stationibus servabantur agrariis, laevorsum flexo itinere.
-                                                        </span>
-                                                        <span class="showMoinsComment is_hidden">
-                                                            <a href="#" class="showMoinsCommentLink">Voir moins <i class="fa fa-caret-up" aria-hidden="true"></i></a>
-                                                        </span>
-                                                    </p>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <hr>
-                                        <div class="commentaire">
-                                            <div class="media">
-                                                <div class="media-left">
-                                                    <img src="http://www.w3schools.com/bootstrap/img_avatar1.png" class="media-object img-circle avatar-media-sm">
-                                                </div>
-                                                <div class="media-body">
-                                                    <h4 class="media-heading">John Doe</h4> <span class="text-muted">25/01/2017</span>
-                                                    <p>
-                                                        Et quia Mesopotamiae tractus omnes crebro inquietari sueti praetenturis et stationibus servabantur agrariis, laevorsum flexo itinere.
-                                                    </p>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <hr>
-                                        <div class="commentaire">
-                                            <div class="media">
-                                                <div class="media-left">
-                                                    <img src="http://www.w3schools.com/bootstrap/img_avatar3.png" class="media-object img-circle avatar-media-sm">
-                                                </div>
-                                                <div class="media-body">
-                                                    <h4 class="media-heading">John Hit</h4> <span class="text-muted">26/01/2017</span>
-                                                    <p>
-                                                        Et quia Mesopotamiae tractus omnes crebro inquietari sueti praetenturis.
-                                                    </p>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <hr>
-                                        <div class="addCommentaire">
-                                            <div class="row">
-                                                <div class="col-md-10">
-                                                    <label class="is_hidden" for="commentActu1"></label>
-                                                    <textarea class="form-control textareaComments" id="commentActu1" placeholder="Saisissez un commentaire..."></textarea>
-                                                </div>
-                                                <div class="col-md-2">
-                                                    <a href="#" class="btn btn-primary"><i class="fa fa-paper-plane-o" aria-hidden="true"></i></a>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </article>
-                            </div>
-                            <div class="row" data-userId="2" data-actuId="3">
-                                <article class="blocks">
-                                    <div class="blocks-header row">
-                                        <div class="col-md-12">
-                                            <div class="media">
-                                                <div class="media-left media-middle">
-                                                    <img src="http://www.w3schools.com/bootstrap/img_avatar3.png" alt="Avatar" class="media-object img-circle avatar-media-md">
-                                                </div>
-                                                <div class="media-body">
-                                                    <h4 class="media-heading">Prenom Nom</h4>
-                                                    <span class="text-muted">25/01/2017 12:09</span>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="blocks-body">
-                                        <div class="galleryActu" id="galleryActu2">
-                                            <img src="http://www.photo-paysage.com/images_accueil/Plus-belles-photos-de-nature.jpg" alt="Image actualité">
-                                        </div>
-                                    </div>
-                                    <div class="blocks-footer">
-                                        <a href="#" class="btn btn-xs btn-primary">
-                                            <i class="fa fa-thumbs-o-up" aria-hidden="true"></i><span class="hidden-xs"> J'aime</span>
-                                        </a> |
-                                        <a href="#" data-toggle="tooltip" data-placement="top" title="Tooltip on top">
-                                            2 <i class="fa fa-heart" aria-hidden="true"></i>
-                                        </a>
-                                        <span class="pull-right">
-                                            <a href="#" class="btn btn-xs btn-primary btnShowComments">
-                                                3<span class="hidden-xs"> Commentaires</span> <i class="fa fa-comments-o" aria-hidden="true"></i>
-                                            </a>
-                                        </span>
-                                    </div>
-                                    <div class="blocks-commentaires">
-                                        <div class="commentaire">
-                                            <div class="media">
-                                                <div class="media-left">
-                                                    <img src="http://www.w3schools.com/bootstrap/img_avatar6.png" class="media-object img-circle avatar-media-sm">
-                                                </div>
-                                                <div class="media-body">
-                                                    <h4 class="media-heading">Alicia Keyes</h4> <span class="text-muted">24/01/2017</span>
-                                                    <p>
-                                                        <span class="baseComment">
-                                                            Et quia Mesopotamiae tractus omnes crebro inquietari sueti praetenturis et stationibus servabantur agrariis, laevorsum flexo itinere...<br>
-                                                        </span>
-                                                        <span class="showMoreComment">
-                                                            <a href="#" class="showMoreCommentLink">Voir plus <i class="fa fa-caret-down" aria-hidden="true"></i></a>
-                                                        </span>
-                                                        <span class="moreComment is_hidden">
-                                                            Et quia Mesopotamiae tractus omnes crebro inquietari sueti praetenturis et stationibus servabantur agrariis, laevorsum flexo itinere,
-                                                            Et quia Mesopotamiae tractus omnes crebro inquietari sueti praetenturis et stationibus servabantur agrariis, laevorsum flexo itinere.
-                                                        </span>
-                                                        <span class="showMoinsComment is_hidden">
-                                                            <a href="#" class="showMoinsCommentLink">Voir moins <i class="fa fa-caret-up" aria-hidden="true"></i></a>
-                                                        </span>
-                                                    </p>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <hr>
-                                        <div class="commentaire">
-                                            <div class="media">
-                                                <div class="media-left">
-                                                    <img src="http://www.w3schools.com/bootstrap/img_avatar1.png" class="media-object img-circle avatar-media-sm">
-                                                </div>
-                                                <div class="media-body">
-                                                    <h4 class="media-heading">John Doe</h4> <span class="text-muted">25/01/2017</span>
-                                                    <p>
-                                                        Et quia Mesopotamiae tractus omnes crebro inquietari sueti praetenturis et stationibus servabantur agrariis, laevorsum flexo itinere.
-                                                    </p>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <hr>
-                                        <div class="commentaire">
-                                            <div class="media">
-                                                <div class="media-left">
-                                                    <img src="http://www.w3schools.com/bootstrap/img_avatar1.png" class="media-object img-circle avatar-media-sm">
-                                                </div>
-                                                <div class="media-body">
-                                                    <h4 class="media-heading">John Doe</h4> <span class="text-muted">26/01/2017</span>
-                                                    <p>
-                                                        Et quia Mesopotamiae tractus omnes crebro inquietari sueti praetenturis et stationibus servabantur agrariis, laevorsum flexo itinere.
-                                                    </p>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <hr>
-                                        <div class="addCommentaire">
-                                            <div class="row">
-                                                <div class="col-md-10">
-                                                    <label class="is_hidden" for="commentActu2"></label>
-                                                    <textarea class="form-control textareaComments" id="commentActu2" placeholder="Saisissez un commentaire..."></textarea>
-                                                </div>
-                                                <div class="col-md-2">
-                                                    <a href="#" class="btn btn-primary"><i class="fa fa-paper-plane-o" aria-hidden="true"></i></a>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </article>
-                            </div>
-                            <div class="row" data-userId="1" data-actuId="4">
-                                <article class="blocks">
-                                    <div class="blocks-header row">
-                                        <div class="col-md-12">
-                                            <div class="media">
-                                                <div class="media-left media-middle">
-                                                    <img src="http://www.w3schools.com/bootstrap/img_avatar3.png" alt="Avatar" class="media-object img-circle avatar-media-md">
-                                                </div>
-                                                <div class="media-body">
-                                                    <h4 class="media-heading">Prenom Nom</h4>
-                                                    <span class="text-muted">25/01/2017 12:09</span>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="blocks-body">
-                                        <p class="actualite">
-                                            Le Lorem Ipsum est simplement du faux texte employé dans la composition et la mise en page avant impression. Le Lorem Ipsum est le faux texte standard de l'imprimerie depuis les années 1500, quand un peintre anonyme assembla ensemble des morceaux de texte pour réaliser un livre spécimen de polices de texte. Il n'a pas fait que survivre cinq siècles, mais s'est aussi adapté à la bureautique informatique, sans que son contenu n'en soit modifié. Il a été popularisé dans les années 1960 grâce à la vente de feuilles Letraset contenant des passages du Lorem Ipsum, et, plus récemment, par son inclusion dans des applications de mise en page de texte, comme Aldus PageMaker.
-                                        </p>
-                                        <div class="galleryActu" id="galleryActu3">
-                                            <img src="http://maximumwallhd.com/wp-content/uploads/2015/07/fonds-ecran-paysage-de-reve-13.jpg" alt="Image actualité">
-                                        </div>
-                                    </div>
-                                    <div class="blocks-footer">
-                                        <a href="#" class="btn btn-xs btn-primary">
-                                            <i class="fa fa-thumbs-o-up" aria-hidden="true"></i><span class="hidden-xs"> J'aime</span>
-                                        </a> |
-                                        <a href="#" data-toggle="tooltip" data-placement="top" title="Tooltip on top">
-                                            2 <i class="fa fa-heart" aria-hidden="true"></i>
-                                        </a>
-                                        <span class="pull-right">
-                                            <a href="#" class="btn btn-xs btn-primary btnShowComments">
-                                                1<span class="hidden-xs"> Commentaires</span> <i class="fa fa-comments-o" aria-hidden="true"></i>
-                                            </a>
-                                        </span>
-                                    </div>
-                                    <div class="blocks-commentaires">
-                                        <div class="commentaire">
-                                            <div class="media">
-                                                <div class="media-left">
-                                                    <img src="http://www.w3schools.com/bootstrap/img_avatar1.png" class="media-object img-circle avatar-media-sm">
-                                                </div>
-                                                <div class="media-body">
-                                                    <h4 class="media-heading">John Doe</h4> <span class="text-muted">26/01/2017</span>
-                                                    <p>
-                                                        Et quia Mesopotamiae tractus omnes crebro inquietari sueti praetenturis et stationibus servabantur agrariis, laevorsum flexo itinere.
-                                                    </p>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <hr>
-                                        <div class="addCommentaire">
-                                            <div class="row">
-                                                <div class="col-md-10">
-                                                    <label class="is_hidden" for="commentActu3"></label>
-                                                    <textarea class="form-control textareaComments" id="commentActu3" placeholder="Saisissez un commentaire..."></textarea>
-                                                </div>
-                                                <div class="col-md-2">
-                                                    <a href="#" class="btn btn-primary"><i class="fa fa-paper-plane-o" aria-hidden="true"></i></a>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </article>
-                            </div>
-                            <div class="row" data-userId="4" data-actuId="5">
-                                <article class="blocks">
-                                    <div class="blocks-header row">
-                                        <div class="col-md-12">
-                                            <div class="media">
-                                                <div class="media-left media-middle">
-                                                    <img src="http://www.w3schools.com/bootstrap/img_avatar3.png" alt="Avatar" class="media-object img-circle avatar-media-md">
-                                                </div>
-                                                <div class="media-body">
-                                                    <h4 class="media-heading">Prenom Nom</h4>
-                                                    <span class="text-muted">25/01/2017 12:09</span>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="blocks-body">
-                                        <p class="actualite">
-                                            <span class="baseTextActu">
-                                                Le Lorem Ipsum est simplement du faux texte employé dans la composition et la mise en page avant impression. Le Lorem Ipsum est le faux texte standard de
-                                                l'imprimerie depuis les années 1500, quand un peintre anonyme assembla ensemble des morceaux de texte pour réaliser un livre spécimen de polices de texte.
-                                                Il n'a pas fait que survivre cinq siècles, mais s'est aussi adapté à la bureautique informatique, sans que son contenu n'en soit modifié. Il a été popularisé
-                                                dans les années 1960 grâce à la vente de feuilles Letraset contenant des passages du Lorem Ipsum, et, plus récemment, par son inclusion dans des applications...<br>
-                                            </span>
-                                            <span class="showMoreTextActu">
-                                                <a href="#" class="showMoreTextActuLink">Voir plus <i class="fa fa-caret-down" aria-hidden="true"></i></a>
-                                            </span>
-                                            <span class="moreTextActu is_hidden">
-                                                Le Lorem Ipsum est simplement du faux texte employé dans la composition et la mise en page avant impression. Le Lorem Ipsum est le faux texte standard de
-                                                l'imprimerie depuis les années 1500, quand un peintre anonyme assembla ensemble des morceaux de texte pour réaliser un livre spécimen de polices de texte.
-                                                Il n'a pas fait que survivre cinq siècles, mais s'est aussi adapté à la bureautique informatique, sans que son contenu n'en soit modifié. Il a été popularisé
-                                                dans les années 1960 grâce à la vente de feuilles Letraset contenant des passages du Lorem Ipsum, et, plus récemment, par son inclusion dans des applications
-                                                de mise en page de texte, comme Aldus PageMaker. Le Lorem Ipsum est simplement du faux texte employé dans la composition et la mise en page avant impression.
-                                                Le Lorem Ipsum est le faux texte standard de l'imprimerie depuis les années 1500, quand un peintre anonyme assembla ensemble des morceaux de texte pour réaliser
-                                                un livre spécimen de polices de texte.Il n'a pas fait que survivre cinq siècles, mais s'est aussi adapté à la bureautique informatique, sans que son contenu n'en
-                                                soit modifié. Il a été popularisédans les années 1960 grâce à la vente de feuilles Letraset contenant des passages du Lorem Ipsum, et, plus récemment, par son
-                                                inclusion dans des applicationsde mise en page de texte, comme Aldus PageMaker. quand un peintre anonyme assembla ensemble des morceaux de texte pour réaliser
-                                                un livre spécimen de polices de texte.Il n'a pas fait que survivre cinq siècles, mais s'est aussi adapté à la bureautique informatique, sans que son contenu n'en
-                                                soit modifié. Il a été popularisédans les années 1960 grâce à la vente de feuilles Letraset contenant des passages du Lorem Ipsum, et, plus récemment, par son
-                                                inclusion dans des applicationsde mise en page de texte, comme Aldus PageMaker. quand un peintre anonyme assembla ensemble des morceaux de texte pour réaliser
-                                                un livre spécimen de polices de texte.Il n'a pas fait que survivre cinq siècles, mais s'est aussi adapté à la bureautique informatique, sans que son contenu n'en
-                                                soit modifié. Il a été popularisédans les années 1960 grâce à la vente de feuilles Letraset contenant des passages du Lorem Ipsum, et, plus récemment, par son
-                                                inclusion dans des applicationsde mise en page de texte, comme Aldus PageMaker. quand un peintre anonyme assembla ensemble des morceaux de texte pour réaliser
-                                                un livre spécimen de polices de texte.Il n'a pas fait que survivre cinq siècles, mais s'est aussi adapté à la bureautique informatique, sans que son contenu n'en
-                                                soit modifié. Il a été popularisédans les années 1960 grâce à la vente de feuilles Letraset contenant des passages du Lorem Ipsum, et, plus récemment, par son
-                                                inclusion dans des applicationsde mise en page de texte, comme Aldus PageMaker.
-                                            </span>
-                                            <span class="showMoinsTextActu is_hidden">
-                                                <a href="#" class="showMoinsTextActuLink">Voir moins <i class="fa fa-caret-up" aria-hidden="true"></i></a>
-                                            </span>
-                                        </p>
-                                        <div class="galleryActu" id="galleryActu4">
-                                            <img src="http://www.photo-paysage.com/images_accueil/Plus-belles-photos-de-nature.jpg" alt="Image actualité">
-                                            <img src="{{ asset('images/548b52ec.jpg') }}" alt="Image actualité">
-                                            <img src="{{ asset('images/mer-plage-vagues-550x309.jpg') }}" alt="Image actualité">
-                                            <img src="{{ asset('images/c52fc99b6fecac8e6bc20a8ccc83a7e1.jpg') }}" alt="Image actualité">
-                                        </div>
-                                    </div>
-                                    <div class="blocks-footer">
-                                        <a href="#" class="btn btn-xs btn-primary">
-                                            <i class="fa fa-thumbs-o-up" aria-hidden="true"></i><span class="hidden-xs"> J'aime</span>
-                                        </a> |
-                                        <a href="#" data-toggle="tooltip" data-placement="top" title="Tooltip on top">
-                                            2 <i class="fa fa-heart" aria-hidden="true"></i>
-                                        </a>
-                                        <span class="pull-right">
-                                            <a href="#" class="btn btn-xs btn-primary btnShowComments">
-                                                <span class="hidden-xs"> Commentaire</span> <i class="fa fa-comments-o" aria-hidden="true"></i>
-                                            </a>
-                                        </span>
-                                    </div>
-                                    <div class="blocks-commentaires">
-                                        <div class="commentaire">
-                                            <div class="alert alert-info">
-                                                <p>Aucun commentaire</p>
-                                            </div>
-                                        </div>
-                                        <hr>
-                                        <div class="addCommentaire">
-                                            <div class="row">
-                                                <div class="col-md-10">
-                                                    <label class="is_hidden" for="commentActu4"></label>
-                                                    <textarea class="form-control textareaComments" id="commentActu4" placeholder="Saisissez un commentaire..."></textarea>
-                                                </div>
-                                                <div class="col-md-2">
-                                                    <a href="#" class="btn btn-primary"><i class="fa fa-paper-plane-o" aria-hidden="true"></i></a>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </article>
-                            </div>
-                            <div class="row" data-userId="5" data-actuId="6">
-                                <article class="blocks">
-                                    <div class="blocks-header row">
-                                        <div class="col-md-12">
-                                            <div class="media">
-                                                <div class="media-left media-middle">
-                                                    <img src="http://www.w3schools.com/bootstrap/img_avatar3.png" alt="Avatar" class="media-object img-circle avatar-media-md">
-                                                </div>
-                                                <div class="media-body">
-                                                    <h4 class="media-heading">Prenom Nom</h4>
-                                                    <span class="text-muted">25/01/2017 12:09</span>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="blocks-body">
-                                        <p class="actualite">
-                                            <span class="baseTextActu">
-                                                Le Lorem Ipsum est simplement du faux texte employé dans la composition et la mise en page avant impression. Le Lorem Ipsum est le faux texte standard de
-                                                l'imprimerie depuis les années 1500, quand un peintre anonyme assembla ensemble des morceaux de texte pour réaliser un livre spécimen de polices de texte.
-                                                Il n'a pas fait que survivre cinq siècles, mais s'est aussi adapté à la bureautique informatique, sans que son contenu n'en soit modifié. Il a été popularisé
-                                                dans les années 1960 grâce à la vente de feuilles Letraset contenant des passages du Lorem Ipsum, et, plus récemment, par son inclusion dans des applications...<br>
-                                            </span>
-                                            <span class="showMoreTextActu">
-                                                <a href="#" class="showMoreTextActuLink">Voir plus <i class="fa fa-caret-down" aria-hidden="true"></i></a>
-                                            </span>
-                                            <span class="moreTextActu is_hidden">
-                                                Le Lorem Ipsum est simplement du faux texte employé dans la composition et la mise en page avant impression. Le Lorem Ipsum est le faux texte standard de
-                                                l'imprimerie depuis les années 1500, quand un peintre anonyme assembla ensemble des morceaux de texte pour réaliser un livre spécimen de polices de texte.
-                                                Il n'a pas fait que survivre cinq siècles, mais s'est aussi adapté à la bureautique informatique, sans que son contenu n'en soit modifié. Il a été popularisé
-                                                dans les années 1960 grâce à la vente de feuilles Letraset contenant des passages du Lorem Ipsum, et, plus récemment, par son inclusion dans des applications
-                                                de mise en page de texte, comme Aldus PageMaker. Le Lorem Ipsum est simplement du faux texte employé dans la composition et la mise en page avant impression.
-                                                Le Lorem Ipsum est le faux texte standard de l'imprimerie depuis les années 1500, quand un peintre anonyme assembla ensemble des morceaux de texte pour réaliser
-                                                un livre spécimen de polices de texte.Il n'a pas fait que survivre cinq siècles, mais s'est aussi adapté à la bureautique informatique, sans que son contenu n'en
-                                                soit modifié. Il a été popularisédans les années 1960 grâce à la vente de feuilles Letraset contenant des passages du Lorem Ipsum, et, plus récemment, par son
-                                                inclusion dans des applicationsde mise en page de texte, comme Aldus PageMaker. quand un peintre anonyme assembla ensemble des morceaux de texte pour réaliser
-                                                un livre spécimen de polices de texte.Il n'a pas fait que survivre cinq siècles, mais s'est aussi adapté à la bureautique informatique, sans que son contenu n'en
-                                                soit modifié. Il a été popularisédans les années 1960 grâce à la vente de feuilles Letraset contenant des passages du Lorem Ipsum, et, plus récemment, par son
-                                                inclusion dans des applicationsde mise en page de texte, comme Aldus PageMaker. quand un peintre anonyme assembla ensemble des morceaux de texte pour réaliser
-                                                un livre spécimen de polices de texte.Il n'a pas fait que survivre cinq siècles, mais s'est aussi adapté à la bureautique informatique, sans que son contenu n'en
-                                                soit modifié. Il a été popularisédans les années 1960 grâce à la vente de feuilles Letraset contenant des passages du Lorem Ipsum, et, plus récemment, par son
-                                                inclusion dans des applicationsde mise en page de texte, comme Aldus PageMaker. quand un peintre anonyme assembla ensemble des morceaux de texte pour réaliser
-                                                un livre spécimen de polices de texte.Il n'a pas fait que survivre cinq siècles, mais s'est aussi adapté à la bureautique informatique, sans que son contenu n'en
-                                                soit modifié. Il a été popularisédans les années 1960 grâce à la vente de feuilles Letraset contenant des passages du Lorem Ipsum, et, plus récemment, par son
-                                                inclusion dans des applicationsde mise en page de texte, comme Aldus PageMaker.
-                                            </span>
-                                            <span class="showMoinsTextActu is_hidden">
-                                                <a href="#" class="showMoinsTextActuLink">Voir moins <i class="fa fa-caret-up" aria-hidden="true"></i></a>
-                                            </span>
-                                        </p>
-                                    </div>
-                                    <div class="blocks-footer">
-                                        <a href="#" class="btn btn-xs btn-primary">
-                                            <i class="fa fa-thumbs-o-up" aria-hidden="true"></i><span class="hidden-xs"> J'aime</span>
-                                        </a> |
-                                        <a href="#" data-toggle="tooltip" data-placement="top" title="Tooltip on top">
-                                            2 <i class="fa fa-heart" aria-hidden="true"></i>
-                                        </a>
-                                        <span class="pull-right">
-                                            <a href="#" class="btn btn-xs btn-primary btnShowComments">
-                                                <span class="hidden-xs"> Commentaire</span> <i class="fa fa-comments-o" aria-hidden="true"></i>
-                                            </a>
-                                        </span>
-                                    </div>
-                                    <div class="blocks-commentaires">
-                                        <div class="commentaire">
-                                            <div class="alert alert-info">
-                                                <p>Aucun commentaire</p>
-                                            </div>
-                                        </div>
-                                        <hr>
-                                        <div class="addCommentaire">
-                                            <div class="row">
-                                                <div class="col-md-10">
-                                                    <label class="is_hidden" for="commentActu4"></label>
-                                                    <textarea class="form-control textareaComments" id="commentActu4" placeholder="Saisissez un commentaire..."></textarea>
-                                                </div>
-                                                <div class="col-md-2">
-                                                    <a href="#" class="btn btn-primary"><i class="fa fa-paper-plane-o" aria-hidden="true"></i></a>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </article>
-                            </div>
+                    </div>
+                    <div class="col-md-8 mt-20">
+                        <div class="row">
+                            {% include('SBActivityBundle:activity:form_add.html.twig') %}
+                        </div>
+                        <div id="container-activity" data-total-ativity="{{ number_of_activity }}">
+                            {% include('SBActivityBundle:activity:activity.html.twig') %}
                         </div>
                     </div>
                 </div>

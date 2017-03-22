@@ -1,0 +1,18 @@
+<div class="col-md-12 activity activity-form-body">
+    {{ form_start(form_add_activity) }}
+    <div class="row">
+        <div class="col-md-12">
+            {{ form_widget(form_add_activity.message) }}
+            <span class="btnAddPicture pull-right">
+                <i id="btnAddPictures" class="fa fa-picture-o fa-lg" aria-hidden="true"></i>
+                <input id="btnSubmitNewActu" type="submit" class="btn btn-info btn-sm" value="Publier">
+            </span>
+        </div>
+    </div>
+    <div class="row"><div class="col-md-12"><div id="listImageAddActu" class="is_hidden"></div></div></div>
+    <span class="is_hidden" id="blockFormNewActu">
+        {{ form_widget(form_add_activity.image) }}
+    </span>
+    {{ form_end(form_add_activity) }}
+    <img id="image-preview-input" class="img-responsive hidden" src="" alt="Image preview">
+</div>

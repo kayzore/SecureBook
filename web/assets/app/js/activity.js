@@ -166,7 +166,7 @@ $(document).ready(function () {
                 loading_activity = true;
                 lastActivity = activityList.last();
                 id_last_activity = lastActivity[0].dataset.activity;
-                container_activity.fadeIn('slow').append('<div class="col-md-6" id="loading-activity"><p class="text-center">Chargement en cours <i class="fa fa-spinner fa-pulse fa-fw"></i></p></div>');
+                container_activity.fadeIn('slow').append('<div class="col-md-8" id="loading-activity"><p class="text-center">Chargement en cours <i class="fa fa-spinner fa-pulse fa-fw"></i></p></div>');
                 $.ajax({
                     url: Routing.generate('sb_activity_get_activity'),
                     method: 'post',
@@ -178,7 +178,7 @@ $(document).ready(function () {
                         loading_activity = false;
                         if (container_activity[0].dataset.totalAtivity == ($('div.activity').length - 1)) {
                             all_activity_loaded = true;
-                            container_activity.fadeIn('slow').append('<div class="col-md-6 no-pl"><div class="alert alert-info alert-no-activity"><p class="text-center">Plus d\'actualité</p></div></div>');
+                            container_activity.fadeIn('slow').append('<div class="col-md-8 no-pl no-pr"><div class="alert alert-info alert-no-activity"><p class="text-center">Plus d\'actualité</p></div></div>');
                         }
                     }
                 });
