@@ -39,13 +39,22 @@
         });
         app.controller('userInformations', function($scope) {
             $scope.user = {
-                prenom: 'Jérôme',
-                nom: 'Lelievre',
-                pays: 'France',
-                region: 'Île-de-France',
-                ville: 'Arpajon'
+                prenom: '{{ app.user.firstname }}',
+                nom: '{{ app.user.lastname }}',
+                pays: '{{ app.user.pays }}',
+                region: '{{ app.user.region }}',
+                ville: '{{ app.user.ville }}'
             };
             $scope.updateUser = function(data) {
+                $.ajax({
+                    url: Routing.generate('sb_user_profil_update_profil'),
+                    method: 'POST',
+                    data: $scope.user,
+                    dataType: 'json',
+                    success: function (result) {
+                        console.log(result);
+                    }
+                });
                 console.log(data);
                 console.log($scope.user);
             };
@@ -67,8 +76,13 @@
                         <img src="http://www.w3schools.com/bootstrap/img_avatar3.png" class="img-circle img-thumbnail currentAvatar" alt="Image couverture">
                     </div>
                     <div id="blocks-nav-profil">
+                        {% if not app.user.firstname == null and not app.user.lastname == null %}
+                            {% set user_profil_name = app.user.firstname ~ ' ' ~ app.user.lastname %}
+                        {% else %}
+                            {% set user_profil_name = app.user.username %}
+                        {% endif %}
                         <ul>
-                            <li><h4>{{ app.user.username }}</h4></li>
+                            <li><h4>{{ user_profil_name }}</h4></li>
                             <li><a href="#" class="btn btn-infos" id="btnSubmitNewActu"><i class="fa fa-cogs" aria-hidden="true"></i> Mes paramètres</a></li>
                             <li><a href="#" class="btn btn-infos" id="btnSubmitNewActu"><i class="fa fa-picture-o" aria-hidden="true"></i> Mes images</a></li>
                         </ul>

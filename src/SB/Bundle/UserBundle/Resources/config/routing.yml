@@ -12,6 +12,13 @@ login_check:
 logout:
     path:   /deconnexion
 
+sb_user_profil_update_profil:
+    path:     /modifier-mon-profil
+    methods: [POST]
+    options:
+        expose: true
+    defaults: { _controller: SBUserBundle:Profil:updateProfil }
+
 sb_user_profil:
     path:     /{slugUsername}
     methods: [GET]

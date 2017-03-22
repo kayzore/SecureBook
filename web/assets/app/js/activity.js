@@ -1,8 +1,8 @@
 $(document).ready(function () {
     var loading_activity = false,
-        all_activity_loaded= false,
-        container_activity = $('#container-activity');
-    var client = new Faye.Client('http://localhost:3000/');
+        all_activity_loaded = false,
+        container_activity = $('#container-activity'),
+        client = new Faye.Client('http://localhost:3000/');
 
     // Inscription du client au channel "notifications" & lorsqu'on recoit un message affichage dans la console
     client.subscribe('/' + $('#username').text(), function (message) {

@@ -6,12 +6,13 @@ $(document).ready(function () {
     } else {
         coverPosition = 'top';
     }
+    /*
     $('#blocks-couverture').imagedrag({
         input: "#coverPosition",
         position: coverPosition,
         attribute: "html"
     });
-
+    */
     $('#blocks-user-information p.popover-wrapper i').click(function () {
         // Click pour changer un parametre public en non public et vis versa
         console.log(this);
