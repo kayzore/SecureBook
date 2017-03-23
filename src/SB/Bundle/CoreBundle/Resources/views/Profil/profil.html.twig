@@ -191,14 +191,14 @@
                 </div>
                 <div class="modal-body">
                     <div class="row">
-                        <div class="col-mxs-12">
+                        <div class="col-xs-12">
                             <h5 class="text-center">Image de couverture actuelle :</h5>
                             <img src="http://www.photo-paysage.com/images_accueil/Plus-belles-photos-de-nature.jpg"
                                  alt="Image de couverture actuelle" class="img-responsive center-block"
                                  style="max-height: 200px"/>
                         </div>
                         <hr>
-                        <div class="col-mxs-12" id="test">
+                        <div class="col-xs-12" id="test">
                         </div>
                     </div>
                 </div>
@@ -217,23 +217,26 @@
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
                     <h4 class="modal-title" id="modalAvatarLabel">Modifier mon avatar</h4>
                 </div>
+                {{ form_start(form_update_avatar) }}
                 <div class="modal-body">
                     <div class="row">
-                        <div class="col-mxs-12">
+                        <div class="col-xs-12">
                             <h5 class="text-center">Avatar actuel :</h5>
                             <img src="http://www.w3schools.com/bootstrap/img_avatar3.png"
                                  class="img-circle img-thumbnail currentAvatar center-block" alt="Image couverture"
                                  data-toggle="modal" data-target="#modalAvatar">
                         </div>
                         <hr>
-                        <div class="col-mxs-12" id="test">
+                        <div class="col-xs-12">
+                            {{ form_widget(form_update_avatar.file) }}
                         </div>
                     </div>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-default" data-dismiss="modal">Annuler</button>
-                    <button type="button" class="btn btn-primary" id="btnChangeCover">Sauvegarder</button>
+                    <button type="submit" class="btn btn-primary" id="btnChangeCover">Sauvegarder</button>
                 </div>
+                {{ form_end(form_update_avatar) }}
             </div>
         </div>
     </div>

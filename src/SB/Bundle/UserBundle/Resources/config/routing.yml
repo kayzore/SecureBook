@@ -26,6 +26,13 @@ sb_user_profil_update_profil_confidentiality:
         expose: true
     defaults: { _controller: SBUserBundle:Profil:updateProfilConfidentiality }
 
+sb_user_profil_update_profil_avatar:
+    path:     /modifier-mon-avatar
+    methods: [POST]
+    options:
+        expose: true
+    defaults: { _controller: SBUserBundle:Profil:updateProfilAvatar }
+
 sb_user_profil:
     path:     /{slugUsername}
     methods: [GET]
