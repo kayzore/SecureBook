@@ -19,6 +19,13 @@ sb_user_profil_update_profil:
         expose: true
     defaults: { _controller: SBUserBundle:Profil:updateProfil }
 
+sb_user_profil_update_profil_confidentiality:
+    path:     /modifier-mes-paramètres-de-confidentialite
+    methods: [POST]
+    options:
+        expose: true
+    defaults: { _controller: SBUserBundle:Profil:updateProfilConfidentiality }
+
 sb_user_profil:
     path:     /{slugUsername}
     methods: [GET]

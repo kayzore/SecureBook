@@ -68,4 +68,43 @@ class ProfilController extends Controller
         }
         return $this->createAccessDeniedException('Acces Denied');
     }
+
+    public function updateProfilConfidentialityAction(Request $request)
+    {
+        if ($request->isXmlHttpRequest()) {
+            $champ = $request->request->get('champ');
+            $new_value = $request->request->get('new_value');
+            $em = $this->getDoctrine()->getManager();
+            $user = $em->getRepository('SBUserBundle:User')->findOneBy(array('id' => $this->getUser()->getId()));
+
+            if (!empty($champ) && !empty($new_value)) {
+                if ($new_value == 'true') {
+                    $new_value = true;
+                } elseif ($new_value == 'false') {
+                    $new_value = false;
+                }
+                switch ($champ) {
+                    case 'prenom':
+                        $user->getConfidentiality()->setFirstname($new_value);
+                        break;
+                    case 'nom':
+                        $user->getConfidentiality()->setLastname($new_value);
+                        break;
+                    case 'pays':
+                        $user->getConfidentiality()->setPays($new_value);
+                        break;
+                    case 'region':
+                        $user->getConfidentiality()->setRegion($new_value);
+                        break;
+                    case 'ville':
+                        $user->getConfidentiality()->setVille($new_value);
+                        break;
+                }
+            }
+            $em->persist($user);
+            $em->flush();
+            return new JsonResponse(array('result' => true));
+        }
+        return $this->createAccessDeniedException('Acces Denied');
+    }
 }

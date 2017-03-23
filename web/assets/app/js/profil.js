@@ -5,18 +5,44 @@ $(document).ready(function () {
         older_region_value = $('#zoneRegion a')[0].innerText,
         older_ville_value = $('#zoneVille a')[0].innerText;
 
-    $('#blocks-user-information p.popover-wrapper i').click(function () {
+    $('#blocks-user-information div .confidentiality i').click(function () {
+        var champ = $(this.parentNode).data('zone').toLowerCase();
         // Click pour changer un parametre public en non public et vis versa
-        console.log(this);
-        console.log($(this.parentNode).data('public'));
-        if ($(this.parentNode).data('public')) {
+        if (this.parentNode.dataset.public == 'true') {
             // Si l'information est egal a true on passe en false
-            console.log('On passe en false');
+            saveConfidentiality(champ, false, this);
         } else {
             // Sinon on passe en true
-            console.log('On passe en true');
+            saveConfidentiality(champ, true, this);
         }
     });
+    function saveConfidentiality(champ, new_value, fa) {
+        $.ajax({
+            url: Routing.generate('sb_user_profil_update_profil_confidentiality'),
+            method: 'post',
+            data: {champ: champ, new_value: new_value},
+            dataType: 'json',
+            success: function (result) {
+                if (result.result == true) {
+                    if (new_value) {
+                        $(fa)
+                            .removeClass('fa-eye-slash')
+                            .addClass('fa-eye')
+                            .attr('title', 'Visible')
+                        ;
+                        fa.parentNode.dataset.public = 'true';
+                    } else if (!new_value) {
+                        $(fa)
+                            .removeClass('fa-eye')
+                            .addClass('fa-eye-slash')
+                            .attr('title', 'Masqué')
+                        ;
+                        fa.parentNode.dataset.public = 'false';
+                    }
+                }
+            }
+        });
+    }
 
     /**
      * Systeme de modification dynamique des informations (affiche le formulaire)
