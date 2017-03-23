@@ -11,6 +11,10 @@
 .activity-top > div:first-child {
     padding-right: 0;
 }
+.activity-avatar {
+    width: 40px;
+    height: 40px;
+}
 .activity-middle {
     border-top:1px solid #ddd;
     border-bottom:1px solid #ddd;

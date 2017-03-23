@@ -3,7 +3,12 @@
         <div class="col-md-8 activity" data-activity="{{ activity.id }}">
             <div class="row activity-top">
                 <div class="col-xs-1">
-                    <img class="img-circle" src="https://dummyimage.com/40x40/c9c9c9/000000" alt="...">
+                    {% if not activity.user.avatar == null %}
+                        {% set avatar_name = asset('uploads/img/' ~ activity.user.avatar.name) %}
+                    {% else %}
+                        {% set avatar_name = asset('assets/app/img/img_avatar2.png') %}
+                    {% endif %}
+                    <img class="img-circle activity-avatar" src="{{ avatar_name }}" alt="...">
                 </div>
                 <div class="col-xs-11 no-pr">
                     <div class="col-xs-12">
