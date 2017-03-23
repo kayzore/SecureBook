@@ -37,3 +37,10 @@ sb_activity_get_activity:
     options:
         expose: true
     defaults: { _controller: SBActivityBundle:Activity:activityGet }
+
+sb_activity_get_my_activity:
+    path:     /obtenir-mes-activites/
+    methods: [POST]
+    options:
+        expose: true
+    defaults: { _controller: SBActivityBundle:Activity:activityGetMy }

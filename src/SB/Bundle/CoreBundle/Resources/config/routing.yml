@@ -1,4 +1,6 @@
 sb_core_homepage:
     path:     /
     methods: [GET]
+    options:
+        expose: true
     defaults: { _controller: SBCoreBundle:Core:index }

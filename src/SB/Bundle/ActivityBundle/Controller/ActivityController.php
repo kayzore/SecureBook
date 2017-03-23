@@ -164,14 +164,40 @@ class ActivityController extends Controller
             $activity_last_id = $request->request->get('id_last_activity');
 
             $em = $this->getDoctrine()->getManager();
-            $user = $this->getUser();
-            $list_friends = $em->getRepository('SBUserBundle:User')->findBy(array('id' => $user->getFriends()));
-            $activity = $em->getRepository('SBActivityBundle:Activity')->fetchAll($user->getId(), $list_friends, 3, $activity_last_id);
+            $list_friends = $em->getRepository('SBUserBundle:User')->findBy(array('id' => $this->getUser()->getFriends()));
+
+            $activity = $this->loadActivity(3, $activity_last_id, $list_friends);
 
             return $this->render('SBActivityBundle:activity:activity.html.twig', array(
                 'list_activity' => $activity
             ));
         }
         return $this->createAccessDeniedException('Acces Denied');
+    }
+
+    public function activityGetMyAction(Request $request)
+    {
+        if ($request->isXmlHttpRequest()) {
+            $activity_last_id = $request->request->get('id_last_activity');
+
+            $activity = $this->loadActivity(3, $activity_last_id);
+
+            return $this->render('SBActivityBundle:activity:activity.html.twig', array(
+                'list_activity' => $activity
+            ));
+        }
+        return $this->createAccessDeniedException('Acces Denied');
+    }
+
+    private function loadActivity($limit, $activity_last_id, $list_friends = null)
+    {
+        $em = $this->getDoctrine()->getManager();
+        $user = $this->getUser();
+
+        if (!is_null($list_friends)) {
+            return $em->getRepository('SBActivityBundle:Activity')->fetchAll($user->getId(), $list_friends, $limit, $activity_last_id);
+        }
+
+        return $em->getRepository('SBActivityBundle:Activity')->fetchAll($user->getId(), array(), $limit, $activity_last_id);
     }
 }
