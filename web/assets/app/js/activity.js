@@ -132,15 +132,17 @@ $(document).ready(function () {
             id_activity = this.parentNode.parentNode.dataset.activity,
             comment_text = $(this.previousElementSibling.previousElementSibling).val();
 
-        $(btn_send).append('<i class="fa fa-spinner fa-pulse fa-fw"></i>');
-        $.ajax({
-            url: Routing.generate('sb_activity_add_comment'),
-            method: 'post',
-            data: {comment_text: comment_text, id_activity: id_activity},
-            dataType: 'json',
-            success: function (result) {
-                console.log(result)
-            }
-        });
+        if (comment_text.length > 0) {
+            $(btn_send).append('<i class="fa fa-spinner fa-pulse fa-fw"></i>');
+            $.ajax({
+                url: Routing.generate('sb_activity_add_comment'),
+                method: 'post',
+                data: {comment_text: comment_text, id_activity: id_activity},
+                dataType: 'json',
+                success: function (result) {
+                    console.log(result)
+                }
+            });
+        }
     });
 });
