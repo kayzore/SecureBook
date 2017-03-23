@@ -20,8 +20,7 @@ class CoreController extends Controller
             $user = $this->getUser();
             $em = $this->getDoctrine()->getManager();
             $list_friends = $this->container->get('sb_user.friend')->getFriends($user);
-            $activity = new Activity();
-            $form_add_activity = $this->createForm(ActivityType::class, $activity, array(
+            $form_add_activity = $this->createForm(ActivityType::class, new Activity(), array(
                 'action' => $this->generateUrl('sb_activity_add')
             ));
             $activityRepository = $em->getRepository('SBActivityBundle:Activity');

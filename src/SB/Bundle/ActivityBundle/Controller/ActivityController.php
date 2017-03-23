@@ -35,6 +35,29 @@ class ActivityController extends Controller
         return $this->createAccessDeniedException('Acces Denied');
     }
 
+    public function addActivityOnProfilAction(Request $request)
+    {
+        $activity = new Activity();
+        $form = $this->createForm(new ActivityType(), $activity);
+        $form->handleRequest($request);
+        if ($form->isSubmitted() && $form->isValid()) {
+            $user = $this->getUser();
+            $activity->setUser($user);
+
+            if (!is_null($activity->getImage()->getFile())) {
+                $activity->getImage()->upload($user->getUsername());
+            } else {
+                $activity->setImage(null);
+            }
+
+            $em = $this->getDoctrine()->getManager();
+            $em->persist($activity);
+            $em->flush();
+            return $this->redirectToRoute('sb_user_profil', array('slugUsername' => $user->getSlug()));
+        }
+        return $this->createAccessDeniedException('Acces Denied');
+    }
+
     public function addLikeAction(Request $request)
     {
         if ($request->isXmlHttpRequest()) {
