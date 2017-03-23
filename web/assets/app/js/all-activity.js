@@ -51,8 +51,6 @@ $(document).ready(function () {
                             }
                         });
                     }
-                    console.log(container_activity[0].dataset.totalAtivity)
-                    console.log($('#container-activity div.activity').length)
                 }
             });
         }
