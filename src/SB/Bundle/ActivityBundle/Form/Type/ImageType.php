@@ -2,6 +2,7 @@
 
 namespace SB\Bundle\ActivityBundle\Form\Type;
 
+use SB\Bundle\ActivityBundle\Entity\Image;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\FileType;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -32,7 +33,7 @@ class ImageType extends AbstractType
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults(array(
-            'data_class' => 'SB\Bundle\ActivityBundle\Entity\Image'
+            'data_class' => Image::class
         ));
     }
 
