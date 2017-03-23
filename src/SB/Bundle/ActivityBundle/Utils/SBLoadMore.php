@@ -17,7 +17,15 @@ class SBLoadMore
         $this->em = $entityManager;
     }
 
-    public function loadActivity(User $user, $limit, $activity_last_id, $list_friends = null)
+    /**
+     * Return older activity
+     * @param User $user
+     * @param int $limit
+     * @param int $activity_last_id
+     * @param null|array $list_friends
+     * @return array List of activity
+     */
+    public function loadOlderActivity(User $user, $limit, $activity_last_id, $list_friends = null)
     {
         if (!is_null($list_friends)) {
             return $this->em->getRepository('SBActivityBundle:Activity')->fetchAll($user->getId(), $list_friends, $limit, $activity_last_id);

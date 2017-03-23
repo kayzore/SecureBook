@@ -168,7 +168,7 @@ class ActivityController extends Controller
             $list_friends = $em->getRepository('SBUserBundle:User')->findBy(array('id' => $user->getFriends()));
 
             $loadmore = $this->container->get('sb_activity.loadmore');
-            $activity = $loadmore->loadActivity($user, 3, $activity_last_id, $list_friends);
+            $activity = $loadmore->loadOlderActivity($user, 3, $activity_last_id, $list_friends);
 
             return $this->render('SBActivityBundle:activity:activity.html.twig', array(
                 'list_activity' => $activity
@@ -182,7 +182,7 @@ class ActivityController extends Controller
         if ($request->isXmlHttpRequest()) {
             $activity_last_id = $request->request->get('id_last_activity');
             $loadmore = $this->container->get('sb_activity.loadmore');
-            $activity = $loadmore->loadActivity($this->getUser(), 3, $activity_last_id);
+            $activity = $loadmore->loadOlderActivity($this->getUser(), 3, $activity_last_id);
 
             return $this->render('SBActivityBundle:activity:activity.html.twig', array(
                 'list_activity' => $activity
