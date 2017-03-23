@@ -1,4 +1,9 @@
-<div class="col-md-12 activity activity-form-body">
+{% if profil is defined %}
+    {% set col = '8' %}
+{% else %}
+    {% set col = '12' %}
+{% endif %}
+<div class="col-md-{{ col }} activity activity-form-body">
     {{ form_start(form_add_activity) }}
     <div class="row">
         <div class="col-md-12">
