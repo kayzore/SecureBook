@@ -31,7 +31,9 @@
                         </span>
                     </div>
                     <div id="blocks-profil">
-                        <img src="http://www.w3schools.com/bootstrap/img_avatar3.png" class="img-circle img-thumbnail currentAvatar" alt="Image couverture">
+                        <img src="http://www.w3schools.com/bootstrap/img_avatar3.png"
+                             class="img-circle img-thumbnail currentAvatar" alt="Image couverture"
+                             data-toggle="modal" data-target="#modalAvatar">
                     </div>
                     <div id="blocks-nav-profil">
                         {% if not app.user.firstname == null and not app.user.lastname == null %}
@@ -194,6 +196,34 @@
                             <img src="http://www.photo-paysage.com/images_accueil/Plus-belles-photos-de-nature.jpg"
                                  alt="Image de couverture actuelle" class="img-responsive center-block"
                                  style="max-height: 200px"/>
+                        </div>
+                        <hr>
+                        <div class="col-mxs-12" id="test">
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Annuler</button>
+                    <button type="button" class="btn btn-primary" id="btnChangeCover">Sauvegarder</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Modal Avatar -->
+    <div class="modal fade" id="modalAvatar" tabindex="-1" role="dialog" aria-labelledby="modalAvatarLabel">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title" id="modalAvatarLabel">Modifier mon avatar</h4>
+                </div>
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="col-mxs-12">
+                            <h5 class="text-center">Avatar actuel :</h5>
+                            <img src="http://www.w3schools.com/bootstrap/img_avatar3.png"
+                                 class="img-circle img-thumbnail currentAvatar center-block" alt="Image couverture"
+                                 data-toggle="modal" data-target="#modalAvatar">
                         </div>
                         <hr>
                         <div class="col-mxs-12" id="test">

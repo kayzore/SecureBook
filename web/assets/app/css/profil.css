@@ -22,14 +22,16 @@
 #blocks-profil {
     overflow: hidden;
 }
+img.currentAvatar {
+    height: 110px;
+    width: 110px;
+}
 #blocks-profil img.currentAvatar {
     position: absolute;
     bottom: 70px;
     left: 30px;
     opacity: 0.8;
     display: inline-block;
-    height: 110px;
-    width: 110px;
 }
 #blocks-profil img.currentAvatar:hover {
     opacity: 1;
