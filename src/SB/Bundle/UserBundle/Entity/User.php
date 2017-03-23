@@ -104,11 +104,19 @@ class User implements UserInterface
     private $notifications;
 
     /**
+     * @ORM\OneToOne(targetEntity="SB\Bundle\UserBundle\Entity\Confidentiality", cascade={"persist", "remove"})
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $confidentiality;
+
+
+    /**
      * Constructor
      */
     public function __construct()
     {
         $this->notifications = new ArrayCollection();
+        $this->confidentiality = new Confidentiality();
     }
 
     public function getEmail()
@@ -404,5 +412,29 @@ class User implements UserInterface
     public function getVille()
     {
         return $this->ville;
+    }
+
+    /**
+     * Set confidentiality
+     *
+     * @param \SB\Bundle\UserBundle\Entity\Confidentiality $confidentiality
+     *
+     * @return User
+     */
+    public function setConfidentiality(Confidentiality $confidentiality)
+    {
+        $this->confidentiality = $confidentiality;
+
+        return $this;
+    }
+
+    /**
+     * Get confidentiality
+     *
+     * @return \SB\Bundle\UserBundle\Entity\Confidentiality
+     */
+    public function getConfidentiality()
+    {
+        return $this->confidentiality;
     }
 }
