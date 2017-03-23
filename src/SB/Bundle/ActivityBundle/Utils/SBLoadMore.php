@@ -4,6 +4,7 @@ namespace SB\Bundle\ActivityBundle\Utils;
 
 use Doctrine\ORM\EntityManager;
 use SB\Bundle\UserBundle\Entity\User;
+use SB\Bundle\UserBundle\Utils\SBFriend;
 
 class SBLoadMore
 {
@@ -11,10 +12,15 @@ class SBLoadMore
      * @var EntityManager
      */
     private $em;
+    /**
+     * @var SBFriend
+     */
+    private $friend;
 
-    public function __construct(EntityManager $entityManager)
+    public function __construct(EntityManager $entityManager, SBFriend $friend)
     {
         $this->em = $entityManager;
+        $this->friend = $friend;
     }
 
     /**
@@ -22,12 +28,13 @@ class SBLoadMore
      * @param User $user
      * @param int $limit
      * @param int $activity_last_id
-     * @param null|array $list_friends
+     * @param bool $global_activity
      * @return array List of activity
      */
-    public function loadOlderActivity(User $user, $limit, $activity_last_id, $list_friends = null)
+    public function loadOlderActivity(User $user, $limit, $activity_last_id, $global_activity = false)
     {
-        if (!is_null($list_friends)) {
+        if ($global_activity) {
+            $list_friends = $this->friend->getFriends($user);
             return $this->em->getRepository('SBActivityBundle:Activity')->fetchAll($user->getId(), $list_friends, $limit, $activity_last_id);
         }
 

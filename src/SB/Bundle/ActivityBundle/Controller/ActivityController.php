@@ -161,18 +161,16 @@ class ActivityController extends Controller
     public function getActivityAction(Request $request)
     {
         if ($request->isXmlHttpRequest()) {
-            $activity_last_id = $request->request->get('id_last_activity');
+            $activity_last_id = (int)$request->request->get('id_last_activity');
 
-            $em = $this->getDoctrine()->getManager();
-            $user = $this->getUser();
-            $list_friends = $em->getRepository('SBUserBundle:User')->findBy(array('id' => $user->getFriends()));
+            if (is_int($activity_last_id)) {
+                $loadmore = $this->container->get('sb_activity.loadmore');
+                $activity = $loadmore->loadOlderActivity($this->getUser(), 3, $activity_last_id, true);
 
-            $loadmore = $this->container->get('sb_activity.loadmore');
-            $activity = $loadmore->loadOlderActivity($user, 3, $activity_last_id, $list_friends);
-
-            return $this->render('SBActivityBundle:activity:activity.html.twig', array(
-                'list_activity' => $activity
-            ));
+                return $this->render('SBActivityBundle:activity:activity.html.twig', array(
+                    'list_activity' => $activity
+                ));
+            }
         }
         return $this->createAccessDeniedException('Acces Denied');
     }
@@ -180,13 +178,16 @@ class ActivityController extends Controller
     public function getMyActivityAction(Request $request)
     {
         if ($request->isXmlHttpRequest()) {
-            $activity_last_id = $request->request->get('id_last_activity');
-            $loadmore = $this->container->get('sb_activity.loadmore');
-            $activity = $loadmore->loadOlderActivity($this->getUser(), 3, $activity_last_id);
+            $activity_last_id = (int)$request->request->get('id_last_activity');
 
-            return $this->render('SBActivityBundle:activity:activity.html.twig', array(
-                'list_activity' => $activity
-            ));
+            if (is_int($activity_last_id)) {
+                $loadmore = $this->container->get('sb_activity.loadmore');
+                $activity = $loadmore->loadOlderActivity($this->getUser(), 3, $activity_last_id);
+
+                return $this->render('SBActivityBundle:activity:activity.html.twig', array(
+                    'list_activity' => $activity
+                ));
+            }
         }
         return $this->createAccessDeniedException('Acces Denied');
     }

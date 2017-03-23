@@ -19,7 +19,7 @@ class CoreController extends Controller
         if ($this->get('security.authorization_checker')->isGranted('IS_AUTHENTICATED_REMEMBERED')) {
             $user = $this->getUser();
             $em = $this->getDoctrine()->getManager();
-            $list_friends = $em->getRepository('SBUserBundle:User')->findBy(array('id' => $user->getFriends()));
+            $list_friends = $this->container->get('sb_user.friend')->getFriends($user);
             $activity = new Activity();
             $form_add_activity = $this->createForm(ActivityType::class, $activity, array(
                 'action' => $this->generateUrl('sb_activity_add')
