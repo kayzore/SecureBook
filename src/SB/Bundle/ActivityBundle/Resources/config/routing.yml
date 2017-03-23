@@ -13,28 +13,28 @@ sb_activity_like:
     methods: [POST]
     options:
         expose: true
-    defaults: { _controller: SBActivityBundle:Activity:addLike }
+    defaults: { _controller: SBActivityBundle:Like:addLike }
 
 sb_activity_dislike:
     path:     /supprimer-un-like/
     methods: [POST]
     options:
         expose: true
-    defaults: { _controller: SBActivityBundle:Activity:dislike }
+    defaults: { _controller: SBActivityBundle:Like:dislike }
 
 sb_activity_get_comments:
     path:     /obtenir-les-commentaires/
     methods: [POST]
     options:
         expose: true
-    defaults: { _controller: SBActivityBundle:Activity:activityGetComment }
+    defaults: { _controller: SBActivityBundle:Comment:activityGetComment }
 
 sb_activity_add_comment:
     path:     /ajouter-un-commentaire/
     methods: [POST]
     options:
         expose: true
-    defaults: { _controller: SBActivityBundle:Activity:addComment }
+    defaults: { _controller: SBActivityBundle:Comment:addComment }
 
 sb_activity_get_activity:
     path:     /obtenir-des-activites/
