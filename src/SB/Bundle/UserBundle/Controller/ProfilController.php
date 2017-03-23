@@ -16,14 +16,9 @@ class ProfilController extends Controller
         if ($user->getSlug() != $slugUsername) {
             $this->friendProfilAction($slugUsername);
         }
+        $form_add_activity = $this->container->get('sb_activity.activity')->getForm('sb_activity_profil_add');
         $em = $this->getDoctrine()->getManager();
-        $activity = new Activity();
-        $form_add_activity = $this->createForm(ActivityType::class, $activity, array(
-            'action' => $this->generateUrl('sb_activity_profil_add')
-        ));
         $activityRepository = $em->getRepository('SBActivityBundle:Activity');
-
-
 
         return $this->render('SBCoreBundle:Profil:profil.html.twig', array(
             'list_activity'         => $activityRepository->fetchAll($user->getId(), array(), 5),

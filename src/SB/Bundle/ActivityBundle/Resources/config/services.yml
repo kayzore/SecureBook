@@ -2,3 +2,6 @@ services:
     sb_activity.loadmore:
         class: SB\Bundle\ActivityBundle\Utils\SBLoadMore
         arguments: ["@doctrine.orm.default_entity_manager", "@sb_user.friend"]
+    sb_activity.activity:
+        class: SB\Bundle\ActivityBundle\Utils\SBActivity
+        arguments: ["@form.factory", "@router"]
