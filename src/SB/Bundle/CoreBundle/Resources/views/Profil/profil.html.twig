@@ -217,7 +217,7 @@
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
                     <h4 class="modal-title" id="modalAvatarLabel">Modifier mon avatar</h4>
                 </div>
-                {{ form_start(form_update_avatar) }}
+                {{ form_start(form_avatar) }}
                 <div class="modal-body">
                     <div class="row">
                         <div class="col-xs-12">
@@ -228,7 +228,7 @@
                         </div>
                         <hr>
                         <div class="col-xs-12">
-                            {{ form_widget(form_update_avatar.file) }}
+                            {{ form_widget(form_avatar.file) }}
                         </div>
                     </div>
                 </div>
@@ -236,7 +236,7 @@
                     <button type="button" class="btn btn-default" data-dismiss="modal">Annuler</button>
                     <button type="submit" class="btn btn-primary" id="btnChangeCover">Sauvegarder</button>
                 </div>
-                {{ form_end(form_update_avatar) }}
+                {{ form_end(form_avatar) }}
             </div>
         </div>
     </div>

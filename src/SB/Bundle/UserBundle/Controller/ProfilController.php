@@ -3,6 +3,9 @@
 namespace SB\Bundle\UserBundle\Controller;
 
 use SB\Bundle\ActivityBundle\Entity\Activity;
+use SB\Bundle\ActivityBundle\Form\Type\ActivityType;
+use SB\Bundle\UserBundle\Entity\Avatar;
+use SB\Bundle\UserBundle\Form\Type\AvatarType;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
@@ -18,11 +21,15 @@ class ProfilController extends Controller
         $form_add_activity = $this->container->get('sb_activity.activity')->getForm(new Activity(), 'sb_activity_profil_add');
         $em = $this->getDoctrine()->getManager();
         $activityRepository = $em->getRepository('SBActivityBundle:Activity');
+        $form_avatar = $this->createForm(AvatarType::class, new Avatar(), array(
+            'action' => $this->generateUrl('sb_user_profil_update_profil_avatar')
+        ));
 
         return $this->render('SBCoreBundle:Profil:profil.html.twig', array(
             'list_activity'         => $activityRepository->fetchAll($user->getId(), array(), 5),
             'number_of_activity'    => $activityRepository->countAll($user->getId(), array()),
             'form_add_activity'     => $form_add_activity->createView(),
+            'form_avatar'           => $form_avatar->createView(),
             'notifications'         => $user->getNotifications()
         ));
     }
@@ -104,6 +111,30 @@ class ProfilController extends Controller
             $em->persist($user);
             $em->flush();
             return new JsonResponse(array('result' => true));
+        }
+        return $this->createAccessDeniedException('Acces Denied');
+    }
+
+    public function updateProfilAvatarAction(Request $request)
+    {
+        $avatar = new Avatar();
+        $form_avatar = $this->createForm(AvatarType::class, $avatar);
+        $form_avatar->handleRequest($request);
+        if ($form_avatar->isSubmitted() && $form_avatar->isValid()) {
+            $user = $this->getUser();
+            $em = $this->getDoctrine()->getManager();
+            $user = $em->getRepository('SBUserBundle:User')->findOneBy(array('id' => $user->getId()));
+
+            if (!is_null($avatar->getFile())) {
+                $avatar->upload($user->getUsername());
+                $user->setAvatar($avatar);
+            }
+
+            $em->persist($user);
+            $em->persist($avatar);
+            $em->flush();
+
+            return $this->redirectToRoute('sb_user_profil', array('slugUsername' => $user->getSlug()));
         }
         return $this->createAccessDeniedException('Acces Denied');
     }

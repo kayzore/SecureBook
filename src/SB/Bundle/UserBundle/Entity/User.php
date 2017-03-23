@@ -109,6 +109,12 @@ class User implements UserInterface
      */
     private $confidentiality;
 
+    /**
+     * @ORM\OneToOne(targetEntity="SB\Bundle\UserBundle\Entity\Avatar")
+     * @ORM\JoinColumn(nullable=true)
+     */
+    private $avatar;
+
 
     /**
      * Constructor
@@ -436,5 +442,29 @@ class User implements UserInterface
     public function getConfidentiality()
     {
         return $this->confidentiality;
+    }
+
+    /**
+     * Set avatar
+     *
+     * @param \SB\Bundle\UserBundle\Entity\Avatar $avatar
+     *
+     * @return User
+     */
+    public function setAvatar(Avatar $avatar = null)
+    {
+        $this->avatar = $avatar;
+
+        return $this;
+    }
+
+    /**
+     * Get avatar
+     *
+     * @return \SB\Bundle\UserBundle\Entity\Avatar
+     */
+    public function getAvatar()
+    {
+        return $this->avatar;
     }
 }
