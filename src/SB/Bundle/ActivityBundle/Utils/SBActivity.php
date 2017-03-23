@@ -33,6 +33,7 @@ class SBActivity
 
     /**
      * Return form of activity
+     * @param Activity $activity
      * @param string $route_name Alias of route
      * @return \Symfony\Component\Form\FormInterface
      */
