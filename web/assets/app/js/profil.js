@@ -18,6 +18,9 @@ $(document).ready(function () {
         }
     });
 
+    /**
+     * Systeme de modification dynamique des informations (affiche le formulaire)
+     */
     $(document).on('click', '#blocks-user-information a', function (evt) {
         evt.preventDefault();
         var elementParent = this.parentNode,
@@ -63,6 +66,9 @@ $(document).ready(function () {
         ;
     });
 
+    /**
+     * Systeme de validation d'un input de modification dynamique des informations
+     */
     $(document).on('click', '#blocks-user-information form .btn-valid-informations', function () {
         var new_value = $(this.parentNode.parentNode).find('input').val(),
             zone = this.parentNode.parentNode.parentNode.parentNode.parentNode,
@@ -99,6 +105,13 @@ $(document).ready(function () {
         }
     });
 
+    /**
+     * Sauvegarde un champ d'information
+     * @param champ
+     * @param new_value
+     * @param btnCancel
+     * @param type
+     */
     function saveInformation(champ, new_value, btnCancel, type) {
         $.ajax({
             url: Routing.generate('sb_user_profil_update_profil'),
@@ -122,6 +135,9 @@ $(document).ready(function () {
         });
     }
 
+    /**
+     * Systeme de fermeture d'un champ d'information
+     */
     $(document).on('click', '#blocks-user-information form .btn-cancel-informations', function () {
         var form = this.parentNode.parentNode.parentNode.parentNode,
             zone = this.parentNode.parentNode.parentNode.parentNode.parentNode,
