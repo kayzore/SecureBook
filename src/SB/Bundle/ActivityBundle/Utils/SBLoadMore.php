@@ -17,6 +17,11 @@ class SBLoadMore
      */
     private $friend;
 
+    /**
+     * SBLoadMore constructor.
+     * @param EntityManager $entityManager
+     * @param SBFriend $friend
+     */
     public function __construct(EntityManager $entityManager, SBFriend $friend)
     {
         $this->em = $entityManager;

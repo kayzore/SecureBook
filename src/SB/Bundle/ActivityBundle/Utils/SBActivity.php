@@ -24,6 +24,12 @@ class SBActivity
      */
     private $em;
 
+    /**
+     * SBActivity constructor.
+     * @param FormFactory $formFactory
+     * @param Router $router
+     * @param EntityManager $entityManager
+     */
     public function __construct(FormFactory $formFactory, Router $router, EntityManager $entityManager)
     {
         $this->formFactory  = $formFactory;
