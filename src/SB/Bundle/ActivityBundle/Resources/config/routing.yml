@@ -1,21 +1,21 @@
 sb_activity_add:
     path:     /ajouter-une-activite/
     methods: [POST]
-    defaults: { _controller: SBActivityBundle:Activity:activityAdd }
+    defaults: { _controller: SBActivityBundle:Activity:addActivity }
 
 sb_activity_like:
     path:     /ajouter-un-like/
     methods: [POST]
     options:
         expose: true
-    defaults: { _controller: SBActivityBundle:Activity:activityLike }
+    defaults: { _controller: SBActivityBundle:Activity:addLike }
 
 sb_activity_dislike:
     path:     /supprimer-un-like/
     methods: [POST]
     options:
         expose: true
-    defaults: { _controller: SBActivityBundle:Activity:activityDislike }
+    defaults: { _controller: SBActivityBundle:Activity:dislike }
 
 sb_activity_get_comments:
     path:     /obtenir-les-commentaires/
@@ -29,18 +29,18 @@ sb_activity_add_comment:
     methods: [POST]
     options:
         expose: true
-    defaults: { _controller: SBActivityBundle:Activity:activityComment }
+    defaults: { _controller: SBActivityBundle:Activity:addComment }
 
 sb_activity_get_activity:
     path:     /obtenir-des-activites/
     methods: [POST]
     options:
         expose: true
-    defaults: { _controller: SBActivityBundle:Activity:activityGet }
+    defaults: { _controller: SBActivityBundle:Activity:getActivity }
 
 sb_activity_get_my_activity:
     path:     /obtenir-mes-activites/
     methods: [POST]
     options:
         expose: true
-    defaults: { _controller: SBActivityBundle:Activity:activityGetMy }
+    defaults: { _controller: SBActivityBundle:Activity:getMyActivity }

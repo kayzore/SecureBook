@@ -13,7 +13,7 @@ use Symfony\Component\HttpFoundation\Request;
 
 class ActivityController extends Controller
 {
-    public function activityAddAction(Request $request)
+    public function addActivityAction(Request $request)
     {
         $activity = new Activity();
         $form = $this->createForm(new ActivityType(), $activity);
@@ -35,7 +35,7 @@ class ActivityController extends Controller
         return $this->createAccessDeniedException('Acces Denied');
     }
 
-    public function activityLikeAction(Request $request)
+    public function addLikeAction(Request $request)
     {
         if ($request->isXmlHttpRequest()) {
             $id_activity = $request->request->get('id_activity');
@@ -78,7 +78,7 @@ class ActivityController extends Controller
         return $this->createAccessDeniedException('Acces Denied');
     }
 
-    public function activityDislikeAction(Request $request)
+    public function dislikeAction(Request $request)
     {
         if ($request->isXmlHttpRequest()) {
             $id_activity = $request->request->get('id_activity');
@@ -105,7 +105,7 @@ class ActivityController extends Controller
         return $this->createAccessDeniedException('Acces Denied');
     }
 
-    public function activityCommentAction(Request $request)
+    public function addCommentAction(Request $request)
     {
         if ($request->isXmlHttpRequest()) {
             $comment_text = $request->request->get('comment_text');
@@ -158,7 +158,7 @@ class ActivityController extends Controller
         return $this->createAccessDeniedException('Acces Denied');
     }
 
-    public function activityGetAction(Request $request)
+    public function getActivityAction(Request $request)
     {
         if ($request->isXmlHttpRequest()) {
             $activity_last_id = $request->request->get('id_last_activity');
@@ -177,7 +177,7 @@ class ActivityController extends Controller
         return $this->createAccessDeniedException('Acces Denied');
     }
 
-    public function activityGetMyAction(Request $request)
+    public function getMyActivityAction(Request $request)
     {
         if ($request->isXmlHttpRequest()) {
             $activity_last_id = $request->request->get('id_last_activity');
