@@ -15,21 +15,14 @@ class ActivityController extends Controller
 {
     public function addActivityAction(Request $request)
     {
+        $activityService = $this->container->get('sb_activity.activity');
         $activity = new Activity();
-        $form = $this->createForm(new ActivityType(), $activity);
+        $form = $activityService->getForm($activity);
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
-            $activity->setUser($this->getUser());
 
-            if (!is_null($activity->getImage()->getFile())) {
-                $activity->getImage()->upload($this->getUser()->getUsername());
-            } else {
-                $activity->setImage(null);
-            }
+            $this->container->get('sb_activity.activity')->addActivity($this->getUser(), $activity);
 
-            $em = $this->getDoctrine()->getManager();
-            $em->persist($activity);
-            $em->flush();
             return $this->redirectToRoute('sb_core_homepage');
         }
         return $this->createAccessDeniedException('Acces Denied');
@@ -37,22 +30,15 @@ class ActivityController extends Controller
 
     public function addActivityOnProfilAction(Request $request)
     {
+        $activityService = $this->container->get('sb_activity.activity');
         $activity = new Activity();
-        $form = $this->createForm(new ActivityType(), $activity);
+        $form = $activityService->getForm($activity);
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
             $user = $this->getUser();
-            $activity->setUser($user);
 
-            if (!is_null($activity->getImage()->getFile())) {
-                $activity->getImage()->upload($user->getUsername());
-            } else {
-                $activity->setImage(null);
-            }
+            $activityService->addActivity($user, $activity);
 
-            $em = $this->getDoctrine()->getManager();
-            $em->persist($activity);
-            $em->flush();
             return $this->redirectToRoute('sb_user_profil', array('slugUsername' => $user->getSlug()));
         }
         return $this->createAccessDeniedException('Acces Denied');

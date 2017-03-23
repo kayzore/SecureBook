@@ -20,7 +20,7 @@ class CoreController extends Controller
             $user = $this->getUser();
             $em = $this->getDoctrine()->getManager();
             $list_friends = $this->container->get('sb_user.friend')->getFriends($user);
-            $form_add_activity = $this->container->get('sb_activity.activity')->getForm('sb_activity_add');
+            $form_add_activity = $this->container->get('sb_activity.activity')->getForm(new Activity(), 'sb_activity_add');
             $activityRepository = $em->getRepository('SBActivityBundle:Activity');
             return $this->render('SBCoreBundle:Home:membre_accueil.html.twig', array(
                 'list_activity'         => $activityRepository->fetchAll($user->getId(), $list_friends, 5),
