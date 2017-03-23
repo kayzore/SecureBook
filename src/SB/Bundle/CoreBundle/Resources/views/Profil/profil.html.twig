@@ -40,7 +40,7 @@
                             {% set user_profil_name = app.user.username %}
                         {% endif %}
                         <ul>
-                            <li><h4>{{ user_profil_name }}</h4></li>
+                            <li><h4 id="zone-profil-name">{{ user_profil_name }}</h4></li>
                             <li>
                                 <a href="#" class="btn btn-infos" id="btnSubmitNewActu">
                                     <i class="fa fa-cogs" aria-hidden="true"></i> Mes paramètres
@@ -61,43 +61,70 @@
                 <div class="row">
                     <div class="col-md-3 ml-20 mr-50 mt-20">
                         <div class="row">
-                            <div class="col-md-12 activity pb-20" id="blocks-user-information">
+                            <div class="col-md-12 activity pb-20 no-pr" id="blocks-user-information">
                                 <h4><i class="fa fa-info" aria-hidden="true"></i> Mes informations</h4>
-                                <p class="popover-wrapper">
-                                    <span id="publicPrenom" data-public="true">
-                                        <i class="fa fa-eye" aria-hidden="true" data-toggle="tooltip" title="Public"></i>
-                                    </span>
-                                    Prenom :
-                                    <a href="#">{{ app.user.firstname }} <i class="fa fa-pencil" aria-hidden="true"></i></a>
-                                </p><br>
-                                <p class="popover-wrapper">
+                                <div class="row">
+                                    <!--
+                                    <div class="col-md-1">
+                                        <span id="publicPrenom" data-public="true">
+                                            <i class="fa fa-eye" aria-hidden="true" data-toggle="tooltip" title="Public"></i>
+                                        </span>
+                                    </div>
+                                    -->
+                                    <div class="col-md-12">
+                                        <span id="zonePrenom" data-zone="Prenom">
+                                            Prenom : <a href="#">{{ app.user.firstname }} <i class="fa fa-pencil" aria-hidden="true"></i></a>
+                                        </span>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <!--
                                     <span id="publicNom" data-public="true">
                                         <i class="fa fa-eye" aria-hidden="true" data-toggle="tooltip" title="Public"></i>
                                     </span>
-                                    Nom :
-                                    <a href="#">{{ app.user.lastname }} <i class="fa fa-pencil" aria-hidden="true"></i></a>
-                                </p><br>
-                                <p class="popover-wrapper">
+                                    -->
+                                    <div class="col-md-12">
+                                        <span id="zoneNom" data-zone="Nom">
+                                            Nom : <a href="#">{{ app.user.lastname }} <i class="fa fa-pencil" aria-hidden="true"></i></a>
+                                        </span>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <!--
                                     <span id="publicPays" data-public="false">
                                         <i class="fa fa-eye-slash" aria-hidden="true" data-toggle="tooltip" title="Non public"></i>
                                     </span>
-                                    Pays :
-                                    <a href="#">{{ app.user.pays }} <i class="fa fa-pencil" aria-hidden="true"></i></a>
-                                </p><br>
-                                <p class="popover-wrapper">
+                                    -->
+                                    <div class="col-md-12">
+                                        <span id="zonePays" data-zone="Pays">
+                                            Pays : <a href="#">{{ app.user.pays }} <i class="fa fa-pencil" aria-hidden="true"></i></a>
+                                        </span>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <!--
                                     <span id="publicRegion" data-public="false">
                                         <i class="fa fa-eye-slash" aria-hidden="true" data-toggle="tooltip" title="Non public"></i>
                                     </span>
-                                    Région :
-                                    <a href="#">{{ app.user.region }} <i class="fa fa-pencil" aria-hidden="true"></i></a>
-                                </p><br>
-                                <p class="popover-wrapper">
+                                    -->
+                                    <div class="col-md-12">
+                                        <span id="zoneRegion" data-zone="Region">
+                                            Region : <a href="#">{{ app.user.region }} <i class="fa fa-pencil" aria-hidden="true"></i></a>
+                                        </span>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <!--
                                     <span id="publicVille" data-public="true">
                                         <i class="fa fa-eye" aria-hidden="true" data-toggle="tooltip" title="Public"></i>
                                     </span>
-                                    Ville :
-                                    <a href="#">{{ app.user.ville }} <i class="fa fa-pencil" aria-hidden="true"></i></a>
-                                </p>
+                                    -->
+                                    <div class="col-md-12">
+                                        <span id="zoneVille" data-zone="Ville">
+                                            Ville : <a href="#">{{ app.user.ville }} <i class="fa fa-pencil" aria-hidden="true"></i></a>
+                                        </span>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>

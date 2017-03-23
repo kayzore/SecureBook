@@ -62,23 +62,24 @@
     border: grey 1px solid;
     color: grey;
 }
-#blocks-user-information p,
-#blocks-user-information-connexion p {
+
+#blocks-user-information div,
+#blocks-user-information-connexion div {
     display: block !important;
 }
-#blocks-user-information p a,
-#blocks-user-information-connexion p a {
+#blocks-user-information div a,
+#blocks-user-information-connexion div a {
     color: darkgray;
     border-bottom: dashed 1px darkgray;
 }
-#blocks-user-information p a i,
-#blocks-user-information-connexion p a i {
+#blocks-user-information div a i,
+#blocks-user-information-connexion div a i {
     color: gray;
 }
-#blocks-user-information p .fa-eye,
-#blocks-user-information p .fa-eye-slash,
-#blocks-user-information-connexion p .fa-eye,
-#blocks-user-information-connexion p .fa-eye-slash {
+#blocks-user-information div .fa-eye,
+#blocks-user-information div .fa-eye-slash,
+#blocks-user-information-connexion div .fa-eye,
+#blocks-user-information-connexion div .fa-eye-slash {
     cursor: pointer;
 }
 .dropNewCover {

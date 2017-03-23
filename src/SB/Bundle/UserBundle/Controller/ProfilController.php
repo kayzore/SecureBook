@@ -37,29 +37,30 @@ class ProfilController extends Controller
     public function updateProfilAction(Request $request)
     {
         if ($request->isXmlHttpRequest()) {
-            $prenom = $request->request->get('prenom');
-            $nom = $request->request->get('nom');
-            $pays = $request->request->get('pays');
-            $region = $request->request->get('region');
-            $ville = $request->request->get('ville');
+            $champ = $request->request->get('champ');
+            $new_value = $request->request->get('new_value');
 
             $em = $this->getDoctrine()->getManager();
             $user = $em->getRepository('SBUserBundle:User')->findOneBy(array('id' => $this->getUser()->getId()));
 
-            if (!empty($prenom)) {
-                $user->setFirstname($prenom);
-            }
-            if (!empty($nom)) {
-                $user->setLastname($nom);
-            }
-            if (!empty($pays)) {
-                $user->setPays($pays);
-            }
-            if (!empty($region)) {
-                $user->setRegion($region);
-            }
-            if (!empty($ville)) {
-                $user->setVille($ville);
+            if (!empty($champ) && !empty($new_value)) {
+                switch ($champ) {
+                    case 'prenom':
+                        $user->setFirstname($new_value);
+                        break;
+                    case 'nom':
+                        $user->setLastname($new_value);
+                        break;
+                    case 'pays':
+                        $user->setPays($new_value);
+                        break;
+                    case 'region':
+                        $user->setRegion($new_value);
+                        break;
+                    case 'ville':
+                        $user->setVille($new_value);
+                        break;
+                }
             }
             $em->persist($user);
             $em->flush();
