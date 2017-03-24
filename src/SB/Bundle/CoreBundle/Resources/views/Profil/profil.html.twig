@@ -31,7 +31,12 @@
                         </span>
                     </div>
                     <div id="blocks-profil">
-                        <img src="{{ asset('uploads/img/' ~ app.user.avatar.name) }}"
+                        {% if not app.user.avatar == null %}
+                            {% set avatar_name = asset('uploads/img/' ~ app.user.avatar.name) %}
+                        {% else %}
+                            {% set avatar_name = asset('assets/app/img/img_avatar2.png') %}
+                        {% endif %}
+                        <img src="{{ avatar_name }}"
                              class="img-circle img-thumbnail currentAvatar" alt="Image couverture"
                              data-toggle="modal" data-target="#modalAvatar">
                     </div>
@@ -222,7 +227,12 @@
                     <div class="row">
                         <div class="col-xs-12">
                             <h5 class="text-center">Avatar actuel :</h5>
-                            <img src="http://www.w3schools.com/bootstrap/img_avatar3.png"
+                            {% if not app.user.avatar == null %}
+                                {% set avatar_name = asset('uploads/img/' ~ app.user.avatar.name) %}
+                            {% else %}
+                                {% set avatar_name = asset('assets/app/img/img_avatar2.png') %}
+                            {% endif %}
+                            <img src="{{ avatar_name }}"
                                  class="img-circle img-thumbnail currentAvatar center-block" alt="Image couverture"
                                  data-toggle="modal" data-target="#modalAvatar">
                         </div>
