@@ -12,7 +12,8 @@ class FeedbackController extends Controller
     public function addAction(Request $request)
     {
         /**
-         * @see http://feedbacknow.tuyoshi.com.br/
+         * @see https://github.com/newerton/feedback-html2canvas
+         * @see http://feedbacknow.tuyoshi.com.br/ (payant)
          */
         if ($this->get('security.authorization_checker')->isGranted('ROLE_ADMIN') && $request->isXmlHttpRequest()) {
             $result = json_decode($request->request->get('feedback'), true);
