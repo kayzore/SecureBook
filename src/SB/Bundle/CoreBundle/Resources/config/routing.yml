@@ -4,3 +4,10 @@ sb_core_homepage:
     options:
         expose: true
     defaults: { _controller: SBCoreBundle:Core:index }
+
+sb_core_feedback_add:
+    path:     /add-feedback/
+    methods: [POST]
+    options:
+        expose: true
+    defaults: { _controller: SBCoreBundle:Feedback:add }

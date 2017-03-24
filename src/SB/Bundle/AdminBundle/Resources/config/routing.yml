@@ -1,0 +1,3 @@
+sb_admin_homepage:
+    path:     /
+    defaults: { _controller: SBAdminBundle:Admin:home }

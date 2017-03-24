@@ -1,0 +1,13 @@
+{% extends '::base.html.twig' %}
+
+{% block content %}
+    {% for feedback in feedbacks %}
+        <img src="{{ feedback.imgData }}" class="img-responsive" style="max-height: 300px" alt="">
+        <p>{{ feedback.note }}</p>
+        <hr>
+    {% else %}
+        <div class="alert alert-info">
+            <p>Pas de feedback</p>
+        </div>
+    {% endfor %}
+{% endblock %}
