@@ -25,7 +25,7 @@ class ProfilController extends Controller
             'action' => $this->generateUrl('sb_user_profil_update_profil_avatar')
         ));
 
-        return $this->render('SBCoreBundle:Profil:profil.html.twig', array(
+        return $this->render('SBUserBundle:Profil:profil.html.twig', array(
             'list_activity'         => $activityRepository->fetchAll($user->getId(), array(), 5),
             'number_of_activity'    => $activityRepository->countAll($user->getId(), array()),
             'form_add_activity'     => $form_add_activity->createView(),
@@ -38,7 +38,7 @@ class ProfilController extends Controller
     {
         $em = $this->getDoctrine()->getManager();
 
-        return $this->render('SBCoreBundle:Profil:friend_profil.html.twig');
+        return $this->render('SBUserBundle:Profil:friend_profil.html.twig');
     }
 
     public function updateProfilAction(Request $request)
