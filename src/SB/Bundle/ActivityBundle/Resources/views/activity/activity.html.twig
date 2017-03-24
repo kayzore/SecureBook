@@ -1,14 +1,11 @@
+{% import 'SBCoreBundle:Utils:user.html.twig' as user_macro %}
+
 {% for activity in list_activity %}
     <div class="row">
         <div class="col-md-8 activity" data-activity="{{ activity.id }}">
             <div class="row activity-top">
                 <div class="col-xs-1">
-                    {% if not activity.user.avatar == null %}
-                        {% set avatar_name = asset('uploads/img/' ~ activity.user.avatar.name) %}
-                    {% else %}
-                        {% set avatar_name = asset('assets/app/img/img_avatar2.png') %}
-                    {% endif %}
-                    <img class="img-circle activity-avatar" src="{{ avatar_name }}" alt="...">
+                    {{ user_macro.getAvatar(activity.user.avatar, 'activity') }}
                 </div>
                 <div class="col-xs-11 no-pr">
                     <div class="col-xs-12">

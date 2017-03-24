@@ -1,0 +1,22 @@
+{% macro getAvatar(entity_field, type, opts) %}
+    {% if  type == 'activity' %}
+        {% if not entity_field == null %}
+            {% set avatar_name = asset('uploads/img/' ~ entity_field.name) %}
+        {% else %}
+            {% set avatar_name = asset('assets/app/img/img_avatar2.png') %}
+        {% endif %}
+        <img class="img-circle activity-avatar" src="{{ avatar_name }}" alt="...">
+    {% elseif type == 'profil' or type == 'myProfil' %}
+        {% if type == 'myProfil' %}
+            {% if not entity_field == null %}
+                {% set avatar_name = asset('uploads/img/' ~ entity_field.name) %}
+            {% else %}
+                {% set avatar_name = asset('assets/app/img/img_avatar2.png') %}
+            {% endif %}
+            <img src="{{ avatar_name }}" class="img-circle img-thumbnail currentAvatar center-block"
+             alt="Image couverture"{% if not opts == 'inModal' %} data-toggle="modal" data-target="#modalAvatar"{% endif %}>
+        {% else %}
+
+        {% endif %}
+    {% endif %}
+{% endmacro %}

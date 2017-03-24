@@ -1,5 +1,7 @@
 {% extends 'SBCoreBundle::layout.html.twig' %}
 
+{% import 'SBCoreBundle:Utils:user.html.twig' as user_macro %}
+
 {% block title %}
     Mon profil -
 {% endblock title %}
@@ -31,17 +33,10 @@
                         </span>
                     </div>
                     <div id="blocks-profil">
-                        {% if not app.user.avatar == null %}
-                            {% set avatar_name = asset('uploads/img/' ~ app.user.avatar.name) %}
-                        {% else %}
-                            {% set avatar_name = asset('assets/app/img/img_avatar2.png') %}
-                        {% endif %}
-                        <img src="{{ avatar_name }}"
-                             class="img-circle img-thumbnail currentAvatar" alt="Image couverture"
-                             data-toggle="modal" data-target="#modalAvatar">
+                        {{ user_macro.getAvatar(app.user.avatar, 'myProfil') }}
                     </div>
                     <div id="blocks-nav-profil">
-                        {% if not app.user.firstname == null and not app.user.lastname == null %}
+                        {% if (not app.user.firstname == null or not app.user.firstname == '') and (not app.user.lastname == null or not app.user.lastname == '') %}
                             {% set user_profil_name = app.user.firstname ~ ' ' ~ app.user.lastname %}
                         {% else %}
                             {% set user_profil_name = app.user.username %}
@@ -227,14 +222,7 @@
                     <div class="row">
                         <div class="col-xs-12">
                             <h5 class="text-center">Avatar actuel :</h5>
-                            {% if not app.user.avatar == null %}
-                                {% set avatar_name = asset('uploads/img/' ~ app.user.avatar.name) %}
-                            {% else %}
-                                {% set avatar_name = asset('assets/app/img/img_avatar2.png') %}
-                            {% endif %}
-                            <img src="{{ avatar_name }}"
-                                 class="img-circle img-thumbnail currentAvatar center-block" alt="Image couverture"
-                                 data-toggle="modal" data-target="#modalAvatar">
+                            {{ user_macro.getAvatar(app.user.avatar, 'myProfil', 'inModal') }}
                         </div>
                         <hr>
                         <div class="col-xs-12">
