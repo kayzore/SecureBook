@@ -3,6 +3,7 @@
 {% block stylesheets %}
     <link rel="stylesheet" href="{{ asset('assets/app/css/activity.css') }}">
     <link rel="stylesheet" href="{{ asset('assets/external/libs/animate.css/animate.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('assets/external/libs/feedback/stable/2.0/feedback.min.css') }}" />
 {% endblock stylesheets %}
 
 {% block javascripts %}
@@ -13,6 +14,8 @@
     <script src="{{ asset('assets/external/libs/remarkable-bootstrap-notify/bootstrap-notify.min.js') }}"></script>
     <script src="{{ asset('assets/external/libs/waypoints/lib/jquery.waypoints.min.js') }}"></script>
     <script src="{{ asset('assets/app/js/activity.js') }}"></script>
+    <script src="{{ asset('assets/external/libs/feedback/stable/2.0/feedback.min.js') }}"></script>
+    <script src="{{ asset('assets/app/js/app.js') }}"></script>
     {% block js %}
     {% endblock js %}
 {% endblock javascripts %}
