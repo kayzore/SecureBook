@@ -8,10 +8,13 @@ class AdminController extends Controller
 {
     public function homeAction()
     {
-        $em = $this->getDoctrine()->getManager();
-        $feedbacks = $em->getRepository('SBAdminBundle:Feedback')->findAll();
-        return $this->render('SBAdminBundle:Admin:home.html.twig', array(
-            'feedbacks' => $feedbacks
-        ));
+        if ($this->get('security.authorization_checker')->isGranted('ROLE_ADMIN')) {
+            $em = $this->getDoctrine()->getManager();
+            $feedbacks = $em->getRepository('SBAdminBundle:Feedback')->findAll();
+            return $this->render('SBAdminBundle:Admin:home.html.twig', array(
+                'feedbacks' => $feedbacks
+            ));
+        }
+        return $this->createAccessDeniedException('Acces Denied');
     }
 }
