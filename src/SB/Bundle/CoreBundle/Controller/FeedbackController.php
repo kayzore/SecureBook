@@ -11,7 +11,10 @@ class FeedbackController extends Controller
 {
     public function addAction(Request $request)
     {
-        if ($this->get('security.authorization_checker')->isGranted('ROLE_ADMIN')) {
+        /**
+         * @see http://feedbacknow.tuyoshi.com.br/
+         */
+        if ($this->get('security.authorization_checker')->isGranted('ROLE_ADMIN') && $request->isXmlHttpRequest()) {
             $result = json_decode($request->request->get('feedback'), true);
             if (!empty($result)){
                 unset($result['html']);
