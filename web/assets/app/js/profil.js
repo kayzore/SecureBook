@@ -4,6 +4,15 @@ $(document).ready(function () {
         older_pays_value = $('#zonePays a')[0].innerText,
         older_region_value = $('#zoneRegion a')[0].innerText,
         older_ville_value = $('#zoneVille a')[0].innerText;
+    $('.btn-toggle').bootstrapToggle({
+        on: 'Visible',
+        off: 'Masqué',
+        width: '100px'
+    });
+
+    $(document).on('change', '#btn-toggle-avatar-visibility', function () {
+        console.log('Toggle: ' + $(this).prop('checked'))
+    });
 
     $('#blocks-user-information div .confidentiality i').click(function () {
         var champ = $(this.parentNode).data('zone').toLowerCase();

@@ -9,6 +9,7 @@
 {% block stylesheets %}
     {{ parent() }}
     <link rel="stylesheet" href="{{ asset('assets/app/css/profil.css') }}">
+    <link rel="stylesheet" href="{{ asset('assets/external/libs/bootstrap-toggle/css/bootstrap-toggle.min.css') }}">
 {% endblock stylesheets %}
 
 
@@ -16,6 +17,7 @@
     <!--<script src="{{ asset('assets/external/libs/jquery-ui/jquery-ui.min.js') }}"></script>-->
     <!--<script src="{{ asset('assets/external/libs/JQ-Image-Drag/script/jquery.imagedrag.min.js') }}"></script>-->
     <script src="{{ asset('assets/app/js/my-activity.js') }}"></script>
+    <script src="{{ asset('assets/external/libs/bootstrap-toggle/js/bootstrap-toggle.min.js') }}"></script>
     <script src="{{ asset('assets/app/js/profil.js') }}"></script>
 {% endblock js %}
 
@@ -221,8 +223,18 @@
                 <div class="modal-body">
                     <div class="row">
                         <div class="col-xs-12">
-                            <h5 class="text-center">Avatar actuel :</h5>
-                            {{ user_macro.getAvatar(app.user.avatar, 'myProfil', 'inModal') }}
+                            <div class="row">
+                                <div class="col-xs-12">
+                                    <h5 class="text-center">Avatar actuel :</h5>
+                                    {{ user_macro.getAvatar(app.user.avatar, 'myProfil', 'inModal') }}
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-xs-12 text-center">
+                                    <label class="sr-only" for="btn-toggle-avatar-visibility">ff</label>
+                                    <input id="btn-toggle-avatar-visibility" class="btn-toggle" checked type="checkbox">
+                                </div>
+                            </div>
                         </div>
                         <hr>
                         <div class="col-xs-12">
