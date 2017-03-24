@@ -1,6 +1,6 @@
 <?php
 
-namespace SB\Bundle\NotificationBundle\Entity;
+namespace SB\Bundle\NotificationBundle\Repository;
 
 use Doctrine\ORM\EntityRepository;
 

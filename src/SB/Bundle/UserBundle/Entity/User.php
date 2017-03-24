@@ -13,7 +13,7 @@ use Symfony\Component\Security\Core\User\UserInterface;
  * User
  *
  * @ORM\Table()
- * @ORM\Entity(repositoryClass="SB\Bundle\UserBundle\Entity\UserRepository")
+ * @ORM\Entity(repositoryClass="SB\Bundle\UserBundle\Repository\UserRepository")
  * @UniqueEntity(fields="email", message="Email déjà enregistrée")
  * @UniqueEntity(fields="username", message="Username déjà enregistré")
  */

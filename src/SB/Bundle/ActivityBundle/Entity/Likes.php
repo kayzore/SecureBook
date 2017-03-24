@@ -9,7 +9,7 @@ use SB\Bundle\UserBundle\Entity\User;
  * Likes
  *
  * @ORM\Table()
- * @ORM\Entity(repositoryClass="SB\Bundle\ActivityBundle\Entity\LikesRepository")
+ * @ORM\Entity(repositoryClass="SB\Bundle\ActivityBundle\Repository\LikesRepository")
  */
 class Likes
 {

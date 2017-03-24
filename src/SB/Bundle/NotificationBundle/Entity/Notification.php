@@ -10,7 +10,7 @@ use SB\Bundle\UserBundle\Entity\User;
  * Notification
  *
  * @ORM\Table()
- * @ORM\Entity(repositoryClass="SB\Bundle\NotificationBundle\Entity\NotificationRepository")
+ * @ORM\Entity(repositoryClass="SB\Bundle\NotificationBundle\Repository\NotificationRepository")
  */
 class Notification
 {

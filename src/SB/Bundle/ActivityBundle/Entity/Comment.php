@@ -9,7 +9,7 @@ use SB\Bundle\UserBundle\Entity\User;
  * Comment
  *
  * @ORM\Table()
- * @ORM\Entity(repositoryClass="SB\Bundle\ActivityBundle\Entity\CommentRepository")
+ * @ORM\Entity(repositoryClass="SB\Bundle\ActivityBundle\Repository\CommentRepository")
  */
 class Comment
 {

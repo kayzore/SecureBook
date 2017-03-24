@@ -10,7 +10,7 @@ use SB\Bundle\UserBundle\Entity\User;
  * Activity
  *
  * @ORM\Table()
- * @ORM\Entity(repositoryClass="SB\Bundle\ActivityBundle\Entity\ActivityRepository")
+ * @ORM\Entity(repositoryClass="SB\Bundle\ActivityBundle\Repository\ActivityRepository")
  */
 class Activity
 {
