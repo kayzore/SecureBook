@@ -74,3 +74,15 @@ stof_doctrine_extensions:
     orm:
         default:
             sluggable:   true
+
+# Assetic Configuration
+assetic:
+    debug:          '%kernel.debug%'
+    use_controller: false
+    filters:
+        cssrewrite: ~
+        uglifycss:
+            bin: 'app/Resources/node_modules/uglifycss/uglifycss'
+        uglifyjs2:
+            # the path to the uglifyjs executable
+            bin: 'app/Resources/node_modules/uglify-js/bin/uglifyjs'

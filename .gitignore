@@ -20,3 +20,10 @@ app/check.php
 web/config.php
 web/uploads/
 phpunit.phar
+web/css/
+app/Resources/node_modules/
+web/js/
+app/Resources/uglifycss
+app/Resources/uglifycss.cmd
+app/Resources/uglifyjs
+app/Resources/uglifyjs.cmd

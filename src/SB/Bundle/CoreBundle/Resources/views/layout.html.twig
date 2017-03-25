@@ -1,9 +1,12 @@
 {% extends '::base.html.twig' %}
 
 {% block stylesheets %}
-    <link rel="stylesheet" href="{{ asset('assets/app/css/activity.css') }}">
-    <link rel="stylesheet" href="{{ asset('assets/external/libs/animate.css/animate.min.css') }}">
-    <link rel="stylesheet" href="{{ asset('assets/external/libs/angular-send-feedback/dist/angular-send-feedback.min.css') }}">
+    {% stylesheets filter='?uglifycss' filter='cssrewrite'
+    'assets/app/css/activity.css'
+    'assets/external/libs/animate.css/animate.min.css'
+    'assets/external/libs/angular-send-feedback/dist/angular-send-feedback.min.css' %}
+    <link rel="stylesheet" href="{{ asset_url }}" type="text/css" />
+    {% endstylesheets %}
 {% endblock stylesheets %}
 
 {% block javascripts %}
