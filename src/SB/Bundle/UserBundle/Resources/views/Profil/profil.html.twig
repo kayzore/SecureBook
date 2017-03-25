@@ -17,10 +17,10 @@
 
 
 {% block js %}
-    <script src="{{ asset('http://localhost:3000/faye/client.js') }}"></script>
-    <script src="{{ asset('assets/external/libs/angular/angular.js') }}"></script>
-    <script src="{{ asset('assets/external/libs/angular-send-feedback/dist/angular-send-feedback.js') }}"></script>
     {% javascripts filter='?uglifyjs2'
+    'http://localhost:3000/faye/client.js'
+    'assets/external/libs/angular/angular.js'
+    'assets/external/libs/angular-send-feedback/dist/angular-send-feedback.js'
     'assets/external/libs/autogrow-textarea/jquery.autogrowtextarea.min.js'
     'assets/external/libs/remarkable-bootstrap-notify/bootstrap-notify.min.js'
     'assets/external/libs/waypoints/lib/jquery.waypoints.min.js'
@@ -28,10 +28,10 @@
     'assets/app/js/my-activity.js'
     'assets/external/libs/bootstrap-toggle/js/bootstrap-toggle.min.js'
     'assets/app/js/profil.js'
+    'assets/app/js/feedback.js'
     %}
     <script type="text/javascript" src="{{ asset_url }}"></script>
     {% endjavascripts %}
-    <script src="{{ asset('assets/app/js/feedback.js') }}"></script>
     <!--<script src="{{ asset('assets/external/libs/jquery-ui/jquery-ui.min.js') }}"></script>-->
     <!--<script src="{{ asset('assets/external/libs/JQ-Image-Drag/script/jquery.imagedrag.min.js') }}"></script>-->
 {% endblock js %}
