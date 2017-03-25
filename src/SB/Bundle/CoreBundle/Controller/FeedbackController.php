@@ -15,7 +15,7 @@ class FeedbackController extends Controller
          * @see https://github.com/newerton/feedback-html2canvas
          * @see http://feedbacknow.tuyoshi.com.br/ (payant)
          */
-        if ($this->get('security.authorization_checker')->isGranted('ROLE_ADMIN') && $request->isXmlHttpRequest()) {
+        if ($request->isXmlHttpRequest()) {
             $result = json_decode($request->request->get('feedback'), true);
             if (!empty($result)){
                 unset($result['html']);

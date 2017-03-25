@@ -5,6 +5,14 @@
 {% endblock title %}
 
 {% block js %}
+    <script src="http://localhost:3000/faye/client.js"></script>
+    <script src="{{ asset('assets/external/libs/autogrow-textarea/jquery.autogrowtextarea.min.js') }}"></script>
+    <script src="{{ asset('assets/external/libs/remarkable-bootstrap-notify/bootstrap-notify.min.js') }}"></script>
+    <script src="{{ asset('assets/external/libs/waypoints/lib/jquery.waypoints.min.js') }}"></script>
+    <script src="{{ asset('assets/app/js/activity.js') }}"></script>
+    <script src="{{ asset('assets/external/libs/angular/angular.js') }}"></script>
+    <script src="{{ asset('assets/external/libs/angular-send-feedback/dist/angular-send-feedback.js') }}"></script>
+    <script src="{{ asset('assets/app/js/feedback.js') }}"></script>
     <script src="{{ asset('assets/app/js/all-activity.js') }}"></script>
 {% endblock js %}
 

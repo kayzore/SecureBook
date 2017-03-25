@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="fr">
+<html lang="fr" ng-app="myApp">
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
@@ -18,7 +18,7 @@
     <script src="{{ asset('assets/external/libs/bootstrap/dist/js/bootstrap.min.js') }}"></script>
     {% block javascripts %}{% endblock %}
 </head>
-<body>
+<body class="ng-scope" ng-controller="mainController">
 {% block content %}{% endblock %}
 </body>
 </html>

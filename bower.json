@@ -19,6 +19,10 @@
     "JQ-Image-Drag": "https://github.com/puneetkay/JQ-Image-Drag.git#^1.1.2",
     "waypoints": "https://github.com/imakewebthings/waypoints.git#^4.0.1",
     "bootstrap-toggle": "https://github.com/minhur/bootstrap-toggle.git#^2.2.2",
-    "feedback": "https://github.com/ivoviz/feedback.git"
+    "feedback": "https://github.com/ivoviz/feedback.git",
+    "feedback-html2canvas": "https://github.com/newerton/feedback-html2canvas.git",
+    "angular-send-feedback": "https://github.com/jacobscarter/angular-feedback.git#^1.2.1",
+    "angular-ui-router": "^0.4.2",
+    "angular": "^1.6.3"
   }
 }
