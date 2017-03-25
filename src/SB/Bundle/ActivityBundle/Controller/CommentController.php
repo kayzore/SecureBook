@@ -27,17 +27,20 @@ class CommentController extends Controller
             $comment->setUser($user);
             $comment->setText($comment_text);
 
-            $faye = $this->container->get('sb_realtime.faye.client');
-            $channel = '/' . $activity->getUser()->getUsername();
-            $data    = array('type' => 'comment', 'text' => $user->getUsername() . ' à commenté une de vos actualité');
-            $faye->send($channel, $data);
-            $notification = new Notification();
-            $notification->setUserFrom($user);
-            $notification->setUserTo($activity->getUser());
-            $notification->setActivity($activity);
-            $notification->setType('comment');
+            if ($user->getUsername() != $activity->getUser()->getUsername()) {
+                $faye = $this->container->get('sb_realtime.faye.client');
+                $channel = '/' . $activity->getUser()->getUsername();
+                $data    = array('type' => 'comment', 'text' => $user->getUsername() . ' à commenté une de vos actualité');
+                $faye->send($channel, $data);
 
-            $em->persist($notification);
+                $notification = new Notification();
+                $notification->setUserFrom($user);
+                $notification->setUserTo($activity->getUser());
+                $notification->setActivity($activity);
+                $notification->setType('comment');
+                $em->persist($notification);
+            }
+
             $em->persist($activity);
             $em->persist($comment);
             $em->flush();
@@ -55,9 +58,11 @@ class CommentController extends Controller
 
             $em = $this->getDoctrine()->getManager();
             $comments = $em->getRepository('SBActivityBundle:Comment')->fetchAll($activity_id, 3);
+            $nb_comments = $em->getRepository('SBActivityBundle:Comment')->countAll($activity_id, 3);
 
             return $this->render('SBActivityBundle:comments:comment.html.twig', array(
-                'comments' => $comments
+                'comments'      => $comments,
+                'nb_comments'   => $nb_comments
             ));
         }
         return $this->createAccessDeniedException('Acces Denied');

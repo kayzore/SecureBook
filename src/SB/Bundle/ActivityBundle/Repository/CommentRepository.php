@@ -27,4 +27,17 @@ class CommentRepository extends EntityRepository
 
         return $qb->getQuery()->getResult();
     }
+
+    public function countAll($id_activity)
+    {
+        $qb = $this->createQueryBuilder('c');
+
+        $qb
+            ->select('COUNT(c)')
+            ->where('c.activity = :id_activity')
+                ->setParameter('id_activity', $id_activity)
+        ;
+
+        return $qb->getQuery()->getSingleScalarResult();
+    }
 }

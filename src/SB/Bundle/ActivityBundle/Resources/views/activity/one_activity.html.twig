@@ -1,0 +1,104 @@
+{% extends 'SBCoreBundle::layout.html.twig' %}
+
+{% import 'SBUserBundle:Utils:user.html.twig' as user_macro %}
+
+{% block title %}
+    Voir une activité -
+{% endblock title %}
+
+{% block js %}
+    {% javascripts filter='?uglifyjs2'
+    'http://localhost:3000/faye/client.js'
+    'assets/external/libs/angular/angular.js'
+    'assets/external/libs/angular-send-feedback/dist/angular-send-feedback.js'
+    'assets/external/libs/autogrow-textarea/jquery.autogrowtextarea.min.js'
+    'assets/external/libs/remarkable-bootstrap-notify/bootstrap-notify.min.js'
+    'assets/external/libs/waypoints/lib/jquery.waypoints.min.js'
+    'assets/app/js/activity.js'
+    'assets/app/js/comments.js'
+    'assets/app/js/feedback.js'
+    %}
+    <script type="text/javascript" src="{{ asset_url }}"></script>
+    {% endjavascripts %}
+{% endblock js %}
+
+{% block body %}
+    <div class="row">
+        <div class="col-md-8 col-md-offset-2 activity" data-activity="{{ activity.id }}">
+            <div class="row activity-top">
+                <div class="col-xs-1">
+                    {{ user_macro.getAvatar(activity.user.avatar, 'activity') }}
+                </div>
+                <div class="col-xs-11 no-pr no-pl">
+                    <div class="col-xs-12 no-pl">
+                        <b>{{ activity.user.username }}</b>
+                        <div class="btn-group pull-right">
+                            <button type="button" class="btn btn-default btn-xs dropdown-toggle"
+                                    data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                <i class="fa fa-plus-circle" aria-hidden="true"></i>
+                            </button>
+                            <ul class="dropdown-menu dropdown-menu-right">
+                                <li><a href="#">Action</a></li>
+                                <li role="separator" class="divider"></li>
+                                <li><a href="#">Separated link</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="col-xs-12 activity-date no-pl">
+                        <em class="text-muted">{{ activity.dateActivity|date('d/m/Y') }}</em>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row activity-middle">
+                <div class="col-xs-12">
+                    <p>{{ activity.message|raw|nl2br }}</p>
+                    {% if not activity.image == null %}
+                        <img src="{{ asset('uploads/img/' ~ activity.image.name) }}" class="activity-image">
+                    {% endif %}
+                </div>
+            </div>
+
+            <div class="row activity-bottom">
+                <div class="col-xs-12">
+                    {% if activity.nbLikes < 2 %}
+                        {% set like_text = " J'aime" %}
+                    {% else %}
+                        {% set like_text = " J'aimes" %}
+                    {% endif %}
+
+                    {% if activity.likes|length > 0 %}
+                        {% set like_class = 'btn btn-success btn-xs btn-dislike' %}
+                    {% else %}
+                        {% set like_class = 'btn btn-primary btn-xs btn-like' %}
+                    {% endif %}
+
+                    <button type="button" class="{{ like_class }}">
+                        {{ activity.nbLikes ~ like_text }}
+                    </button>
+                    <span class="pull-right">
+                    {% if activity.nbComments < 2 %}
+                        {% set comment_text = " Commentaire" %}
+                    {% else %}
+                        {% set comment_text = " Commentaires" %}
+                    {% endif %}
+                        <button type="button" class="btn btn-primary btn-xs btn-show-comments"
+                                data-activity="{{ activity.id }}">
+                        {{ activity.nbComments ~ comment_text }}
+                    </button>
+                </span>
+                </div>
+            </div>
+
+            <div class="row activity-comments is_hidden"></div>
+
+            <div class="row activity-add-comment">
+            <textarea class="form-control autogrow" rows="1" placeholder="Ajoutez un commentaie"
+                      id="textareaAddComment"></textarea>
+                <button class="btn btn-default btn-xs btn-add-comment">
+                    <i class="fa fa-paper-plane" aria-hidden="true"></i>
+                </button>
+            </div>
+        </div>
+    </div>
+{% endblock %}
