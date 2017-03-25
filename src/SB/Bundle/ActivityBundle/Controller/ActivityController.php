@@ -72,4 +72,12 @@ class ActivityController extends Controller
         }
         return $this->createAccessDeniedException('Acces Denied');
     }
+
+    public function activityViewAction(Activity $activity)
+    {
+        return $this->render('SBActivityBundle:activity:one_activity.html.twig', array(
+            'activity'      => $activity,
+            'notifications' => $this->getUser()->getNotifications()
+        ));
+    }
 }

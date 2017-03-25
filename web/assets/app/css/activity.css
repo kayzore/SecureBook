@@ -37,9 +37,15 @@
 }
 .activity-comments .media {
     border-bottom:1px solid #ddd;
+    padding: 10px 0;
+    margin: 0;
 }
 .activity-comments .media:last-child {
     border-bottom: none;
+    padding-bottom: 0;
+}
+.activity-comments .media:first-child {
+    padding-top: 0;
 }
 .activity-add-comment {
     border-top:1px solid #ddd;

@@ -49,3 +49,12 @@ sb_activity_get_my_activity:
     options:
         expose: true
     defaults: { _controller: SBActivityBundle:Activity:getMyActivity }
+
+sb_activity_view:
+    path:     /voir-une-activite/{id}
+    methods: [GET]
+    options:
+        expose: true
+    defaults: { _controller: SBActivityBundle:Activity:activityView }
+    requirements:
+        id: \d+
