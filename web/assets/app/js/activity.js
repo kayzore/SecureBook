@@ -5,50 +5,24 @@ $(document).ready(function () {
         var type;
         if (message.type = 'like') {
             type = '<i class="fa fa-thumbs-up" aria-hidden="true"></i> ';
+            activities.user_receive_like();
         } else if (message.type = 'comment') {
             type = '<i class="fa fa-commenting-o" aria-hidden="true"></i> ';
         } else {
             type = '';
         }
-        $.notify({
-            message: type + message.text
-        }, {
-            type: "info",
-            allow_dismiss: true,
-            delay: 3000,
-            animate: {
-                enter: 'animated fadeInLeft',
-                exit: 'animated fadeOutLeft'
-            },
-            placement: {
-                from: "bottom",
-                align: "left"
-            }
-        });
+        user.new_notification(type, message)
     });
 
-    $(".autogrow").autoGrow();
+    activities.autogrow_add_activity();
+    comments.autogrow_comments();
 
-    $('#btnAddPictures').click(function () {
+    $(document).on('click', '#btnAddPictures', function () {
         $("#sb_activity_image_file").click();
     });
 
-    function readURL(input) {
-        if (input.files && input.files[0]) {
-            var reader = new FileReader();
-
-            reader.onload = function (e) {
-                $('#image-preview-input')
-                    .attr('src', e.target.result)
-                    .removeClass('hidden')
-                ;
-            };
-
-            reader.readAsDataURL(input.files[0]);
-        }
-    }
-    $("#sb_activity_image_file").change(function(){
-        readURL(this);
+    $(document).on('change', '#sb_activity_image_file', function () {
+        activities.form_add_preview_image(this);
     });
 
     $(document).on('click', '.btn-like', function(){

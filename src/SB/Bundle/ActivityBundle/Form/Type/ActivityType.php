@@ -20,7 +20,7 @@ class ActivityType extends AbstractType
                 'label'         => false,
                 'required'      => false,
                 'attr' => array(
-                    'class'         => 'form-control autogrow',
+                    'class'         => 'form-control autogrow-add-activity',
                     'placeholder'   => 'Publiez quelque chose !',
                     'id'            => 'textareaAddActu',
                     'name'          => 'activity_message'
