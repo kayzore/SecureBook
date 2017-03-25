@@ -12,19 +12,18 @@ class FeedbackController extends Controller
     public function addAction(Request $request)
     {
         /**
-         * @see https://github.com/newerton/feedback-html2canvas
-         * @see http://feedbacknow.tuyoshi.com.br/ (payant)
+         * @see https://github.com/jacobscarter/angular-feedback
          */
         if ($request->isXmlHttpRequest()) {
-            $result = json_decode($request->request->get('feedback'), true);
-            if (!empty($result)){
+            $result = json_decode($this->get("request")->getContent(), true);
+            if (!empty($result['feedback'])){
                 unset($result['html']);
                 $feedback = new Feedback();
                 $feedback->setUser($this->getUser());
-                $feedback->setBrowserData($result['browser']);
-                $feedback->setImgData($result['img']);
-                $feedback->setNote($result['note']);
-                $feedback->setUrl($result['url']);
+                $feedback->setBrowserData($result['feedback']['browser']);
+                $feedback->setImgData($result['feedback']['img']);
+                $feedback->setNote($result['feedback']['note']);
+                $feedback->setUrl($result['feedback']['url']);
                 $em = $this->getDoctrine()->getManager();
                 $em->persist($feedback);
                 $em->flush();
