@@ -106,64 +106,13 @@ $(document).ready(function () {
 
     $(document).on('click', '.btn-show-comments', function () {
         var comments_block = $(this.parentNode.parentNode.parentNode).next(),
-            id_activity;
-        if (comments_block.hasClass('open')) {
-            comments_block.slideUp('slow');
-        } else {
             id_activity = this.parentNode.parentNode.parentNode.parentNode.dataset.activity;
-            openCommentZone(comments_block, id_activity)
-        }
-        comments_block.toggleClass('open');
-        comments_block.toggleClass('is_hidden');
+        comments.showComments(comments_block, id_activity);
     });
-
-    function openCommentZone(comments_block, id_activity) {
-        comments_block.html('<p class="text-center">Chargement en cours <i class="fa fa-spinner fa-pulse fa-fw"></i></p>');
-        comments_block.slideDown('slow');
-
-        $.ajax({
-            url: Routing.generate('sb_activity_get_comments'),
-            method: 'post',
-            data: {id_activity: id_activity},
-            dataType: 'html',
-            success: function (comments) {
-                comments_block.html(comments);
-                if ($(comments_block).find('.nb-comments')[0].innerText > 3) {
-                    var route = Routing.generate('sb_activity_view', {id: id_activity});
-                    $(comments_block).prepend('<div class="row"><div class="col-xs-12 text-center"><a class="btn-link btn-show-more-comments" href="' + route + '">Voir plus</a></div></div>');
-                }
-            }
-        });
-    }
-
     $(document).on('click', '.btn-add-comment', function () {
         var btn_send = this,
             id_activity = this.parentNode.parentNode.dataset.activity,
             comment_text = $(this.previousElementSibling.previousElementSibling).val();
-
-        if (comment_text.length > 0) {
-            $(btn_send).append('<i class="fa fa-spinner fa-pulse fa-fw"></i>');
-            $.ajax({
-                url: Routing.generate('sb_activity_add_comment'),
-                method: 'post',
-                data: {comment_text: comment_text, id_activity: id_activity},
-                dataType: 'json',
-                success: function (result) {
-                    var btnComments = $($(btn_send.parentNode.parentNode).find('.btn-show-comments')[0]),
-                        textarea = $($(btn_send.parentNode).find('textarea')[0]),
-                        comments_block,
-                        id_activity;
-
-                    btnComments[0].innerText = result.activity_comments + ' Commentaires';
-                    $(btn_send).html('<i class="fa fa-paper-plane" aria-hidden="true"></i>');
-
-                    comments_block = $($(btn_send.parentNode.parentNode).find('.activity-comments')[0]);
-                    id_activity = $(btn_send.parentNode.parentNode)[0].dataset.activity;
-                    openCommentZone(comments_block, id_activity);
-                    $(textarea[0]).val('');
-                    $(".autogrow").autoGrow();
-                }
-            });
-        }
+        comments.addComment(comment_text, btn_send, id_activity);
     });
 });
