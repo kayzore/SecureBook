@@ -1,22 +1,4 @@
 $(document).ready(function () {
-    var client = new Faye.Client('http://localhost:3000/');
-
-    client.subscribe('/' + $('#username').text(), function (message) {
-        var type;
-        if (message.type = 'like') {
-            type = '<i class="fa fa-thumbs-up" aria-hidden="true"></i> ';
-            activities.user_receive_like();
-        } else if (message.type = 'comment') {
-            type = '<i class="fa fa-commenting-o" aria-hidden="true"></i> ';
-        } else {
-            type = '';
-        }
-        user.new_notification(type, message)
-    });
-
-    activities.autogrow_add_activity();
-    comments.autogrow_comments();
-
     $(document).on('click', '#btnAddPictures', function () {
         $("#sb_activity_image_file").click();
     });

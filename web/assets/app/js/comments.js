@@ -9,7 +9,15 @@ var comments = function () {
         openCommentZone,
         closeCommentZone,
         addComment,
-        autogrow_comments;
+        autogrow_comments,
+        init_comments;
+
+    /**
+     * Init comments functionality
+     */
+    init_comments = function () {
+        autogrow_comments();
+    };
 
     /**
      * TODO: Create the loadMoreComment system
@@ -112,6 +120,7 @@ var comments = function () {
     };
 
     return {
+        init_comments: init_comments,
         loadMoreComment: loadMoreComment,
         showComments: showComments,
         openCommentZone: openCommentZone,
