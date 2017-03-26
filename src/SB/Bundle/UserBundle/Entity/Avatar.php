@@ -35,6 +35,17 @@ class Avatar
      */
     private $file;
 
+    /**
+     * @var string
+     */
+    private $path;
+
+
+    public function __construct($path)
+    {
+        $this->path = $path;
+    }
+
 
     /**
      * Get id
@@ -85,7 +96,7 @@ class Avatar
 
     public function upload($username)
     {
-        $fileUpload = new FileUpload($this->file, $username);
+        $fileUpload = new FileUpload($this->file, $username, $this->path);
         $this->name = $fileUpload->upload();
     }
 

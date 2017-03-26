@@ -19,7 +19,7 @@ class ActivityController extends Controller
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
 
-            $this->container->get('sb_activity.activity')->addActivity($this->getUser(), $activity);
+            $this->container->get('sb_activity.activity')->addActivity($this->getUser(), $activity, $this->get('kernel')->getRootDir());
 
             return $this->redirectToRoute('sb_core_homepage');
         }
@@ -35,7 +35,7 @@ class ActivityController extends Controller
         if ($form->isSubmitted() && $form->isValid()) {
             $user = $this->getUser();
 
-            $activityService->addActivity($user, $activity);
+            $activityService->addActivity($user, $activity, $this->get('kernel')->getRootDir());
 
             return $this->redirectToRoute('sb_user_profil', array('slugUsername' => $user->getSlug()));
         }

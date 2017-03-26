@@ -20,7 +20,7 @@ class ProfilController extends Controller
         $form_add_activity = $this->container->get('sb_activity.activity')->getForm(new Activity(), 'sb_activity_profil_add');
         $em = $this->getDoctrine()->getManager();
         $activityRepository = $em->getRepository('SBActivityBundle:Activity');
-        $form_avatar = $this->createForm(AvatarType::class, new Avatar(), array(
+        $form_avatar = $this->createForm(AvatarType::class, new Avatar($this->get('kernel')->getRootDir()), array(
             'action' => $this->generateUrl('sb_user_profil_update_profil_avatar')
         ));
 

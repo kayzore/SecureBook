@@ -14,12 +14,17 @@ class FileUpload
      * @var string
      */
     private $username;
+    /**
+     * @var string
+     */
+    private $path;
 
 
-    public function __construct(UploadedFile $file, $username)
+    public function __construct(UploadedFile $file, $username, $path)
     {
-        $this->file = $file;
+        $this->file     = $file;
         $this->username = $username;
+        $this->path     = $path;
     }
 
     public function getFile()
@@ -53,6 +58,6 @@ class FileUpload
     protected function getUploadRootDir()
     {
         // On retourne le chemin relatif vers l'image pour notre code PHP
-        return __DIR__.'/../../../../../web/'.$this->getUploadDir();
+        return $this->path . '/../web/' . $this->getUploadDir();
     }
 }

@@ -57,13 +57,17 @@ class SBActivity
      * Add one activity
      * @param User $user
      * @param Activity $activity
+     * @param string $path
      */
-    public function addActivity(User $user, Activity $activity)
+    public function addActivity(User $user, Activity $activity, $path)
     {
         $activity->setUser($user);
 
         if (!is_null($activity->getImage()->getFile())) {
-            $activity->getImage()->upload($user->getUsername());
+            $activity->getImage()
+                ->setPath($path)
+                ->upload($user->getUsername())
+            ;
         } else {
             $activity->setImage(null);
         }

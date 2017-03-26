@@ -35,6 +35,11 @@ class Image
      */
     private $file;
 
+    /**
+     * @var string
+     */
+    private $path;
+
 
     /**
      * Get id
@@ -81,7 +86,14 @@ class Image
 
     public function upload($username)
     {
-        $fileUpload = new FileUpload($this->file, $username);
+        $fileUpload = new FileUpload($this->file, $username, $this->path);
         $this->name = $fileUpload->upload();
+    }
+
+    public function setPath($path)
+    {
+        $this->path = $path;
+
+        return $this;
     }
 }
