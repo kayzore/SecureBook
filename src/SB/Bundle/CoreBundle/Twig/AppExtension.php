@@ -8,9 +8,9 @@ class AppExtension extends \Twig_Extension
     public function getFilters()
     {
         return array(
-            'isSecure' => new \Twig_Filter_Method($this, 'isSecureFilter',
-                array('is_safe' => array('html'))
-            ),
+            new \Twig_SimpleFilter('isSecure', array($this, 'isSecureFilter'), array(
+                'is_safe' => array('html')
+            )),
         );
     }
 
