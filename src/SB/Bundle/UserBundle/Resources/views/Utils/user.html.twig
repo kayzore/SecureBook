@@ -40,3 +40,31 @@
     <img class="{{ class }}" src="{{ src }}" alt="{{ alt }}" {% if opts is defined %}{{ opts }}{% endif %}>
 {% endmacro %}
 
+{% macro getConfidentiality(confidentiality_field_value, confidentiality_field_text, text) %}
+    {% if confidentiality_field_value %}
+        {% set title = 'Visible' %}
+        {% set public = 'true' %}
+        {% set fa = '' %}
+    {% else %}
+        {% set title = 'Masqué' %}
+        {% set public = 'false' %}
+        {% set fa = '-slash' %}
+    {% endif %}
+    <span class="confidentiality" id="publicPrenom"
+          data-public="{{ public }}" data-zone="Prenom">
+        <i class="fa fa-eye{{ fa }}" aria-hidden="true" data-toggle="tooltip" title="{{ title }}"></i>
+    </span>
+    <span id="zonePrenom" data-zone="Prenom">
+        {{ text }} : <a href="#">{{ app.user.firstname }} <i class="fa fa-pencil" aria-hidden="true"></i></a>
+    </span>
+{% endmacro %}
+
+{% macro getUserProfilName() %}
+    {% if (not app.user.firstname == null or not app.user.firstname == '') and (not app.user.lastname == null or not app.user.lastname == '') %}
+        {% set user_profil_name = app.user.firstname ~ ' ' ~ app.user.lastname %}
+    {% else %}
+        {% set user_profil_name = app.user.username %}
+    {% endif %}
+    {{ user_profil_name }}
+{% endmacro %}
+

@@ -58,13 +58,8 @@
                         {{ user_macro.getAvatar(app.user.avatar, 'myProfil') }}
                     </div>
                     <div id="blocks-nav-profil">
-                        {% if (not app.user.firstname == null or not app.user.firstname == '') and (not app.user.lastname == null or not app.user.lastname == '') %}
-                            {% set user_profil_name = app.user.firstname ~ ' ' ~ app.user.lastname %}
-                        {% else %}
-                            {% set user_profil_name = app.user.username %}
-                        {% endif %}
                         <ul>
-                            <li><h4 id="zone-profil-name">{{ user_profil_name }}</h4></li>
+                            <li><h4 id="zone-profil-name">{{ user_macro.getUserProfilName() }}</h4></li>
                             <li>
                                 <a href="#" class="btn btn-infos" id="btnSubmitNewActu">
                                     <i class="fa fa-cogs" aria-hidden="true"></i> Mes paramètres
@@ -89,102 +84,27 @@
                                 <h4><i class="fa fa-info" aria-hidden="true"></i> Mes informations</h4>
                                 <div class="row">
                                     <div class="col-md-12">
-                                        {% if app.user.confidentiality.firstname %}
-                                            {% set title = 'Visible' %}
-                                            {% set public = 'true' %}
-                                            {% set fa = '' %}
-                                        {% else %}
-                                            {% set title = 'Masqué' %}
-                                            {% set public = 'false' %}
-                                            {% set fa = '-slash' %}
-                                        {% endif %}
-                                        <span class="confidentiality" id="publicPrenom"
-                                              data-public="{{ public }}" data-zone="Prenom">
-                                            <i class="fa fa-eye{{ fa }}" aria-hidden="true" data-toggle="tooltip" title="{{ title }}"></i>
-                                        </span>
-                                        <span id="zonePrenom" data-zone="Prenom">
-                                            Prenom : <a href="#">{{ app.user.firstname }} <i class="fa fa-pencil" aria-hidden="true"></i></a>
-                                        </span>
+                                        {{ user_macro.getConfidentiality(app.user.confidentiality.firstname, app.user.firstname, 'Prenom') }}
                                     </div>
                                 </div>
                                 <div class="row">
                                     <div class="col-md-12">
-                                        {% if app.user.confidentiality.lastname %}
-                                            {% set title = 'Visible' %}
-                                            {% set public = 'true' %}
-                                            {% set fa = '' %}
-                                        {% else %}
-                                            {% set title = 'Masqué' %}
-                                            {% set public = 'false' %}
-                                            {% set fa = '-slash' %}
-                                        {% endif %}
-                                        <span class="confidentiality" id="publicNom"
-                                              data-public="{{ public }}" data-zone="Nom">
-                                            <i class="fa fa-eye{{ fa }}" aria-hidden="true" data-toggle="tooltip" title="{{ title }}"></i>
-                                        </span>
-                                        <span id="zoneNom" data-zone="Nom">
-                                            Nom : <a href="#">{{ app.user.lastname }} <i class="fa fa-pencil" aria-hidden="true"></i></a>
-                                        </span>
+                                        {{ user_macro.getConfidentiality(app.user.confidentiality.lastname, app.user.lastname, 'Nom') }}
                                     </div>
                                 </div>
                                 <div class="row">
                                     <div class="col-md-12">
-                                        {% if app.user.confidentiality.pays %}
-                                            {% set title = 'Visible' %}
-                                            {% set public = 'true' %}
-                                            {% set fa = '' %}
-                                        {% else %}
-                                            {% set title = 'Masqué' %}
-                                            {% set public = 'false' %}
-                                            {% set fa = '-slash' %}
-                                        {% endif %}
-                                        <span class="confidentiality" id="publicPays"
-                                              data-public="{{ public }}" data-zone="Pays">
-                                            <i class="fa fa-eye{{ fa }}" aria-hidden="true" data-toggle="tooltip" title="{{ title }}"></i>
-                                        </span>
-                                        <span id="zonePays" data-zone="Pays">
-                                            Pays : <a href="#">{{ app.user.pays }} <i class="fa fa-pencil" aria-hidden="true"></i></a>
-                                        </span>
+                                        {{ user_macro.getConfidentiality(app.user.confidentiality.pays, app.user.pays, 'Pays') }}
                                     </div>
                                 </div>
                                 <div class="row">
                                     <div class="col-md-12">
-                                        {% if app.user.confidentiality.region %}
-                                            {% set title = 'Visible' %}
-                                            {% set public = 'true' %}
-                                            {% set fa = '' %}
-                                        {% else %}
-                                            {% set title = 'Masqué' %}
-                                            {% set public = 'false' %}
-                                            {% set fa = '-slash' %}
-                                        {% endif %}
-                                        <span class="confidentiality" id="publicRegion"
-                                              data-public="{{ public }}" data-zone="Region">
-                                            <i class="fa fa-eye{{ fa }}" aria-hidden="true" data-toggle="tooltip" title="{{ title }}"></i>
-                                        </span>
-                                        <span id="zoneRegion" data-zone="Region">
-                                            Region : <a href="#">{{ app.user.region }} <i class="fa fa-pencil" aria-hidden="true"></i></a>
-                                        </span>
+                                        {{ user_macro.getConfidentiality(app.user.confidentiality.region, app.user.region, 'Region') }}
                                     </div>
                                 </div>
                                 <div class="row">
                                     <div class="col-md-12">
-                                        {% if app.user.confidentiality.ville %}
-                                            {% set title = 'Visible' %}
-                                            {% set public = 'true' %}
-                                            {% set fa = '' %}
-                                        {% else %}
-                                            {% set title = 'Masqué' %}
-                                            {% set public = 'false' %}
-                                            {% set fa = '-slash' %}
-                                        {% endif %}
-                                        <span class="confidentiality" id="publicVille"
-                                              data-public="{{ public }}" data-zone="Ville">
-                                            <i class="fa fa-eye{{ fa }}" aria-hidden="true" data-toggle="tooltip" title="{{ title }}"></i>
-                                        </span>
-                                        <span id="zoneVille" data-zone="Ville">
-                                            Ville : <a href="#">{{ app.user.ville }} <i class="fa fa-pencil" aria-hidden="true"></i></a>
-                                        </span>
+                                        {{ user_macro.getConfidentiality(app.user.confidentiality.ville, app.user.ville, 'Ville') }}
                                     </div>
                                 </div>
                             </div>
