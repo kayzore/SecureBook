@@ -3,6 +3,8 @@ rules:
         enabled: false
     twig.twig_syntax_error:
         enabled: false
+    symfony.dependency_injection.no_container_as_parameter:
+        enabled: false
 
 global_exclude_dirs:
     - src/SB/Bundle/ActivityBundle/Utils
