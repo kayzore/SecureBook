@@ -11,3 +11,8 @@ services:
         arguments:
             - '@sb_realtime.faye.adapter'
             - '%sb_realtime.faye.endpoint%'
+    app.twig_extension:
+        class: SB\Bundle\CoreBundle\Twig\AppExtension
+        public: false
+        tags:
+            - { name: twig.extension }
