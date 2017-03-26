@@ -18,4 +18,12 @@ class AppExtension extends \Twig_Extension
     {
         return nl2br($message);
     }
+
+    /**
+     * @return string
+     */
+    public function getName()
+    {
+        return 'SBExtension';
+    }
 }
