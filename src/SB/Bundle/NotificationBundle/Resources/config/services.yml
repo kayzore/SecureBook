@@ -1,4 +1,4 @@
 services:
-#    sb_notification.example:
-#        class: SB\NotificationBundle\Example
-#        arguments: [@service_id, "plain_value", %parameter%]
+    sb_notification.notification:
+        class: SB\Bundle\NotificationBundle\Utils\Notification
+        arguments: ['@doctrine.orm.default_entity_manager']

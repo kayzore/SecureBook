@@ -76,14 +76,12 @@ class ActivityController extends Controller
     public function activityViewAction(Activity $activity)
     {
         $em = $this->getDoctrine()->getManager();
-
+        $notifService = $this->container->get('sb_notification.notification');
         $notifications = $em->getRepository('SBNotificationBundle:Notification')->findBy(array('activity' => $activity));
         if (count($notifications) > 0) {
             foreach ($notifications as $notification) {
-                $notification->setView(true);
-                $em->persist($notification);
+                $notifService->setNotificationView($notification, true);
             }
-            $em->flush();
         }
         $comments = $em->getRepository('SBActivityBundle:Comment')->fetchAll($activity, 6);
         $nb_comments = $em->getRepository('SBActivityBundle:Comment')->countAll($activity->getId());
