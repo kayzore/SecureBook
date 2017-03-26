@@ -15,42 +15,11 @@ class LikeController extends Controller
         if ($request->isXmlHttpRequest()) {
             $id_activity = $request->request->get('id_activity');
             $user = $this->getUser();
+            $activity_likes = $this->container->get('sb_activity.like')->addLike($id_activity, $user);
 
-            $em = $this->getDoctrine()->getManager();
-            $activity = $em->getRepository('SBActivityBundle:Activity')->findOneBy(array('id' => $id_activity));
-
-            $like = $em->getRepository('SBActivityBundle:Likes')->findOneBy(array(
-                'user' => $user,
-                'activity' => $activity
-            ));
-
-            if (is_null($like)) {
-                $activity->addOneLike();
-
-                $likes = new Likes();
-                $likes->setActivity($activity);
-                $likes->setUser($user);
-
-                if ($user->getUsername() != $activity->getUser()->getUsername()) {
-                    $faye = $this->container->get('sb_realtime.faye.client');
-                    $channel = '/' . $activity->getUser()->getUsername();
-                    $data    = array('type' => 'like', 'text' => $user->getUsername() . ' aime une de vos actualité');
-                    $faye->send($channel, $data);
-                    $notification = new Notification();
-                    $notification->setUserFrom($user);
-                    $notification->setUserTo($activity->getUser());
-                    $notification->setActivity($activity);
-                    $notification->setType('like');
-                    $em->persist($notification);
-                }
-                $em->persist($likes);
-                $em->persist($activity);
-                $em->flush();
-            }
-            $activity_likes = $activity->getNbLikes();
             return new JsonResponse(array('activity_likes' => $activity_likes));
         }
-        return $this->createAccessDeniedException('Acces Denied');
+        return $this->redirectToRoute('sb_core_homepage');
     }
 
     public function dislikeAction(Request $request)

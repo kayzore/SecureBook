@@ -8,3 +8,6 @@ services:
     sb_activity.comment:
         class: SB\Bundle\ActivityBundle\Utils\SBComment
         arguments: ["@doctrine.orm.default_entity_manager", "sb_realtime.faye.client"]
+    sb_activity.like:
+        class: SB\Bundle\ActivityBundle\Utils\SBLike
+        arguments: ["@doctrine.orm.default_entity_manager", "sb_realtime.faye.client"]
