@@ -6,8 +6,11 @@
 var comments = function () {
     var loadMoreComment,
         showComments,
+        showCommentsForOneActivity,
+        showMoreCommentsForOneActivity,
         openCommentZone,
         closeCommentZone,
+        displayNewComments,
         addComment,
         autogrow_comments,
         init_comments;
@@ -43,18 +46,38 @@ var comments = function () {
         if (comments_block.hasClass('open')) {
             closeCommentZone(comments_block);
         } else {
-            openCommentZone(comments_block, id_activity);
+            openCommentZone(comments_block, id_activity, '');
         }
         comments_block.toggleClass('open');
         comments_block.toggleClass('is_hidden');
     };
 
     /**
+     * Show or hide a list of comments for the one activity page
+     * @param comments_block
+     * @param id_activity
+     * @param page
+     */
+    showCommentsForOneActivity = function (comments_block, id_activity, page) {
+        if (comments_block.hasClass('open')) {
+            closeCommentZone(comments_block);
+        } else {
+            openCommentZone(comments_block, id_activity, page);
+        }
+        comments_block.toggleClass('open');
+        comments_block.toggleClass('is_hidden');
+    };
+
+    showMoreCommentsForOneActivity = function () {
+    };
+
+    /**
      * Open a comment zone and display the list of comment
      * @param comments_block
      * @param id_activity
+     * @param page
      */
-    openCommentZone = function (comments_block, id_activity) {
+    openCommentZone = function (comments_block, id_activity, page) {
         comments_block.html('<p class="text-center">Chargement en cours <i class="fa fa-spinner fa-pulse fa-fw"></i></p>');
         comments_block.slideDown('slow');
 
@@ -64,13 +87,40 @@ var comments = function () {
             data: {id_activity: id_activity},
             dataType: 'html',
             success: function (comments) {
-                comments_block.html(comments);
-                if ($(comments_block).find('.nb-comments')[0].innerText > 3) {
-                    var route = Routing.generate('sb_activity_view', {id: id_activity});
-                    $(comments_block).prepend('<div class="row"><div class="col-xs-12 text-center"><a class="btn-link btn-show-more-comments" href="' + route + '">Voir plus</a></div></div>');
-                }
+                displayNewComments(comments_block, comments, page, id_activity);
             }
         });
+    };
+
+    /**
+     * Display on page a list of comments
+     * @param comments_block
+     * @param new_comments
+     * @param page
+     * @param id_activity
+     */
+    displayNewComments = function (comments_block, new_comments, page, id_activity) {
+        comments_block.html(new_comments);
+        if ($(comments_block).find('.nb-comments')[0].innerText > 3) {
+            if (page == '') {
+                var route = Routing.generate('sb_activity_view', {id: id_activity});
+                $(comments_block).prepend(''
+                    + '<div class="row">'
+                        + '<div class="col-xs-12 text-center">'
+                            + '<a class="btn-link btn-show-more-comments" href="' + route + '">Voir plus</a>'
+                        + '</div>'
+                    + '</div>'
+                );
+            } else if (page == 'one_activity') {
+                $(comments_block).prepend(''
+                    + '<div class="row">'
+                        + '<div class="col-xs-12 text-center">'
+                            + '<button class="btn-link btn-show-more-comments" href="#">Voir plus</button>'
+                        + '</div>'
+                    + '</div>'
+                );
+            }
+        }
     };
 
     /**
@@ -123,6 +173,8 @@ var comments = function () {
         init_comments: init_comments,
         loadMoreComment: loadMoreComment,
         showComments: showComments,
+        showCommentsForOneActivity: showCommentsForOneActivity,
+        showMoreCommentsForOneActivity: showMoreCommentsForOneActivity,
         openCommentZone: openCommentZone,
         closeCommentZone: closeCommentZone,
         addComment: addComment,
