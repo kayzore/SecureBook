@@ -32,7 +32,7 @@ class SBComment
      * @param User $user
      * @return string|int
      */
-    public function addComment($comment_text, $activity_id, $user)
+    public function addComment($comment_text, $activity_id, User $user)
     {
         $activity = $this->em->getRepository('SBActivityBundle:Activity')->findOneBy(array('id' => $activity_id));
 
