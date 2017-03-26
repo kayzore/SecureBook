@@ -1,4 +1,3 @@
 securebook
 ==========
-
-A Symfony project created on March 21, 2017, 6:29 pm.
+[![SensioLabsInsight](https://insight.sensiolabs.com/projects/10fb30ff-0f55-4627-8fcb-791bb3301221/big.png)](https://insight.sensiolabs.com/projects/10fb30ff-0f55-4627-8fcb-791bb3301221)
