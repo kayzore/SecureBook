@@ -47,8 +47,7 @@
             <div class="col-md-12">
                 <article class="no-padding">
                     <div id="blocks-couverture">
-                        <img src="http://www.photo-paysage.com/images_accueil/Plus-belles-photos-de-nature.jpg"
-                             class="img-responsive" id="currentCover" alt="Image couverture">
+                        {{ user_macro.getCover(app.user.cover, 'myProfil') }}
                         <span>
                             <i class="fa fa-pencil-square fa-3x" aria-hidden="true" data-toggle="modal"
                                data-target="#modalCover"></i>

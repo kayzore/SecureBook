@@ -1,3 +1,27 @@
+{% macro getCover(entity_field, type, opts) %}
+    {% import _self as userMacro %}
+    {{ userMacro.getCoverProfil(entity_field, type, opts) }}
+{% endmacro %}
+
+{% macro getCoverProfil(entity_field, type, opts) %}
+    {% import _self as userMacro %}
+    {% if type == 'myProfil' %}
+        {% if not entity_field == null %}
+            {% set cover_name = asset('uploads/img/' ~ entity_field.name) %}
+        {% else %}
+            {% set cover_name = asset('assets/app/img/img_cover.jpg') %}
+        {% endif %}
+
+        {% set opts_string = '' %}
+        {% if not opts == 'inModal' %}
+            {% set opts_string = ' id="currentCover"' %}
+        {% endif %}
+        {{ userMacro.getImg('img-responsive', cover_name, 'Couverture', opts_string) }}
+    {% elseif type == 'friendProfil' %}
+
+    {% endif %}
+{% endmacro %}
+
 {% macro getAvatar(entity_field, type, opts) %}
     {% import _self as userMacro %}
     {% if  type == 'activity' %}
@@ -20,7 +44,7 @@
         {% if not opts == 'inModal' %}
             {% set opts_string = ' data-toggle=modal data-target=#modalAvatar' %}
         {% endif %}
-        {{ userMacro.getImg('img-circle img-thumbnail currentAvatar center-block', avatar_name, 'Image couverture', opts_string) }}
+        {{ userMacro.getImg('img-circle img-thumbnail currentAvatar center-block', avatar_name, 'Avatar', opts_string) }}
     {% elseif type == 'friendProfil' %}
 
     {% endif %}

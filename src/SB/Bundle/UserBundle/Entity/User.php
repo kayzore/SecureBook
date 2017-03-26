@@ -115,6 +115,12 @@ class User implements UserInterface
      */
     private $avatar;
 
+    /**
+     * @ORM\OneToOne(targetEntity="SB\Bundle\UserBundle\Entity\Cover")
+     * @ORM\JoinColumn(nullable=true)
+     */
+    private $cover;
+
 
     /**
      * Constructor
@@ -464,5 +470,29 @@ class User implements UserInterface
     public function getAvatar()
     {
         return $this->avatar;
+    }
+
+    /**
+     * Set cover
+     *
+     * @param \SB\Bundle\UserBundle\Entity\Cover $cover
+     *
+     * @return User
+     */
+    public function setCover(Cover $cover = null)
+    {
+        $this->cover = $cover;
+
+        return $this;
+    }
+
+    /**
+     * Get cover
+     *
+     * @return \SB\Bundle\UserBundle\Entity\Cover
+     */
+    public function getCover()
+    {
+        return $this->cover;
     }
 }
