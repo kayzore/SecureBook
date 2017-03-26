@@ -34,7 +34,7 @@
 
             <div class="row activity-middle">
                 <div class="col-xs-12">
-                    <p>{{ activity.message|raw|nl2br }}</p>
+                    <p>{{ activity.message|isSecure }}</p>
                     {% if not activity.image == null %}
                         <img src="{{ asset('uploads/img/' ~ activity.image.name) }}" class="activity-image">
                     {% endif %}

@@ -8,6 +8,9 @@ use Symfony\Component\HttpFoundation\Request;
 
 class ActivityController extends Controller
 {
+    /**
+     * TODO: Trim and sanitize message before flush entity
+     */
     public function addActivityAction(Request $request)
     {
         $activityService = $this->container->get('sb_activity.activity');

@@ -18,7 +18,7 @@
             <a href="{{ path('sb_user_profil', {slugUsername: comment.user.slug}) }}">
                 <b class="media-heading">{{ comment.user.username }}</b>
             </a> <em class="text-muted">{{ comment.dateComment|date('d/m/Y H:i:s') }}</em>
-            <p>{{ comment.text|raw|nl2br }}</p>
+            <p>{{ comment.text|isSecure }}</p>
         </div>
     </div>
 {% else %}
