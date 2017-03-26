@@ -1,20 +1,24 @@
-{% for notification in notifications %}
+{% import 'SBUserBundle:Utils:user.html.twig' as user_macro %}
+
+{% for notification in notifications|reverse %}
     <div class="row">
         <div class="col-md-12 notification {% if notification.view == false %}not-view{% endif %}">
-            <div class="col-md-3">
-                <img class="img-circle center-block" src="https://dummyimage.com/40x40/c9c9c9/000000" alt="...">
-            </div>
-            <div class="col-md-9">
-                <p class="no-margin">
-                    <b>{{ notification.userFrom.username }}</b>
-                    {% if notification.type == 'like' %}
-                        à aimé votre actualité
-                    {% else %}
-                        à commenté votre actualité
-                    {% endif %}
-                    <span class="pull-right"><i class="fa fa-eye" aria-hidden="true"></i></span>
-                </p>
-            </div>
+            <a href="{{ path('sb_activity_view', {id: notification.activity.id}) }}">
+                <div class="col-md-3">
+                    {{ user_macro.getAvatar(notification.userFrom.avatar, 'activity') }}
+                </div>
+                <div class="col-md-9">
+                    <p class="no-margin">
+                        <b>{{ notification.userFrom.username }}</b>
+                        {% if notification.type == 'like' %}
+                            aime votre actualité
+                        {% else %}
+                            a commenté votre actualité
+                        {% endif %}
+                        <span class="pull-right"><i class="fa fa-eye" aria-hidden="true"></i></span>
+                    </p>
+                </div>
+            </a>
         </div>
     </div>
 {% endfor %}

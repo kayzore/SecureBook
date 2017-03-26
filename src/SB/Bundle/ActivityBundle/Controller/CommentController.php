@@ -30,7 +30,7 @@ class CommentController extends Controller
             if ($user->getUsername() != $activity->getUser()->getUsername()) {
                 $faye = $this->container->get('sb_realtime.faye.client');
                 $channel = '/' . $activity->getUser()->getUsername();
-                $data    = array('type' => 'comment', 'text' => $user->getUsername() . ' à commenté une de vos actualité');
+                $data    = array('type' => 'comment', 'text' => $user->getUsername() . ' a commenté une de vos actualité');
                 $faye->send($channel, $data);
 
                 $notification = new Notification();
@@ -59,7 +59,7 @@ class CommentController extends Controller
             $em = $this->getDoctrine()->getManager();
             $comments = $em->getRepository('SBActivityBundle:Comment')->fetchAll($activity_id, 3);
             $comments = array_reverse($comments);
-            $nb_comments = $em->getRepository('SBActivityBundle:Comment')->countAll($activity_id, 3);
+            $nb_comments = $em->getRepository('SBActivityBundle:Comment')->countAll($activity_id);
 
             return $this->render('SBActivityBundle:comments:comment.html.twig', array(
                 'comments'      => $comments,

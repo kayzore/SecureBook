@@ -77,6 +77,14 @@ class ActivityController extends Controller
     {
         $em = $this->getDoctrine()->getManager();
 
+        $notifications = $em->getRepository('SBNotificationBundle:Notification')->findBy(array('activity' => $activity));
+        if (count($notifications) > 0) {
+            foreach ($notifications as $notification) {
+                $notification->setView(true);
+                $em->persist($notification);
+            }
+            $em->flush();
+        }
         $comments = $em->getRepository('SBActivityBundle:Comment')->fetchAll($activity, 6);
         $nb_comments = $em->getRepository('SBActivityBundle:Comment')->countAll($activity->getId());
 
