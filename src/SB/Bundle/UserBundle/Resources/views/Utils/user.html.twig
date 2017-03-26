@@ -51,11 +51,11 @@
         {% set fa = '-slash' %}
     {% endif %}
     <span class="confidentiality" id="publicPrenom"
-          data-public="{{ public }}" data-zone="Prenom">
+          data-public="{{ public }}" data-zone="{{ text|title }}">
         <i class="fa fa-eye{{ fa }}" aria-hidden="true" data-toggle="tooltip" title="{{ title }}"></i>
     </span>
-    <span id="zonePrenom" data-zone="Prenom">
-        {{ text }} : <a href="#">{{ app.user.firstname }} <i class="fa fa-pencil" aria-hidden="true"></i></a>
+    <span id="zone{{ text }}" data-zone="{{ text|title }}">
+        {{ text }} : <a href="#">{{ confidentiality_field_text }} <i class="fa fa-pencil" aria-hidden="true"></i></a>
     </span>
 {% endmacro %}
 

@@ -2,3 +2,6 @@ services:
     sb_user.friend:
         class: SB\Bundle\UserBundle\Utils\SBFriend
         arguments: ["@doctrine.orm.default_entity_manager"]
+    sb_user.user:
+        class: SB\Bundle\UserBundle\Utils\SBUser
+        arguments: ["@doctrine.orm.default_entity_manager"]
