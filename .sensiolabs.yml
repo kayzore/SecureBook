@@ -3,3 +3,8 @@ rules:
         enabled: false
     twig.twig_syntax_error:
         enabled: false
+
+global_exclude_dirs:
+    - src/SB/Bundle/ActivityBundle/Utils
+    - src/SB/Bundle/NotificationBundle/Utils
+    - src/SB/Bundle/UserBundle/Utils
