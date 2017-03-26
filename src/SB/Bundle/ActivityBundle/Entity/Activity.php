@@ -308,4 +308,66 @@ class Activity
     {
         return $this->nb_comments;
     }
+
+    /**
+     * Set nbLikes
+     *
+     * @param integer $nbLikes
+     *
+     * @return Activity
+     */
+    public function setNbLikes($nbLikes)
+    {
+        $this->nb_likes = $nbLikes;
+
+        return $this;
+    }
+
+    /**
+     * Set nbComments
+     *
+     * @param integer $nbComments
+     *
+     * @return Activity
+     */
+    public function setNbComments($nbComments)
+    {
+        $this->nb_comments = $nbComments;
+
+        return $this;
+    }
+
+    /**
+     * Add comment
+     *
+     * @param \SB\Bundle\ActivityBundle\Entity\Comment $comment
+     *
+     * @return Activity
+     */
+    public function addComment(Comment $comment)
+    {
+        $this->comments[] = $comment;
+
+        return $this;
+    }
+
+    /**
+     * Remove comment
+     *
+     * @param \SB\Bundle\ActivityBundle\Entity\Comment $comment
+     */
+    public function removeComment(Comment $comment)
+    {
+        $this->comments->removeElement($comment);
+    }
+
+    /**
+     * Get comments
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getComments()
+    {
+        return $this->comments;
+    }
 }
