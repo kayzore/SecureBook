@@ -3,7 +3,6 @@
 namespace SB\Bundle\UserBundle\Controller;
 
 use SB\Bundle\ActivityBundle\Entity\Activity;
-use SB\Bundle\ActivityBundle\Form\Type\ActivityType;
 use SB\Bundle\UserBundle\Entity\Avatar;
 use SB\Bundle\UserBundle\Form\Type\AvatarType;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;

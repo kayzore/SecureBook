@@ -3,7 +3,6 @@
 namespace SB\Bundle\CoreBundle\Controller;
 
 use SB\Bundle\ActivityBundle\Entity\Activity;
-use SB\Bundle\ActivityBundle\Form\Type\ActivityType;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 
 class CoreController extends Controller
