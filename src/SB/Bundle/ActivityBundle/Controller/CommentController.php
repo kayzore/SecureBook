@@ -67,7 +67,7 @@ class CommentController extends Controller
                 'ajax'          => true
             ));
         }
-        return $this->createAccessDeniedException('Acces Denied');
+        return $this->redirectToRoute('sb_core_homepage');
     }
 
     public function activityGetMoreCommentsAction(Request $request)
@@ -87,6 +87,6 @@ class CommentController extends Controller
                 'ajax'          => true
             ));
         }
-        return $this->createAccessDeniedException('Acces Denied');
+        return $this->redirectToRoute('sb_core_homepage');
     }
 }

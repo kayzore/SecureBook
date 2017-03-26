@@ -53,7 +53,7 @@ class ActivityController extends Controller
                 ));
             }
         }
-        return $this->createAccessDeniedException('Acces Denied');
+        return $this->redirectToRoute('sb_core_homepage');
     }
 
     public function getMyActivityAction(Request $request)
@@ -70,7 +70,7 @@ class ActivityController extends Controller
                 ));
             }
         }
-        return $this->createAccessDeniedException('Acces Denied');
+        return $this->redirectToRoute('sb_core_homepage');
     }
 
     public function activityViewAction(Activity $activity)
