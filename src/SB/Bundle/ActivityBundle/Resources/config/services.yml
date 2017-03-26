@@ -5,3 +5,6 @@ services:
     sb_activity.activity:
         class: SB\Bundle\ActivityBundle\Utils\SBActivity
         arguments: ["@form.factory", "@router", "@doctrine.orm.default_entity_manager"]
+    sb_activity.comment:
+        class: SB\Bundle\ActivityBundle\Utils\SBComment
+        arguments: ["@doctrine.orm.default_entity_manager", "sb_realtime.faye.client"]
