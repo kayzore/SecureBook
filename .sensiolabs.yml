@@ -7,6 +7,7 @@ rules:
         enabled: false
 
 global_exclude_dirs:
-    - src/SB/Bundle/ActivityBundle/Utils
-    - src/SB/Bundle/NotificationBundle/Utils
-    - src/SB/Bundle/UserBundle/Utils
+    - src/SB/Bundle/ActivityBundle/Resources/views/Utils
+    - src/SB/Bundle/NotificationBundle/Resources/views/Utils
+    - src/SB/Bundle/UserBundle/Resources/views/Utils
+
