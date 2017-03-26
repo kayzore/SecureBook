@@ -74,6 +74,9 @@ class SBUser
                 case 'ville':
                     $user->getConfidentiality()->setVille($new_value);
                     break;
+                case 'avatar':
+                    $user->getConfidentiality()->setAvatar($new_value);
+                    break;
             }
         }
         $this->em->persist($user);

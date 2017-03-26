@@ -12,6 +12,8 @@ $(document).ready(function () {
 
     $(document).on('change', '#btn-toggle-avatar-visibility', function () {
         console.log('Toggle: ' + $(this).prop('checked'))
+
+        saveConfidentiality('avatar', $(this).prop('checked'), null);
     });
 
     $('#blocks-user-information div .confidentiality i').click(function () {
@@ -33,14 +35,14 @@ $(document).ready(function () {
             dataType: 'json',
             success: function (result) {
                 if (result.result == true) {
-                    if (new_value) {
+                    if (new_value && fa != null) {
                         $(fa)
                             .removeClass('fa-eye-slash')
                             .addClass('fa-eye')
                             .attr('title', 'Visible')
                         ;
                         fa.parentNode.dataset.public = 'true';
-                    } else if (!new_value) {
+                    } else if (!new_value && fa != null) {
                         $(fa)
                             .removeClass('fa-eye')
                             .addClass('fa-eye-slash')
@@ -136,7 +138,7 @@ $(document).ready(function () {
                     break;
             }
             type = zone_value.toLowerCase();
-            saveInformation(type, new_value, btnCancel, type);
+            saveInformation(type, new_value, btnCancel);
         }
     });
 
@@ -145,9 +147,9 @@ $(document).ready(function () {
      * @param champ
      * @param new_value
      * @param btnCancel
-     * @param type
      */
-    function saveInformation(champ, new_value, btnCancel, type) {
+    function saveInformation(champ, new_value, btnCancel) {
+        var type = champ;
         $.ajax({
             url: Routing.generate('sb_user_profil_update_profil'),
             method: 'post',
@@ -162,7 +164,9 @@ $(document).ready(function () {
                             .fadeIn('slow')
                         ;
                     }
-                    $(btnCancel).click();
+                    if (btnCancel != null) {
+                        $(btnCancel).click();
+                    }
                 } else {
                     console.log('error')
                 }

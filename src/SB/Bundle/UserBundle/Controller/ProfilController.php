@@ -49,7 +49,7 @@ class ProfilController extends Controller
 
             return new JsonResponse(array('result' => true));
         }
-        return $this->createAccessDeniedException('Acces Denied');
+        return $this->redirectToRoute('sb_core_homepage');
     }
 
     public function updateProfilConfidentialityAction(Request $request)
@@ -61,7 +61,7 @@ class ProfilController extends Controller
 
             return new JsonResponse(array('result' => true));
         }
-        return $this->createAccessDeniedException('Acces Denied');
+        return $this->redirectToRoute('sb_core_homepage');
     }
 
     public function updateProfilAvatarAction(Request $request)
@@ -85,6 +85,6 @@ class ProfilController extends Controller
 
             return $this->redirectToRoute('sb_user_profil', array('slugUsername' => $user->getSlug()));
         }
-        return $this->createAccessDeniedException('Acces Denied');
+        return $this->redirectToRoute('sb_core_homepage');
     }
 }
