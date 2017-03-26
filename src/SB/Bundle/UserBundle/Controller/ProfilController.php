@@ -16,7 +16,7 @@ class ProfilController extends Controller
     {
         $user = $this->getUser();
         if ($user->getSlug() != $slugUsername) {
-            $this->friendProfilAction($slugUsername);
+            return $this->friendProfilAction($slugUsername);
         }
         $form_add_activity = $this->container->get('sb_activity.activity')->getForm(new Activity(), 'sb_activity_profil_add');
         $em = $this->getDoctrine()->getManager();
