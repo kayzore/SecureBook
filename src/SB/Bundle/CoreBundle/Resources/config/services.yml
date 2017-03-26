@@ -4,5 +4,3 @@ services:
         public: true
         tags:
             -  { name: twig.extension }
-    twig.extension.actions:
-        class: SB\Bundle\CoreBundle\Twig\NullExtension

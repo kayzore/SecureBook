@@ -1,3 +1,5 @@
 rules:
     composer.warning:
         enabled: false
+    twig.twig_syntax_error:
+        enabled: false
