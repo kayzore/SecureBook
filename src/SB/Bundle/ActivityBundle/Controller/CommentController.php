@@ -19,39 +19,11 @@ class CommentController extends Controller
             $comment_text = $request->request->get('comment_text');
             $activity_id = $request->request->get('id_activity');
             $user = $this->getUser();
+            $activity_comments = $this->container->get('sb_activity.comment')->addComment($comment_text, $activity_id, $user);
 
-            $em = $this->getDoctrine()->getManager();
-            $activity = $em->getRepository('SBActivityBundle:Activity')->findOneBy(array('id' => $activity_id));
-
-            $activity->addOneComment();
-
-            $comment = new Comment();
-            $comment->setActivity($activity);
-            $comment->setUser($user);
-            $comment->setText($comment_text);
-
-            if ($user->getUsername() != $activity->getUser()->getUsername()) {
-                $faye = $this->container->get('sb_realtime.faye.client');
-                $channel = '/' . $activity->getUser()->getUsername();
-                $data    = array('type' => 'comment', 'text' => $user->getUsername() . ' a commenté une de vos actualité');
-                $faye->send($channel, $data);
-
-                $notification = new Notification();
-                $notification->setUserFrom($user);
-                $notification->setUserTo($activity->getUser());
-                $notification->setActivity($activity);
-                $notification->setType('comment');
-                $em->persist($notification);
-            }
-
-            $em->persist($activity);
-            $em->persist($comment);
-            $em->flush();
-
-            $activity_comments = $activity->getNbComments();
             return new JsonResponse(array('activity_comments' => $activity_comments));
         }
-        return $this->createAccessDeniedException('Acces Denied');
+        return $this->redirectToRoute('sb_core_homepage');
     }
 
     public function activityGetCommentAction(Request $request)
