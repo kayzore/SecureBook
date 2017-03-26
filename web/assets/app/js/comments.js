@@ -23,21 +23,6 @@ var comments = function () {
     };
 
     /**
-     * TODO: Create the loadMoreComment system
-     * @param id_activity
-     */
-    loadMoreComment = function (id_activity) {
-        $.ajax({
-            url: Routing.generate(''),
-            methode: 'get',
-            dataType: 'html',
-            success: function (comments) {
-                console.log(comments)
-            }
-        });
-    };
-
-    /**
      * Show or hide a list of comments
      * @param comments_block
      * @param id_activity
@@ -68,7 +53,22 @@ var comments = function () {
         comments_block.toggleClass('is_hidden');
     };
 
-    showMoreCommentsForOneActivity = function () {
+    showMoreCommentsForOneActivity = function (comments_block, id_activity, id_first_comment) {
+        var nb_comment = $(comments_block).find('.media').length;
+
+        if ($(comments_block).find('.nb-comments')[0].innerText != nb_comment) {
+            $(comments_block).prepend('<p class="text-center loading-comment">Chargement en cours <i class="fa fa-spinner fa-pulse fa-fw"></i></p>');
+
+            $.ajax({
+                url: Routing.generate('sb_activity_get_more_comments'),
+                method: 'post',
+                data: {id_activity: id_activity, id_comment: id_first_comment},
+                dataType: 'html',
+                success: function (comments) {
+                    displayNewComments(comments_block, comments, 'one_activity', id_activity);
+                }
+            });
+        }
     };
 
     /**
@@ -78,7 +78,7 @@ var comments = function () {
      * @param page
      */
     openCommentZone = function (comments_block, id_activity, page) {
-        comments_block.html('<p class="text-center">Chargement en cours <i class="fa fa-spinner fa-pulse fa-fw"></i></p>');
+        comments_block.html('<p class="text-center loading-comment">Chargement en cours <i class="fa fa-spinner fa-pulse fa-fw"></i></p>');
         comments_block.slideDown('slow');
 
         $.ajax({
@@ -100,12 +100,13 @@ var comments = function () {
      * @param id_activity
      */
     displayNewComments = function (comments_block, new_comments, page, id_activity) {
-        comments_block.html(new_comments);
+        $(comments_block).find('.loading-comment')[0].remove();
+        $(comments_block).prepend(new_comments);
         if ($(comments_block).find('.nb-comments')[0].innerText > 3) {
             if (page == '') {
                 var route = Routing.generate('sb_activity_view', {id: id_activity});
                 $(comments_block).prepend(''
-                    + '<div class="row">'
+                    + '<div class="row" class="row-show-more-comments">'
                         + '<div class="col-xs-12 text-center">'
                             + '<a class="btn-link btn-show-more-comments" href="' + route + '">Voir plus</a>'
                         + '</div>'
@@ -113,7 +114,7 @@ var comments = function () {
                 );
             } else if (page == 'one_activity') {
                 $(comments_block).prepend(''
-                    + '<div class="row">'
+                    + '<div class="row" class="row-show-more-comments">'
                         + '<div class="col-xs-12 text-center">'
                             + '<button class="btn-link btn-show-more-comments" href="#">Voir plus</button>'
                         + '</div>'

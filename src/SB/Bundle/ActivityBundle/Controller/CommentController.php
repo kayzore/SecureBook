@@ -58,11 +58,33 @@ class CommentController extends Controller
 
             $em = $this->getDoctrine()->getManager();
             $comments = $em->getRepository('SBActivityBundle:Comment')->fetchAll($activity_id, 3);
+            $comments = array_reverse($comments);
             $nb_comments = $em->getRepository('SBActivityBundle:Comment')->countAll($activity_id, 3);
 
             return $this->render('SBActivityBundle:comments:comment.html.twig', array(
                 'comments'      => $comments,
-                'nb_comments'   => $nb_comments
+                'nb_comments'   => $nb_comments,
+                'ajax'          => true
+            ));
+        }
+        return $this->createAccessDeniedException('Acces Denied');
+    }
+
+    public function activityGetMoreCommentsAction(Request $request)
+    {
+        if ($request->isXmlHttpRequest()) {
+            $activity_id = $request->request->get('id_activity');
+            $comment_id = $request->request->get('id_comment');
+
+            $em = $this->getDoctrine()->getManager();
+            $comments = $em->getRepository('SBActivityBundle:Comment')->fetchMore($activity_id, $comment_id, 3);
+            $comments = array_reverse($comments);
+            $nb_comments = $em->getRepository('SBActivityBundle:Comment')->countAll($activity_id);
+
+            return $this->render('SBActivityBundle:comments:comment.html.twig', array(
+                'comments'      => $comments,
+                'nb_comments'   => $nb_comments,
+                'ajax'          => true
             ));
         }
         return $this->createAccessDeniedException('Acces Denied');

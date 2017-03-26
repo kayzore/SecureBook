@@ -29,6 +29,13 @@ sb_activity_get_comments:
         expose: true
     defaults: { _controller: SBActivityBundle:Comment:activityGetComment }
 
+sb_activity_get_more_comments:
+    path:     /obtenir-plus-de-commentaires/
+    methods: [POST]
+    options:
+        expose: true
+    defaults: { _controller: SBActivityBundle:Comment:activityGetMoreComments }
+
 sb_activity_add_comment:
     path:     /ajouter-un-commentaire/
     methods: [POST]

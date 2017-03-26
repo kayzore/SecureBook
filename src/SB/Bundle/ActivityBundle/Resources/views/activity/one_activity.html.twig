@@ -94,7 +94,11 @@
                 </div>
             </div>
 
-            <div class="row activity-comments is_hidden"></div>
+            <div class="row activity-comments{% if not comments is defined %} is_hidden{% endif %}">
+                {% if comments is defined %}
+                    {% include 'SBActivityBundle:comments:comment.html.twig' %}
+                {% endif %}
+            </div>
 
             <div class="row activity-add-comment">
             <textarea class="form-control autogrow" rows="1" placeholder="Ajoutez un commentaie"

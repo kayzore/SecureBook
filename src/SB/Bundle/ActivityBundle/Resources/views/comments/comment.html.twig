@@ -1,6 +1,13 @@
 <span class="sr-only nb-comments">{{ nb_comments }}</span>
+{% if not ajax is defined and nb_comments > comments|length %}
+    <div class="row">
+        <div class="col-xs-12 text-center">
+            <button class="btn-link btn-show-more-comments" href="#">Voir plus</button>
+        </div>
+    </div>
+{% endif %}
 {% for comment in comments %}
-    <div class="media">
+    <div class="media" data-comment="{{ comment.id }}">
         <div class="media-left">
             <a href="#">
                 <img class="media-object img-circle"
@@ -8,8 +15,8 @@
             </a>
         </div>
         <div class="media-body">
-            <b class="media-heading">{{ comment.user.username }}</b>
-            <p>{{ comment.text }}</p>
+            <b class="media-heading">{{ comment.user.username }}</b> <em class="text-muted">{{ comment.dateComment|date('d/m/Y H:i:s') }}</em>
+            <p>{{ comment.text|raw|nl2br }}</p>
         </div>
     </div>
 {% else %}

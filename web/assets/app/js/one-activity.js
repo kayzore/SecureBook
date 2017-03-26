@@ -17,9 +17,11 @@ $(document).ready(function () {
     });
 
     $(document).on('click', '.btn-show-more-comments', function () {
-        var comments_block = $(this.parentNode.parentNode.parentNode).next(),
-            id_activity = this.parentNode.parentNode.parentNode.parentNode.dataset.activity;
-        comments.showMoreCommentsForOneActivity(comments_block, id_activity);
+        var comments_block = this.parentNode.parentNode.parentNode,
+            id_activity = this.parentNode.parentNode.parentNode.parentNode.dataset.activity,
+            firstCommentShow = $(comments_block).find('.media:first')[0];
+        $(this).remove();
+        comments.showMoreCommentsForOneActivity(comments_block, id_activity, firstCommentShow.dataset.comment);
     });
 
     $(document).on('click', '.btn-add-comment', function () {

@@ -21,7 +21,25 @@ class CommentRepository extends EntityRepository
                 ->setParameter('id_activity', $id_activity)
             ->join('c.user', 'u')
                 ->addSelect('u')
-            ->orderBy('c.dateComment', 'ASC')
+            ->orderBy('c.dateComment', 'DESC')
+            ->setMaxResults($limit)
+        ;
+
+        return $qb->getQuery()->getResult();
+    }
+
+    public function fetchMore($id_activity, $id_comment, $limit)
+    {
+        $qb = $this->createQueryBuilder('c');
+
+        $qb
+            ->where('c.activity = :id_activity')
+                ->setParameter('id_activity', $id_activity)
+            ->andWhere('c.id < :id_comment')
+                ->setParameter('id_comment', $id_comment)
+            ->join('c.user', 'u')
+                ->addSelect('u')
+            ->orderBy('c.dateComment', 'DESC')
             ->setMaxResults($limit)
         ;
 

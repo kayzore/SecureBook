@@ -75,8 +75,17 @@ class ActivityController extends Controller
 
     public function activityViewAction(Activity $activity)
     {
+        $em = $this->getDoctrine()->getManager();
+
+        $comments = $em->getRepository('SBActivityBundle:Comment')->fetchAll($activity, 6);
+        $nb_comments = $em->getRepository('SBActivityBundle:Comment')->countAll($activity->getId());
+
+        $comments = array_reverse($comments);
+
         return $this->render('SBActivityBundle:activity:one_activity.html.twig', array(
             'activity'      => $activity,
+            'comments'      => $comments,
+            'nb_comments'   => $nb_comments,
             'notifications' => $this->getUser()->getNotifications()
         ));
     }
