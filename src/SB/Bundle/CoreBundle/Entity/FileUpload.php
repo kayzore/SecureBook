@@ -19,6 +19,7 @@ class FileUpload
     public function __construct(UploadedFile $file, $username)
     {
         $this->file = $file;
+        $this->username = $username;
     }
 
     public function getFile()
