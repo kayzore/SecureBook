@@ -2,8 +2,6 @@
 
 namespace SB\Bundle\ActivityBundle\Controller;
 
-use SB\Bundle\ActivityBundle\Entity\Comment;
-use SB\Bundle\NotificationBundle\Entity\Notification;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
