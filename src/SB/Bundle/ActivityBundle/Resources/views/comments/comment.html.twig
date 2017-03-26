@@ -9,13 +9,15 @@
 {% for comment in comments %}
     <div class="media" data-comment="{{ comment.id }}">
         <div class="media-left">
-            <a href="#">
+            <a href="{{ path('sb_user_profil', {slugUsername: comment.user.slug}) }}">
                 <img class="media-object img-circle"
                      src="https://dummyimage.com/40x40/c9c9c9/000000" alt="..." >
             </a>
         </div>
         <div class="media-body">
-            <b class="media-heading">{{ comment.user.username }}</b> <em class="text-muted">{{ comment.dateComment|date('d/m/Y H:i:s') }}</em>
+            <a href="{{ path('sb_user_profil', {slugUsername: comment.user.slug}) }}">
+                <b class="media-heading">{{ comment.user.username }}</b>
+            </a> <em class="text-muted">{{ comment.dateComment|date('d/m/Y H:i:s') }}</em>
             <p>{{ comment.text|raw|nl2br }}</p>
         </div>
     </div>

@@ -5,11 +5,15 @@
         <div class="col-md-8 activity" data-activity="{{ activity.id }}">
             <div class="row activity-top">
                 <div class="col-xs-1">
-                    {{ user_macro.getAvatar(activity.user.avatar, 'activity') }}
+                    <a href="{{ path('sb_user_profil', {slugUsername: activity.user.slug}) }}">
+                        {{ user_macro.getAvatar(activity.user.avatar, 'activity') }}
+                    </a>
                 </div>
                 <div class="col-xs-11 no-pr">
                     <div class="col-xs-12">
-                        <b>{{ activity.user.username }}</b>
+                        <a href="{{ path('sb_user_profil', {slugUsername: activity.user.slug}) }}">
+                            <b>{{ activity.user.username }}</b>
+                        </a>
                         <div class="btn-group pull-right">
                             <button type="button" class="btn btn-default btn-xs dropdown-toggle"
                                     data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
