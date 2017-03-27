@@ -1,2 +1,3 @@
 .idea/
 *.bat
+git config --global core.excludesfile "%USERPROFILE%\.gitignore"
