@@ -1,3 +1,4 @@
 sb_admin_homepage:
     path:     /
+    methods: [GET]
     defaults: { _controller: SBAdminBundle:Admin:home }

@@ -1,9 +1,11 @@
 user_registration:
     path:     /inscription
+    methods: [GET, POST]
     defaults: { _controller: SBUserBundle:Registration:register }
 
 login:
     path:   /connexion
+    methods: [GET, POST]
     defaults:  { _controller: SBUserBundle:Security:login }
 
 login_check:
