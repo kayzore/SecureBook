@@ -1,0 +1,16 @@
+# src/SB/Bundle/CoreBundle/Resources/translations/messages.en.yml
+
+sb:
+    core:
+        home_visitor:
+            login:
+                title: Sign in
+                login_with: Sign in with
+                stay_connected: Stay connected
+            register:
+                title: Sign up
+                sub_message: New on SecureBook ?
+                forgot_password: Forgot your password ?
+        other:
+            password: Password
+            or: or

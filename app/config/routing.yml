@@ -1,18 +1,26 @@
 sb_admin:
     resource: "@SBAdminBundle/Resources/config/routing.yml"
-    prefix:   /administration
+    prefix:   /{_locale}/administration
+    requirements:
+        _locale: |en|fr
 
 sb_activity:
     resource: "@SBActivityBundle/Resources/config/routing.yml"
-    prefix:   /
+    prefix:   /{_locale}
+    requirements:
+        _locale: |en|fr
 
 sb_core:
     resource: "@SBCoreBundle/Resources/config/routing.yml"
-    prefix:   /
+    prefix:   /{_locale}
+    requirements:
+        _locale: |en|fr
 
 sb_user:
     resource: "@SBUserBundle/Resources/config/routing.yml"
-    prefix:   /
+    prefix:   /{_locale}
+    requirements:
+        _locale: |en|fr
 
 fos_js_routing:
     resource: "@FOSJsRoutingBundle/Resources/config/routing/routing.xml"

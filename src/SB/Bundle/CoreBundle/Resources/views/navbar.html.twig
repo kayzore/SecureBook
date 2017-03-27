@@ -38,17 +38,17 @@
             <ul class="nav navbar-nav navbar-right">
                 {% if not is_granted('ROLE_USER') %}
                     <li class="dropdown">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown"><b>Connexion</b> <span class="caret"></span></a>
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown"><b>{{ "sb.core.home_visitor.login.title"|trans }}</b> <span class="caret"></span></a>
                         <ul id="login-dp" class="dropdown-menu">
                             <li>
                                 <div class="row">
                                     <div class="col-md-12">
-                                        Se connecter via
+                                        {{ 'sb.core.home_visitor.login.login_with'|trans }}
                                         <div class="social-buttons">
                                             <a href="#" class="btn btn-fb"><i class="fa fa-facebook"></i> Facebook</a>
                                             <a href="#" class="btn btn-tw"><i class="fa fa-twitter"></i> Twitter</a>
                                         </div>
-                                        ou
+                                        {{ 'sb.core.other.or'|trans }}
                                         <form class="form" role="form" method="post" action="{{ path('login_check') }}"
                                               accept-charset="UTF-8" id="login-nav">
                                             <div class="form-group">
@@ -59,19 +59,19 @@
                                             <div class="form-group">
                                                 <label class="sr-only" for="passwordInput">Password</label>
                                                 <input type="password" class="form-control" id="passwordInput" name="_password"
-                                                       placeholder="Mot de passe">
-                                                <div class="help-block text-right"><a href="#">Mot de passe oublié ?</a></div>
+                                                       placeholder="{{ 'sb.core.other.password'|trans }}">
+                                                <div class="help-block text-right"><a href="#">{{ 'sb.core.home_visitor.register.forgot_password'|trans }}</a></div>
                                             </div>
                                             <div class="checkbox">
                                                 <label>
-                                                    <input type="checkbox"> Rester connecté
+                                                    <input type="checkbox"> {{ "sb.core.home_visitor.login.stay_connected"|trans }}
                                                 </label>
                                             </div>
                                             <div class="form-group">
-                                                <button type="submit" class="btn btn-primary btn-block">Connexion</button>
+                                                <button type="submit" class="btn btn-primary btn-block">{{ "sb.core.home_visitor.login.title"|trans }}</button>
                                             </div>
                                             <div class="bottom text-center">
-                                                Nouveau ? <a href="{{ path('user_registration') }}"><b>Rejoignez-nous</b></a>
+                                                {{ 'sb.core.home_visitor.register.sub_message'|trans }}<br> <a href="{{ path('user_registration') }}"><b>{{ "sb.core.home_visitor.register.title"|trans }}</b></a>
                                             </div>
                                         </form>
                                     </div>
