@@ -4,7 +4,9 @@ namespace SB\Bundle\UserBundle\Controller;
 
 use SB\Bundle\ActivityBundle\Entity\Activity;
 use SB\Bundle\UserBundle\Entity\Avatar;
+use SB\Bundle\UserBundle\Entity\Cover;
 use SB\Bundle\UserBundle\Form\Type\AvatarType;
+use SB\Bundle\UserBundle\Form\Type\CoverType;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
@@ -23,12 +25,16 @@ class ProfilController extends Controller
         $form_avatar = $this->createForm(AvatarType::class, new Avatar($this->get('kernel')->getRootDir()), array(
             'action' => $this->generateUrl('sb_user_profil_update_profil_avatar')
         ));
+        $form_cover = $this->createForm(CoverType::class, new Cover($this->get('kernel')->getRootDir()), array(
+            'action' => $this->generateUrl('sb_user_profil_update_profil_cover')
+        ));
 
         return $this->render('SBUserBundle:Profil:profil.html.twig', array(
             'list_activity'         => $activityRepository->fetchAll($user->getId(), array(), 5),
             'number_of_activity'    => $activityRepository->countAll($user->getId(), array()),
             'form_add_activity'     => $form_add_activity->createView(),
             'form_avatar'           => $form_avatar->createView(),
+            'form_cover'            => $form_cover->createView(),
             'notifications'         => $user->getNotifications()
         ));
     }
@@ -81,6 +87,30 @@ class ProfilController extends Controller
 
             $em->persist($user);
             $em->persist($avatar);
+            $em->flush();
+
+            return $this->redirectToRoute('sb_user_profil', array('slugUsername' => $user->getSlug()));
+        }
+        return $this->redirectToRoute('sb_core_homepage');
+    }
+
+    public function updateProfilCoverAction(Request $request)
+    {
+        $cover = new Cover($this->container->get('kernel')->getRootDir());
+        $form_cover = $this->createForm(CoverType::class, $cover);
+        $form_cover->handleRequest($request);
+        if ($form_cover->isSubmitted() && $form_cover->isValid()) {
+            $user = $this->getUser();
+            $em = $this->getDoctrine()->getManager();
+            $user = $em->getRepository('SBUserBundle:User')->findOneBy(array('id' => $user->getId()));
+
+            if (!is_null($cover->getFile())) {
+                $cover->upload($user->getUsername());
+                $user->setCover($cover);
+            }
+
+            $em->persist($user);
+            $em->persist($cover);
             $em->flush();
 
             return $this->redirectToRoute('sb_user_profil', array('slugUsername' => $user->getSlug()));

@@ -21,10 +21,11 @@ class ActivityType extends AbstractType
                 'required'      => false,
                 'attr' => array(
                     'class'         => 'form-control autogrow-add-activity',
-                    'placeholder'   => 'Publiez quelque chose !',
+                    'placeholder'   => 'sb.activity.form.textarea',
                     'id'            => 'textareaAddActu',
                     'name'          => 'activity_message'
-                )
+                ),
+                'translation_domain' => 'messages'
             ))
             ->add('image', ImageType::class)
         ;

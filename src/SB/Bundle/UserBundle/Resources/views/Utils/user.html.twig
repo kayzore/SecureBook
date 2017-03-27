@@ -15,8 +15,10 @@
         {% set opts_string = '' %}
         {% if not opts == 'inModal' %}
             {% set opts_string = ' id="currentCover"' %}
+        {% else %}
+            {% set opts_string = ' style="max-height: 200px"' %}
         {% endif %}
-        {{ userMacro.getImg('img-responsive', cover_name, 'Couverture', opts_string) }}
+        {{ userMacro.getImg('img-responsive center-block', cover_name, 'Couverture', opts_string) }}
     {% elseif type == 'friendProfil' %}
 
     {% endif %}
@@ -92,3 +94,12 @@
     {{ user_profil_name }}
 {% endmacro %}
 
+{% macro getConfidentialityCheckbox(id, entity_field) %}
+    <label class="sr-only" for="{{ id }}"></label>
+    {% if entity_field %}
+        {% set checked = 'checked' %}
+    {% else %}
+        {% set checked = '' %}
+    {% endif %}
+    <input id="{{ id }}" class="btn-toggle" {{ checked }} type="checkbox">
+{% endmacro %}

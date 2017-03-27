@@ -35,6 +35,13 @@ sb_user_profil_update_profil_avatar:
         expose: true
     defaults: { _controller: SBUserBundle:Profil:updateProfilAvatar }
 
+sb_user_profil_update_profil_cover:
+    path:     /modifier-ma-couverture
+    methods: [POST]
+    options:
+        expose: true
+    defaults: { _controller: SBUserBundle:Profil:updateProfilCover }
+
 sb_user_profil:
     path:     /{slugUsername}
     methods: [GET]
