@@ -27,8 +27,8 @@ var comments = function () {
      * @param comments_block
      * @param id_activity
      */
-    showComments = function (comments_block, id_activity) {
-        if (comments_block.hasClass('open')) {
+    showComments = function (comments_block, id_activity, fromAddComment) {
+        if (comments_block.hasClass('open') && !fromAddComment) {
             closeCommentZone(comments_block);
         } else {
             openCommentZone(comments_block, id_activity, '');
@@ -155,7 +155,7 @@ var comments = function () {
                     $(btn_send).html('<i class="fa fa-paper-plane" aria-hidden="true"></i>');
 
                     comments_block = $($(btn_send.parentNode.parentNode).find('.activity-comments')[0]);
-                    comments.openCommentZone(comments_block, id_activity);
+                    showComments(comments_block, id_activity, true);
                     $(textarea[0]).val('');
                     $(".autogrow").autoGrow();
                 }
