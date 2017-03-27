@@ -20,7 +20,7 @@ class ActivityController extends Controller
 
         } else {
             $session = $request->getSession();
-            $session->getFlashBag()->add('error_add_activity', "Erreur lors de l'ajout de l'acitivité");
+            $session->getFlashBag()->add('error_add_activity', "Erreur lors de l'ajout de l'activité");
         }
         return $this->redirectToRoute('sb_core_homepage');
     }
