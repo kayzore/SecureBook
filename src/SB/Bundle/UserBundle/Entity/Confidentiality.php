@@ -107,7 +107,7 @@ class Confidentiality
      *
      * @return Confidentiality
      */
-    public function setFirstname($firstname)
+    public function setFirstnameConf($firstname)
     {
         $this->firstname = $firstname;
 
@@ -119,7 +119,7 @@ class Confidentiality
      *
      * @return bool
      */
-    public function getFirstname()
+    public function getFirstnameConf()
     {
         return $this->firstname;
     }
@@ -131,7 +131,7 @@ class Confidentiality
      *
      * @return Confidentiality
      */
-    public function setLastname($lastname)
+    public function setLastnameConf($lastname)
     {
         $this->lastname = $lastname;
 
@@ -143,7 +143,7 @@ class Confidentiality
      *
      * @return bool
      */
-    public function getLastname()
+    public function getLastnameConf()
     {
         return $this->lastname;
     }
@@ -155,7 +155,7 @@ class Confidentiality
      *
      * @return Confidentiality
      */
-    public function setPays($pays)
+    public function setPaysConf($pays)
     {
         $this->pays = $pays;
 
@@ -167,7 +167,7 @@ class Confidentiality
      *
      * @return bool
      */
-    public function getPays()
+    public function getPaysConf()
     {
         return $this->pays;
     }
@@ -179,7 +179,7 @@ class Confidentiality
      *
      * @return Confidentiality
      */
-    public function setRegion($region)
+    public function setRegionConf($region)
     {
         $this->region = $region;
 
@@ -191,7 +191,7 @@ class Confidentiality
      *
      * @return bool
      */
-    public function getRegion()
+    public function getRegionConf()
     {
         return $this->region;
     }
@@ -203,7 +203,7 @@ class Confidentiality
      *
      * @return Confidentiality
      */
-    public function setVille($ville)
+    public function setVilleConf($ville)
     {
         $this->ville = $ville;
 
@@ -215,7 +215,7 @@ class Confidentiality
      *
      * @return bool
      */
-    public function getVille()
+    public function getVilleConf()
     {
         return $this->ville;
     }
@@ -227,7 +227,7 @@ class Confidentiality
      *
      * @return Confidentiality
      */
-    public function setAvatar($avatar)
+    public function setAvatarConf($avatar)
     {
         $this->avatar = $avatar;
 
@@ -239,7 +239,7 @@ class Confidentiality
      *
      * @return bool
      */
-    public function getAvatar()
+    public function getAvatarConf()
     {
         return $this->avatar;
     }
@@ -251,7 +251,7 @@ class Confidentiality
      *
      * @return Confidentiality
      */
-    public function setCover($cover)
+    public function setCoverConf($cover)
     {
         $this->cover = $cover;
 
@@ -263,7 +263,7 @@ class Confidentiality
      *
      * @return bool
      */
-    public function getCover()
+    public function getCoverConf()
     {
         return $this->cover;
     }
@@ -275,7 +275,7 @@ class Confidentiality
      *
      * @return Confidentiality
      */
-    public function setActivity($activity)
+    public function setActivityConf($activity)
     {
         $this->activity = $activity;
 
@@ -287,7 +287,7 @@ class Confidentiality
      *
      * @return bool
      */
-    public function getActivity()
+    public function getActivityConf()
     {
         return $this->activity;
     }

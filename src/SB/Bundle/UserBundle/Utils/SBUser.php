@@ -60,22 +60,22 @@ class SBUser
             }
             switch ($champ) {
                 case 'prenom':
-                    $user->getConfidentiality()->setFirstname($new_value);
+                    $user->getConfidentiality()->setFirstnameConf($new_value);
                     break;
                 case 'nom':
-                    $user->getConfidentiality()->setLastname($new_value);
+                    $user->getConfidentiality()->setLastnameConf($new_value);
                     break;
                 case 'pays':
-                    $user->getConfidentiality()->setPays($new_value);
+                    $user->getConfidentiality()->setPaysConf($new_value);
                     break;
                 case 'region':
-                    $user->getConfidentiality()->setRegion($new_value);
+                    $user->getConfidentiality()->setRegionConf($new_value);
                     break;
                 case 'ville':
-                    $user->getConfidentiality()->setVille($new_value);
+                    $user->getConfidentiality()->setVilleConf($new_value);
                     break;
                 case 'avatar':
-                    $user->getConfidentiality()->setAvatar($new_value);
+                    $user->getConfidentiality()->setAvatarConf($new_value);
                     break;
             }
         }
