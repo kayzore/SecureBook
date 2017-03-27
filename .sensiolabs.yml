@@ -6,6 +6,11 @@ rules:
     symfony.dependency_injection.no_container_as_parameter:
         enabled: false
 
+exclude_patterns:
+    - app/.htaccess
+    - src/.htaccess
+    - web/.htaccess
+
 global_exclude_dirs:
     - src/SB/Bundle/ActivityBundle/Resources/views/Utils
     - src/SB/Bundle/NotificationBundle/Resources/views/Utils
