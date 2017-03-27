@@ -8,9 +8,6 @@ use Symfony\Component\HttpFoundation\Request;
 
 class CommentController extends Controller
 {
-    /**
-     * TODO: Trim and sanitize message before flush entity
-     */
     public function addCommentAction(Request $request)
     {
         if ($request->isXmlHttpRequest()) {

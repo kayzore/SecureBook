@@ -4,10 +4,10 @@ services:
         arguments: ["@doctrine.orm.default_entity_manager", "@sb_user.friend"]
     sb_activity.activity:
         class: SB\Bundle\ActivityBundle\Utils\SBActivity
-        arguments: ["@form.factory", "@router", "@doctrine.orm.default_entity_manager"]
+        arguments: ["@form.factory", "@router", "@doctrine.orm.default_entity_manager", "@sb_app.app_function"]
     sb_activity.comment:
         class: SB\Bundle\ActivityBundle\Utils\SBComment
-        arguments: ["@doctrine.orm.default_entity_manager", "sb_realtime.faye.client"]
+        arguments: ["@doctrine.orm.default_entity_manager", "sb_realtime.faye.client", "@sb_app.app_function"]
     sb_activity.like:
         class: SB\Bundle\ActivityBundle\Utils\SBLike
         arguments: ["@doctrine.orm.default_entity_manager", "sb_realtime.faye.client"]

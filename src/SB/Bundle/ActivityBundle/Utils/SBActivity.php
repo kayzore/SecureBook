@@ -5,6 +5,7 @@ namespace SB\Bundle\ActivityBundle\Utils;
 use Doctrine\ORM\EntityManager;
 use SB\Bundle\ActivityBundle\Entity\Activity;
 use SB\Bundle\ActivityBundle\Form\Type\ActivityType;
+use SB\Bundle\CoreBundle\Utils\SBApp;
 use SB\Bundle\UserBundle\Entity\User;
 use Symfony\Component\Form\FormFactory;
 use Symfony\Component\Routing\Router;
@@ -23,18 +24,24 @@ class SBActivity
      * @var EntityManager
      */
     private $em;
+    /**
+     * @var SBApp
+     */
+    private $sbApp;
 
     /**
      * SBActivity constructor.
      * @param FormFactory $formFactory
      * @param Router $router
      * @param EntityManager $entityManager
+     * @param SBApp $sbApp
      */
-    public function __construct(FormFactory $formFactory, Router $router, EntityManager $entityManager)
+    public function __construct(FormFactory $formFactory, Router $router, EntityManager $entityManager, SBApp $sbApp)
     {
         $this->formFactory  = $formFactory;
         $this->router       = $router;
         $this->em           = $entityManager;
+        $this->sbApp        = $sbApp;
     }
 
     /**
@@ -58,8 +65,9 @@ class SBActivity
      * @param User $user
      * @param Activity $activity
      * @param string $path
+     * @param object $data
      */
-    public function addActivity(User $user, Activity $activity, $path)
+    public function addActivity(User $user, Activity $activity, $path, $data)
     {
         $activity->setUser($user);
 
@@ -71,6 +79,7 @@ class SBActivity
         } else {
             $activity->setImage(null);
         }
+        $activity->setMessage($this->sbApp->sanitizeValue($data->getMessage()));
 
         $this->em->persist($activity);
         $this->em->flush();

@@ -8,9 +8,6 @@ use Symfony\Component\HttpFoundation\Request;
 
 class ActivityController extends Controller
 {
-    /**
-     * TODO: Trim and sanitize message before flush entity
-     */
     public function addActivityAction(Request $request)
     {
         $activityService = $this->container->get('sb_activity.activity');
@@ -18,8 +15,8 @@ class ActivityController extends Controller
         $form = $activityService->getForm($activity);
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
-
-            $this->container->get('sb_activity.activity')->addActivity($this->getUser(), $activity, $this->get('kernel')->getRootDir());
+            $data = $form->getData();
+            $this->container->get('sb_activity.activity')->addActivity($this->getUser(), $activity, $this->get('kernel')->getRootDir(), $data);
 
             return $this->redirectToRoute('sb_core_homepage');
         }

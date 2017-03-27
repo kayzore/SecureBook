@@ -4,3 +4,5 @@ services:
         public: true
         tags:
             -  { name: twig.extension }
+    sb_app.app_function:
+        class: SB\Bundle\CoreBundle\Utils\SBApp

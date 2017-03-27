@@ -4,6 +4,7 @@ namespace SB\Bundle\ActivityBundle\Utils;
 
 use Doctrine\ORM\EntityManager;
 use SB\Bundle\ActivityBundle\Entity\Comment;
+use SB\Bundle\CoreBundle\Utils\SBApp;
 use SB\Bundle\NotificationBundle\Entity\Notification;
 use SB\Bundle\UserBundle\Entity\User;
 
@@ -14,16 +15,22 @@ class SBComment
      */
     private $em;
     private $faye;
+    /**
+     * @var SBApp
+     */
+    private $sbApp;
 
     /**
      * SBActivity constructor.
      * @param EntityManager $entityManager
      * @param $faye_client
+     * @param SBApp $sbApp
      */
-    public function __construct(EntityManager $entityManager, $faye_client)
+    public function __construct(EntityManager $entityManager, $faye_client, SBApp $sbApp)
     {
-        $this->em   = $entityManager;
-        $this->faye = $faye_client;
+        $this->em       = $entityManager;
+        $this->faye     = $faye_client;
+        $this->sbApp    = $sbApp;
     }
 
     /**
@@ -41,7 +48,7 @@ class SBComment
         $comment = new Comment();
         $comment->setActivity($activity);
         $comment->setUser($user);
-        $comment->setText($comment_text);
+        $comment->setText($this->sbApp->sanitizeValue($comment_text));
 
         if ($user->getUsername() != $activity->getUser()->getUsername()) {
             $channel = '/securebook/users/' . $activity->getUser()->getUsername();
