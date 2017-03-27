@@ -10,7 +10,7 @@ var likes = function () {
     addLike = function (btn, id_activity) {
         $(btn).append('<i class="fa fa-spinner fa-pulse fa-fw"></i>');
         $.ajax({
-            url: Routing.generate('sb_activity_like'),
+            url: Routing.generate('sb_activity_like', {'_locale': $('html').attr('lang')}),
             method: 'post',
             data: {id_activity: id_activity},
             dataType: 'json',
@@ -40,7 +40,7 @@ var likes = function () {
     removeLike = function (btn, id_activity) {
         $(btn).append('<i class="fa fa-spinner fa-pulse fa-fw"></i>');
         $.ajax({
-            url: Routing.generate('sb_activity_dislike'),
+            url: Routing.generate('sb_activity_dislike', {'_locale': $('html').attr('lang')}),
             method: 'post',
             data: {id_activity: id_activity},
             dataType: 'json',

@@ -61,7 +61,7 @@ var comments = function () {
             $(comments_block).prepend('<p class="text-center loading-comment">Chargement en cours <i class="fa fa-spinner fa-pulse fa-fw"></i></p>');
 
             $.ajax({
-                url: Routing.generate('sb_activity_get_more_comments'),
+                url: Routing.generate('sb_activity_get_more_comments', {'_locale': $('html').attr('lang')}),
                 method: 'post',
                 data: {id_activity: id_activity, id_comment: id_first_comment},
                 dataType: 'html',
@@ -83,7 +83,7 @@ var comments = function () {
         comments_block.slideDown('slow');
 
         $.ajax({
-            url: Routing.generate('sb_activity_get_comments'),
+            url: Routing.generate('sb_activity_get_comments', {'_locale': $('html').attr('lang')}),
             method: 'post',
             data: {id_activity: id_activity},
             dataType: 'html',
@@ -105,7 +105,7 @@ var comments = function () {
         $(comments_block).prepend(new_comments);
         if ($(comments_block).find('.nb-comments')[0].innerText > 3) {
             if (page == '') {
-                var route = Routing.generate('sb_activity_view', {id: id_activity});
+                var route = Routing.generate('sb_activity_view', {id: id_activity, '_locale': $('html').attr('lang')});
                 $(comments_block).prepend(''
                     + '<div class="row" class="row-show-more-comments">'
                         + '<div class="col-xs-12 text-center">'
@@ -143,7 +143,7 @@ var comments = function () {
         if (comment_text.length > 0) {
             $(btn_send).append('<i class="fa fa-spinner fa-pulse fa-fw"></i>');
             $.ajax({
-                url: Routing.generate('sb_activity_add_comment'),
+                url: Routing.generate('sb_activity_add_comment', {'_locale': $('html').attr('lang')}),
                 method: 'post',
                 data: {comment_text: comment_text, id_activity: id_activity},
                 dataType: 'json',

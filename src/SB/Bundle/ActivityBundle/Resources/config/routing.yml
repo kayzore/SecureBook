@@ -1,67 +1,11 @@
-sb_activity_add:
-    path:     /ajouter-une-activite/
-    methods: [POST]
-    defaults: { _controller: SBActivityBundle:Activity:addActivity }
+sb_activity_activity:
+    resource: "@SBActivityBundle/Resources/config/routes/activity.yml"
+    prefix:   /
 
-sb_activity_profil_add:
-    path:     /ajouter-une-activite-depuis-mon-profil/
-    methods: [POST]
-    defaults: { _controller: SBActivityBundle:Activity:addActivityOnProfil }
+sb_activity_likes:
+    resource: "@SBActivityBundle/Resources/config/routes/likes.yml"
+    prefix:   /
 
-sb_activity_like:
-    path:     /ajouter-un-like/
-    methods: [POST]
-    options:
-        expose: true
-    defaults: { _controller: SBActivityBundle:Like:addLike }
-
-sb_activity_dislike:
-    path:     /supprimer-un-like/
-    methods: [POST]
-    options:
-        expose: true
-    defaults: { _controller: SBActivityBundle:Like:dislike }
-
-sb_activity_get_comments:
-    path:     /obtenir-les-commentaires/
-    methods: [POST]
-    options:
-        expose: true
-    defaults: { _controller: SBActivityBundle:Comment:activityGetComment }
-
-sb_activity_get_more_comments:
-    path:     /obtenir-plus-de-commentaires/
-    methods: [POST]
-    options:
-        expose: true
-    defaults: { _controller: SBActivityBundle:Comment:activityGetMoreComments }
-
-sb_activity_add_comment:
-    path:     /ajouter-un-commentaire/
-    methods: [POST]
-    options:
-        expose: true
-    defaults: { _controller: SBActivityBundle:Comment:addComment }
-
-sb_activity_get_activity:
-    path:     /obtenir-des-activites/
-    methods: [POST]
-    options:
-        expose: true
-    defaults: { _controller: SBActivityBundle:Activity:getActivity }
-
-sb_activity_get_my_activity:
-    path:     /obtenir-mes-activites/
-    methods: [POST]
-    options:
-        expose: true
-    defaults: { _controller: SBActivityBundle:Activity:getMyActivity }
-
-sb_activity_view:
-    path:     /voir-une-activite/{id}
-    methods: [GET]
-    options:
-        expose: true
-    defaults: { _controller: SBActivityBundle:Activity:activityView }
-    requirements:
-        id: \d+
+sb_activity_comments:
+    resource: "@SBActivityBundle/Resources/config/routes/comments.yml"
+    prefix:   /

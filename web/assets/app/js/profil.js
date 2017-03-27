@@ -29,7 +29,7 @@ $(document).ready(function () {
     });
     function saveConfidentiality(champ, new_value, fa) {
         $.ajax({
-            url: Routing.generate('sb_user_profil_update_profil_confidentiality'),
+            url: Routing.generate('sb_user_profil_update_profil_confidentiality', {'_locale': $('html').attr('lang')}),
             method: 'post',
             data: {champ: champ, new_value: new_value},
             dataType: 'json',
@@ -151,7 +151,7 @@ $(document).ready(function () {
     function saveInformation(champ, new_value, btnCancel) {
         var type = champ;
         $.ajax({
-            url: Routing.generate('sb_user_profil_update_profil'),
+            url: Routing.generate('sb_user_profil_update_profil', {'_locale': $('html').attr('lang')}),
             method: 'post',
             data: {champ: champ, new_value: new_value},
             dataType: 'json',

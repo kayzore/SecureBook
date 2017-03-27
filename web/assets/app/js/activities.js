@@ -44,10 +44,10 @@ var activities = function () {
             );
 
             if (page == 'accueil') {
-                route = Routing.generate('sb_activity_get_activity');
+                route = Routing.generate('sb_activity_get_activity', {'_locale': $('html').attr('lang')});
                 getMoreActivities(route, id_last_activity);
             } else if (page == 'profil') {
-                route = Routing.generate('sb_activity_get_my_activity');
+                route = Routing.generate('sb_activity_get_my_activity', {'_locale': $('html').attr('lang')});
                 getMoreActivities(route, id_last_activity);
             }
         }

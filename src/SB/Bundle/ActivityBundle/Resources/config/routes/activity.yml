@@ -1,0 +1,32 @@
+sb_activity_add:
+    path:     /ajouter-une-activite/
+    methods: [POST]
+    defaults: { _controller: SBActivityBundle:Activity:addActivity }
+
+sb_activity_profil_add:
+    path:     /ajouter-une-activite-depuis-mon-profil/
+    methods: [POST]
+    defaults: { _controller: SBActivityBundle:Activity:addActivityOnProfil }
+
+sb_activity_get_activity:
+    path:     /obtenir-des-activites/
+    methods: [POST]
+    options:
+        expose: true
+    defaults: { _controller: SBActivityBundle:Activity:getActivity }
+
+sb_activity_get_my_activity:
+    path:     /obtenir-mes-activites/
+    methods: [POST]
+    options:
+        expose: true
+    defaults: { _controller: SBActivityBundle:Activity:getMyActivity }
+
+sb_activity_view:
+    path:     /voir-une-activite/{id}
+    methods: [GET]
+    options:
+        expose: true
+    defaults: { _controller: SBActivityBundle:Activity:activityView }
+    requirements:
+        id: \d+

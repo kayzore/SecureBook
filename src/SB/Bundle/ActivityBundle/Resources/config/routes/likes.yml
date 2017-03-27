@@ -1,0 +1,13 @@
+sb_activity_like:
+    path:     /ajouter-un-like/
+    methods: [POST]
+    options:
+        expose: true
+    defaults: { _controller: SBActivityBundle:Like:addLike }
+
+sb_activity_dislike:
+    path:     /supprimer-un-like/
+    methods: [POST]
+    options:
+        expose: true
+    defaults: { _controller: SBActivityBundle:Like:dislike }
