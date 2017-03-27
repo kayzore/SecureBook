@@ -4,8 +4,7 @@
  * @type {{loadMoreComment, showComments, openCommentZone, closeCommentZone, addComment, autogrow_comments}}
  */
 var comments = function () {
-    var loadMoreComment,
-        showComments,
+    var showComments,
         showCommentsForOneActivity,
         showMoreCommentsForOneActivity,
         openCommentZone,
@@ -26,6 +25,7 @@ var comments = function () {
      * Show or hide a list of comments
      * @param comments_block
      * @param id_activity
+     * @param fromAddComment
      */
     showComments = function (comments_block, id_activity, fromAddComment) {
         fromAddComment = typeof fromAddComment !== 'undefined' ? fromAddComment : false;
@@ -173,7 +173,6 @@ var comments = function () {
 
     return {
         init_comments: init_comments,
-        loadMoreComment: loadMoreComment,
         showComments: showComments,
         showCommentsForOneActivity: showCommentsForOneActivity,
         showMoreCommentsForOneActivity: showMoreCommentsForOneActivity,
