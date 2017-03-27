@@ -4,6 +4,11 @@
     {% set col = '12' %}
 {% endif %}
 <div class="col-md-{{ col }} activity activity-form-body">
+    {% for message in app.session.flashbag.get('error_add_activity') %}
+        <div class="alert alert-danger alert-add-activity">
+            <p>{{ message }}</p>
+        </div>
+    {% endfor %}
     {{ form_start(form_add_activity) }}
     <div class="row">
         <div class="col-md-12">

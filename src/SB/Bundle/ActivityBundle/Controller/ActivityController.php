@@ -18,9 +18,11 @@ class ActivityController extends Controller
             $data = $form->getData();
             $this->container->get('sb_activity.activity')->addActivity($this->getUser(), $activity, $this->get('kernel')->getRootDir(), $data);
 
-            return $this->redirectToRoute('sb_core_homepage');
+        } else {
+            $session = $request->getSession();
+            $session->getFlashBag()->add('error_add_activity', "Error lors de l'ajout de l'acitivité");
         }
-        throw $this->createAccessDeniedException();
+        return $this->redirectToRoute('sb_core_homepage');
     }
 
     public function addActivityOnProfilAction(Request $request)
