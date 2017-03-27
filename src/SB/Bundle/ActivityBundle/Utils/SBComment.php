@@ -44,7 +44,7 @@ class SBComment
         $comment->setText($comment_text);
 
         if ($user->getUsername() != $activity->getUser()->getUsername()) {
-            $channel = '/' . $activity->getUser()->getUsername();
+            $channel = '/securebook/users/' . $activity->getUser()->getUsername();
             $data    = array('type' => 'comment', 'text' => $user->getUsername() . ' a commenté une de vos actualité');
             $this->faye->send($channel, $data);
 

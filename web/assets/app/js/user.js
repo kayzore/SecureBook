@@ -8,7 +8,7 @@ var user = function () {
      * Init user functionality
      */
     init_user = function () {
-        client_listener.subscribe('/' + $('#username').text(), function (message) {
+        client_listener.subscribe('/securebook/users/' + $('#username').text(), function (message) {
             new_notification(message);
         });
     };

@@ -43,7 +43,7 @@ class SBLike
             $likes->setUser($user);
 
             if ($user->getUsername() != $activity->getUser()->getUsername()) {
-                $channel = '/' . $activity->getUser()->getUsername();
+                $channel = '/securebook/users/' . $activity->getUser()->getUsername();
                 $data    = array('type' => 'like', 'text' => $user->getUsername() . ' aime une de vos actualité');
                 $this->faye->send($channel, $data);
                 $notification = new Notification();
