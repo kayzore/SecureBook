@@ -67,7 +67,7 @@ class SBActivity
      * @param string $path
      * @param object $data
      */
-    public function addActivity(User $user, Activity $activity, $path, $data)
+    public function addActivity(User $user, Activity $activity, $path, Activity $data)
     {
         $activity->setUser($user);
 
