@@ -28,6 +28,7 @@ var comments = function () {
      * @param id_activity
      */
     showComments = function (comments_block, id_activity, fromAddComment) {
+        fromAddComment = typeof fromAddComment !== 'undefined' ? fromAddComment : false;
         if (comments_block.hasClass('open') && !fromAddComment) {
             closeCommentZone(comments_block);
         } else {
