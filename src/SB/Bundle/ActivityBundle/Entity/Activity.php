@@ -5,6 +5,7 @@ namespace SB\Bundle\ActivityBundle\Entity;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 use SB\Bundle\UserBundle\Entity\User;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * Activity
@@ -46,6 +47,7 @@ class Activity
     /**
      * @ORM\OneToOne(targetEntity="SB\Bundle\ActivityBundle\Entity\Image", cascade={"persist"})
      * @ORM\JoinColumn(nullable=true)
+     * @Assert\Valid
      */
     private $image;
 

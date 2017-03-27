@@ -20,7 +20,7 @@ class ActivityController extends Controller
 
             return $this->redirectToRoute('sb_core_homepage');
         }
-        return $this->createAccessDeniedException('Acces Denied');
+        throw $this->createAccessDeniedException();
     }
 
     public function addActivityOnProfilAction(Request $request)

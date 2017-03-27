@@ -5,6 +5,7 @@ namespace SB\Bundle\ActivityBundle\Entity;
 use Doctrine\ORM\Mapping as ORM;
 use SB\Bundle\CoreBundle\Entity\FileUpload;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * Image
@@ -32,6 +33,7 @@ class Image
 
     /**
      * @var UploadedFile
+     * @Assert\Image()
      */
     private $file;
 
