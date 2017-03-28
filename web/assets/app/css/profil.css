@@ -12,6 +12,9 @@
     cursor: pointer;
     transition: opacity 0.8s linear;
 }
+#blocks-couverture span i {
+    color: wheat;
+}
 #blocks-couverture {
     overflow: hidden;
     max-height: 400px;
