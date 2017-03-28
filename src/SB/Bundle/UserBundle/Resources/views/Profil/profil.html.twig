@@ -9,7 +9,7 @@
 {% block stylesheets %}
     {{ parent() }}
     {% stylesheets filter='?uglifycss' filter='cssrewrite'
-    'assets/app/css/profil.css'
+    'bundles/sbuser/css/profil.css'
     'assets/external/libs/bootstrap-toggle/css/bootstrap-toggle.min.css' %}
     <link rel="stylesheet" href="{{ asset_url }}" type="text/css" />
     {% endstylesheets %}
@@ -26,13 +26,13 @@
         'assets/external/libs/waypoints/lib/jquery.waypoints.min.js'
         'assets/external/libs/bootstrap-toggle/js/bootstrap-toggle.min.js'
         'assets/app/js/app.js'
-        'assets/app/js/user.js'
-        'assets/app/js/profil.js'
-        'assets/app/js/activities.js'
-        'assets/app/js/likes.js'
-        'assets/app/js/comments.js'
-        'assets/app/js/activity.js'
-        'assets/app/js/my-activity.js'
+        'bundles/sbuser/js/user.js'
+        'bundles/sbuser/js/profil.js'
+        'bundles/sbactivity/js/activities.js'
+        'bundles/sbactivity/js/likes.js'
+        'bundles/sbactivity/js/comments.js'
+        'bundles/sbactivity/js/activity.js'
+        'bundles/sbactivity/js/my-activity.js'
         'assets/app/js/feedback.js'
     %}
     <script type="text/javascript" src="{{ asset_url }}"></script>
