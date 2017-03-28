@@ -5,6 +5,15 @@ rules:
         enabled: false
     symfony.dependency_injection.no_container_as_parameter:
         enabled: false
+    symfony.use_super_globals:
+        enabled: false
+    symfony.use_php_response_function:
+        enabled: false
+
+exclude_patterns:
+    - app/.htaccess
+    - src/.htaccess
+    - web/.htaccess
 
 global_exclude_dirs:
     - src/SB/Bundle/ActivityBundle/Resources/views/Utils

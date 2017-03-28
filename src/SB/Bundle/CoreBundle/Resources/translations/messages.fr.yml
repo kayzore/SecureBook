@@ -11,6 +11,13 @@ sb:
                 title: S'inscrire
                 sub_message: Nouveau sur SecureBook ?
                 forgot_password: Mot de passe oublié ?
+            members:
+                logout:
+                    title: Déconnexion
         other:
             password: Mot de passe
             or: ou
+    activity:
+        form:
+            textarea: Publiez quelque chose !
+            button: Publier

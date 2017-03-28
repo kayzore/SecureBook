@@ -11,6 +11,13 @@ sb:
                 title: Sign up
                 sub_message: New on SecureBook ?
                 forgot_password: Forgot your password ?
+            members:
+                logout:
+                    title: Logout
         other:
             password: Password
             or: or
+    activity:
+        form:
+            textarea: Publish something !
+            button: Publish
